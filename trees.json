@@ -1,0 +1,902 @@
+{
+  "method_name": "Método Joaquín Vega — Modified Fibonacci Trading Methodology",
+  "version": "2.0",
+  "generated": "2026-02-25",
+  "source_videos": 20,
+  "architecture_note": "The method has three layers: (1) Reading Model — cycles, fractality, zones; (2) Attack Model — entry patterns, liquidity grabs; (3) Management Model — partials, stops, risk. 'Modelo de lectura + modelo de ataque + gestión = método completo.'",
+  "trees": [
+    {
+      "tree_name": "T1_Cycle_Identification",
+      "tree_description": "How to identify, activate, and mark a trading cycle. A cycle requires an impulse from a Point of Control followed by a retracement to 38.2%. Once activated, high/low zones are marked. Includes the Point of Control validation protocol (fractal identification + 1/3 rule) and break level confirmation. This is the foundation of the entire reading model. Source: Understanding Fractality, Fractality Practice Example, Evolution of Cycles, PoC Practice (SbIr86IVdvA), Break Levels & Fractality (OMNRlfZzZmU).",
+      "root": {
+        "id": "t1_1",
+        "question": "Do you have a Point of Control (origin of a significant price movement)?",
+        "yes": {
+          "id": "t1_1a",
+          "question": "Is the Point of Control VALIDATED? (Fractal high surpassed by >= 1/3 of retracement height)",
+          "protocol": {
+            "step_1": "Identify the fractal: an impulse movement leaving a peak with at least 2 closed candles to the left and 2 closed candles to the right.",
+            "step_2": "Measure the retracement height in pips (from fractal high to retracement low).",
+            "step_3": "Divide retracement height by 3.",
+            "step_4": "Check: did price surpass the fractal high by at least that 1/3 value?",
+            "example": "Retracement = 122 pips. 122 / 3 = ~40 pips. Price must exceed fractal high by at least 40 pips to validate the PoC."
+          },
+          "quote_es": "Para que yo diga que tengo un punto de control correcto, necesito que el precio supere el alto del fractal en al menos un tercio de la altura del retroceso.",
+          "source_video": "SbIr86IVdvA",
+          "yes": {
+            "id": "t1_2",
+            "question": "Has there been an impulse movement from that Point of Control?",
+            "yes": {
+              "id": "t1_3",
+              "question": "Has the price retraced to the 38.2% Fibonacci level of that impulse?",
+              "quote_es": "El retroceso es la condición imprescindible para que definamos que efectivamente cuando hay retroceso de ese impulso al 38.2, ahí es el momento en el que podemos marcar todas sus zonas.",
+              "yes": {
+                "id": "t1_4",
+                "action": "ACTIVATE CYCLE: Mark all corresponding zones",
+                "explanation": "The cycle is now active. Mark: (1) High Zone — above 61.8% of the impulse, (2) Low Zone — below the retracement area, (3) The 38.2 level as the mid-reference, (4) The 61.8 zone as the working zone, (5) The break level of the cycle. IMPORTANT: A break level is only confirmed when price exceeds it by >= 1/3 of the retracement height. Anything less is a false breakout (manipulation). Direction arrows: In downtrend cycles, sell in high zones (61 downwards). In uptrend cycles, buy in low zones (61 upwards). 'Siempre vender en zonas altas, en este caso bajista, 61 hacia abajo, y en este caso alcista, 61 hacia arriba y siempre comprar en las zonas bajas.'",
+                "sub_decisions": {
+                  "id": "t1_4a",
+                  "question": "Is this an uptrend cycle or downtrend cycle?",
+                  "yes_label": "Uptrend",
+                  "no_label": "Downtrend",
+                  "yes": {
+                    "id": "t1_4b",
+                    "action": "Mark buy arrows in low zones, sell arrows in high zones. Primary bias is LONG.",
+                    "explanation": "In uptrend cycles from a point of control, the primary direction is up. Buy attempts in low zones, with the cycle break level below."
+                  },
+                  "no": {
+                    "id": "t1_4c",
+                    "action": "Mark sell arrows in high zones, buy arrows in low zones. Primary bias is SHORT.",
+                    "explanation": "In downtrend cycles, the primary direction is down. Sell attempts in high zones, with the cycle break level above."
+                  }
+                },
+                "break_level_rule": {
+                  "description": "A break is ONLY confirmed when price exceeds the level by >= 1/3 of the retracement height. Below that threshold = false breakout / manipulation.",
+                  "calculation": "Measure retracement in pips → divide by 3 → price must exceed break level by at least that amount.",
+                  "rationale": "The institutional counterpart concept: market makers manipulate price to trigger stops just below the 1/3 threshold. Only moves exceeding 1/3 represent genuine institutional commitment.",
+                  "quote_es": "Para que haya una rotura válida, el precio debe superar el nivel en al menos un tercio de la altura del retroceso. Todo lo demás es manipulación.",
+                  "source_video": "OMNRlfZzZmU"
+                }
+              },
+              "no": {
+                "id": "t1_5",
+                "action": "WAIT — No cycle is activated yet",
+                "explanation": "Without the 38.2% retracement, you cannot mark zones. The impulse alone is not enough. Continue monitoring for the retracement condition. The price may still be in the impulse phase or forming a different structure."
+              }
+            },
+            "no": {
+              "id": "t1_6",
+              "action": "WAIT — Monitor for impulse completion",
+              "explanation": "A point of control exists but no impulse has formed yet. Watch for price to make a decisive move away from the point of control before expecting a retracement."
+            }
+          },
+          "no": {
+            "id": "t1_1b",
+            "action": "FALSE BREAKOUT — PoC is NOT validated. This is manipulation.",
+            "explanation": "If price does not surpass the fractal high by at least 1/3 of the retracement height, it is a false breakout (manipulation). Do not treat this level as a valid Point of Control. Wait for a valid surpass or look for another PoC.",
+            "quote_es": "¿Superas 40 pips ese nivel? ¡26! ¡No! Falso rompimiento. Eso es manipulación.",
+            "source_video": "SbIr86IVdvA"
+          }
+        },
+        "no": {
+          "id": "t1_7",
+          "action": "IDENTIFY POINTS OF CONTROL — Look for origins of significant movements",
+          "explanation": "Scan the chart for levels where significant price movements originated. A fractal is an impulse movement that leaves a peak with at least 2 closed candles to the left and 2 closed candles to the right of the peak. These fractals become your candidate Points of Control. Use multiple timeframes. Remember: minor fractals lead to major fractals. 'Cualquier metodología necesita tener una forma de leer los gráficos. La tenemos a través de los ciclos.' 'Un fractal es un movimiento impulsivo que debe dejar un pico. Debe tener una secuencia de dos velas a la izquierda, dos velas a la derecha.'"
+        }
+      }
+    },
+    {
+      "tree_name": "T2_Fractality_And_Evolution",
+      "tree_description": "How cycles evolve or break. Every cycle WILL either break or evolve — this is certain. Understanding when to discard old zones and mark new ones is the core skill. Includes the PoC obsolescence rule: when a new retracement is LARGER than previous ones and validates, all previous PoCs become obsolete. Break levels require the 1/3 confirmation rule. 'Todos los fractales que te dan un ciclo, todos, o se rompen o evolucionan.' Source: Understanding Fractality, Fractality Practice Example, Evolution of Cycles, PoC Practice (SbIr86IVdvA), Break Levels & Fractality (OMNRlfZzZmU), Trend Breaks (uYgJBc6TehE).",
+      "root": {
+        "id": "t2_1",
+        "question": "Has price entered the High Zone or Low Zone of the current cycle?",
+        "quote_es": "Si en algún momento el precio entra en zona alta, esta zona de 61 es obvio que no vale, ese 38 es obvio que tampoco vale y esta zona de abajo es obvio que tampoco vale.",
+        "yes": {
+          "id": "t2_2",
+          "action": "IMMEDIATELY DISCARD other zones of this cycle",
+          "explanation": "The moment price enters a High Zone: discard the 61 zone, the 38 level, the Low Zone, and the Low Zone break level. Only the High Zone and the High Zone break level remain valid. Vice versa for Low Zone entry. 'Eliminar las marcas que ya no importan.'",
+          "then": {
+            "id": "t2_3",
+            "question": "Does price CONFIRM a break through the zone? (Must exceed break level by >= 1/3 of retracement height)",
+            "yes": {
+              "id": "t2_4",
+              "action": "CYCLE IS BROKEN — Discard entire cycle, all zones dead",
+              "explanation": "The cycle is finished. It broke — confirmed by price exceeding the break level by >= 1/3 of the retracement height. It will never serve again. 'Ese ciclo no vale, murió, se acabó, se rompió y ya nunca más va a servir.' Start looking for new Points of Control forming from the breakout movement. Watch for new fractals at the next level. IMPORTANT: Only count this as a valid break if the 1/3 threshold is met. Otherwise it's manipulation.",
+              "then": {
+                "id": "t2_4a",
+                "action": "Look for NEW Points of Control forming from the breakout",
+                "explanation": "After a cycle breaks, the breakout movement itself creates new reference points. Monitor these for the formation of a new cycle (impulse + 38.2% retracement). TREND BREAK RULE: A trend is only truly broken when the LAST upward (or downward) control cycle breaks. Breaking intermediate cycles does NOT break the trend. Look for Pattern 2 setups as indicators of potential trend transitions.",
+                "trend_break_protocol": {
+                  "rule": "A trend is broken ONLY when the LAST control cycle in the trend direction breaks.",
+                  "detail": "Breaking intermediate cycles within a trend does not constitute a trend break. Only when the final, most recent control cycle in the trend direction is broken can you declare the trend finished.",
+                  "pattern_2_indicator": "Pattern 2 setups indicate potential trend transitions. Watch for these as early warnings that the last control cycle may be about to break.",
+                  "quote_es": "La tendencia solo se rompe cuando el último ciclo de control alcista se rompe.",
+                  "source_video": "uYgJBc6TehE"
+                }
+              }
+            },
+            "no": {
+              "id": "t2_5",
+              "question": "Does price respect the zone and reverse (zone works well)?",
+              "yes": {
+                "id": "t2_6",
+                "question": "Is the resulting movement (from zone reversal) LARGER than the original impulse that defined this cycle?",
+                "quote_es": "Ahora el movimiento que se está produciendo es superior al movimiento con el que tú estabas trabajando.",
+                "yes": {
+                  "id": "t2_7",
+                  "question": "Does this new, larger movement retrace to 38.2%?",
+                  "yes": {
+                    "id": "t2_8",
+                    "action": "CYCLE EVOLUTION — Old cycle is obsolete, mark NEW cycle with new zones",
+                    "explanation": "This is evolution. The smaller fractal has given way to a larger fractal. The previous cycle, including its point of control, is COMPLETELY DEAD. Mark new zones based on the new, larger impulse. CRITICAL OBSOLESCENCE RULE: When a new retracement is LARGER than all previous retracements AND it validates (price surpasses the new fractal high by >= 1/3 of the new retracement height), ALL previous Points of Control become obsolete simultaneously. Minor fractals lead to major fractals — and major fractals kill minor ones. 'La fractalidad menor se está rompiendo porque se están formando fractales mayores. No me quiero quedar con un fractal menor. Quiero trabajar las zonas del fractal mayor.' All previous marks — zones, 38, 61, break levels — are replaced.",
+                    "sub_decisions": {
+                      "id": "t2_8a",
+                      "action": "Mark new High Zone, Low Zone, 38, 61, and break levels based on the new larger impulse",
+                      "explanation": "The new cycle's measurements come from the new, larger impulse. This creates bigger zones. You always want to work with the largest active fractal."
+                    },
+                    "obsolescence_rule": {
+                      "description": "When a new retracement is LARGER than all previous retracements and validates via the 1/3 rule, ALL previous Points of Control die simultaneously.",
+                      "validation": "The new PoC must be validated: price must surpass the new fractal high by >= 1/3 of the new (larger) retracement height.",
+                      "effect": "Every previously active PoC from smaller fractals is rendered obsolete. Only the new, larger fractal's PoC survives.",
+                      "principle": "Minor fractals lead to major fractals. Minor fractals become obsolete.",
+                      "quote_es": "Los fractales menores conducen a fractales mayores. Los fractales menores se vuelven obsoletos, dando paso a fractales mayores.",
+                      "source_video": "SbIr86IVdvA"
+                    }
+                  },
+                  "no": {
+                    "id": "t2_9",
+                    "action": "WAIT — Evolution is pending but not confirmed",
+                    "explanation": "The movement is larger than the previous impulse, which is a warning sign that evolution MAY occur. But until the 38.2% retracement of this new movement happens, the evolution is not confirmed. Continue monitoring. The old cycle zones are already suspect but not formally replaced."
+                  }
+                },
+                "no": {
+                  "id": "t2_10",
+                  "action": "Zone worked — continue within current cycle framework",
+                  "explanation": "The zone reversal produced a movement that is still within the scale of the current cycle. No evolution yet. The cycle remains valid with its current zones. Continue trading the existing framework."
+                }
+              },
+              "no": {
+                "id": "t2_11",
+                "action": "WAIT — Price is in the zone but hasn't decided. Monitor for break or reversal.",
+                "explanation": "Price is lingering in the High/Low zone. It will eventually either break through (cycle death) or reverse (potential evolution). Patience required."
+              }
+            },
+            "break_confirmation_rule": {
+              "description": "A break is ONLY valid when price exceeds the break level by >= 1/3 of the retracement height. Anything less is manipulation / false breakout.",
+              "calculation": "Measure retracement in pips → divide by 3 → price must exceed break level by at least that amount.",
+              "quote_es": "Para que se confirme la rotura, el precio debe superar el nivel en al menos un tercio de la altura del retroceso.",
+              "source_video": "OMNRlfZzZmU"
+            }
+          }
+        },
+        "no": {
+          "id": "t2_12",
+          "question": "Is price working the 61.8 zone?",
+          "yes": {
+            "id": "t2_13",
+            "action": "61.8 does NOT trigger evolution — trade normally within the cycle",
+            "explanation": "When price works the 61.8 zone, the retracement is still smaller than the original impulse. There is no danger of evolution at this level. The 61.8 zone is a normal working zone within the cycle. 'El 61.8 no afecta al ciclo. Podemos trabajarlo absolutamente pero no afecta a ninguna evolución.'",
+            "quote_es": "Cuando este movimiento viene a trabajar 61.8, el retroceso sigue siendo menor que el impulso. Por tanto, no hay problema."
+          },
+          "no": {
+            "id": "t2_14",
+            "action": "Price is between zones — WAIT for it to reach a decision zone",
+            "explanation": "No action needed. The cycle is active and price hasn't reached any critical zone yet. Monitor and wait."
+          }
+        }
+      }
+    },
+    {
+      "tree_name": "T3_Retracement_Completion",
+      "tree_description": "How to determine if a retracement is complete. A retracement is NOT finished until price touches the 130% Fibonacci level. This is critical for knowing when the next impulse (fractal) has begun. Source: Setbacks - Enemy of Novice Traders.",
+      "root": {
+        "id": "t3_1",
+        "question": "Is there an active retracement in progress?",
+        "yes": {
+          "id": "t3_2",
+          "question": "Has price touched the 130% Fibonacci level (measured from the retracement)?",
+          "quote_es": "Mientras el precio no haga esto y toque el 130, yo no puedo decir que ese retroceso ha concluido.",
+          "yes": {
+            "id": "t3_3",
+            "action": "RETRACEMENT IS COMPLETE — New impulse of next fractal is confirmed",
+            "explanation": "The 130% level means price has fallen below the start of the retracement by a third of its measure. This objectively confirms the retracement is over and a new fractal's impulse is underway. 'Lo que pedimos es que caiga por debajo del inicio del retroceso un tercio de su medida.'"
+          },
+          "no": {
+            "id": "t3_4",
+            "question": "Has the retracement deepened (made new highs/lows)?",
+            "yes": {
+              "id": "t3_5",
+              "action": "REMEASURE — Take new Fibonacci measurement from the full retracement",
+              "explanation": "If the retracement gets deeper, the 130 level moves. You must remeasure with Fibonacci from the new extent. 'Cuanto más profundo se hace el retroceso, más se queda atrás el 130.' The retracement can continue indefinitely until 130 is touched.",
+              "quote_es": "Cojo mi Fibo y lo vuelvo a medir completamente. Desde donde empezó el retroceso, sigo midiendo con mi Fibo. Y fíjate como el 130 cambia de sitio."
+            },
+            "no": {
+              "id": "t3_6",
+              "action": "WAIT — Retracement is NOT complete. Do not assume the next impulse has begun.",
+              "explanation": "Even if price appears to be moving in the impulse direction, without touching 130, you cannot confirm the retracement is over. The price can still extend the retracement. 'Retracements can be fast or slow. Slow ones take a long time and create confusion. The price can be in this state for as long as it wants until it touches the 130.'"
+            }
+          }
+        },
+        "no": {
+          "id": "t3_7",
+          "action": "No retracement to evaluate — monitor for retracement formation",
+          "explanation": "An impulse may be in progress. Wait for the impulse to exhaust and begin retracing."
+        }
+      }
+    },
+    {
+      "tree_name": "T4_Context_Reading",
+      "tree_description": "How to read context from the left side of the chart, evaluate movement origins, and use patterns and liquidity. The reading model positions you on the chart. It tells you WHERE price is likely to go. Source: Value Left Side of Charts, Work on Context in Chart, Analysis vs Strategy vs Method.",
+      "root": {
+        "id": "t4_1",
+        "question": "Have you analyzed the left side of the chart for context?",
+        "yes": {
+          "id": "t4_2",
+          "question": "Is there an activated failure (price reached a zone but origin didn't meet 25% minimum)?",
+          "quote_es": "¿Esto es un origen de movimiento correcto? No. ¿Por qué no? Porque no ha llegado al 25%.",
+          "yes": {
+            "id": "t4_3",
+            "action": "FAILURE PROJECTION ACTIVE — Price has projection to reach 161.8 or 200 level",
+            "explanation": "When a movement origin doesn't reach 25% (defective extreme), the price is likely to return and surpass that level. This activates a failure projection to 161.8 or 200. Even if you're in a selling zone, you cannot ignore the long projection. 'Tengo una proyección para ir arriba. Tengo una proyección para ir al 200 o al 161.8.'",
+            "then": {
+              "id": "t4_3a",
+              "question": "Are you trading indices/commodities or currencies?",
+              "yes_label": "Indices/Commodities",
+              "no_label": "Currencies",
+              "yes": {
+                "id": "t4_3b",
+                "action": "Favor the 200 level as target — 161.8 fails more often in indices",
+                "explanation": "In indices and commodities, the 161.8 level often doesn't hold. The 200 level works much better. 'El 161 trabaja mucho mejor en divisas, en índices y materias primas falla bastante. Los 200 están trabajando mejor.'"
+              },
+              "no": {
+                "id": "t4_3c",
+                "action": "161.8 is a valid first target — 200 as secondary",
+                "explanation": "In currencies, the 161.8 level tends to produce better reactions. Use it as the primary target, with 200 as the extended target."
+              }
+            }
+          },
+          "no": {
+            "id": "t4_4",
+            "question": "Do you have Pattern 1 and Pattern 2 measurements?",
+            "yes": {
+              "id": "t4_5",
+              "question": "Has price completed Pattern 2 and reached the selling/buying zone?",
+              "yes": {
+                "id": "t4_6",
+                "question": "Is the 161.8 level inside or outside the zone?",
+                "yes_label": "161 is OUTSIDE the zone",
+                "no_label": "161 is INSIDE the zone",
+                "yes": {
+                  "id": "t4_7",
+                  "action": "CALM OPTION first — expect measured move to 161.8, then possibly 200",
+                  "explanation": "When 161 stays outside the zone, the first option is always the calm reaction. 'Siempre que el 161 se quede fuera, primero siempre tenemos la opción de calmada.' Most probable is price reaches at least 161.8 and likely 200.",
+                  "quote_es": "Lo más probable es que alcances como mínimo el 161 y seguramente al 200."
+                },
+                "no": {
+                  "id": "t4_8",
+                  "action": "Zone and 161 overlap — increased probability of immediate reaction",
+                  "explanation": "When 161.8 is within the zone, the reaction point is reinforced. Higher probability of a reversal at this level."
+                }
+              },
+              "no": {
+                "id": "t4_9",
+                "action": "WAIT — Patterns measured but price hasn't reached the zone yet",
+                "explanation": "The reading model has given you the probable destination. Prepare your hypotheses: 'Either price reaches the zone (prepare to trade) or it touches the invalidation level (hypothesis changes).' The succession of hypotheses is always the same, always repetitive."
+              }
+            },
+            "no": {
+              "id": "t4_10",
+              "action": "Measure Pattern 1 and Pattern 2 — these are objective, no interpretation needed",
+              "explanation": "Patterns 1 and 2 are objective measurements to evaluate market zones. They form the basis for hypotheses about future price movements. The measurements are always the same, always repetitive. 'Las medidas son 100% objetivas, no hay duda de lo que tengo que medir.'"
+            }
+          }
+        },
+        "no": {
+          "id": "t4_11",
+          "action": "ALWAYS analyze the left side first — context before action",
+          "explanation": "Never trade without context. Check: (1) What failures are activated? (2) What liquidity has been left behind? (3) Where are the historical Points of Control? (4) What is the movement origin — is it correct (reached 25%) or defective? The context tells you which direction has projection even if the immediate map says otherwise. 'Nos falta contexto. No porque esté en zona de venta asumimos que es para vender. No funciona así.'"
+        }
+      }
+    },
+    {
+      "tree_name": "T5_Liquidity_And_Entry_Strategy",
+      "tree_description": "The attack model: how to actually enter trades using liquidity grabs, zone confluences, and Fibonacci levels. The reading model tells you WHERE; this tells you HOW. Includes entry timing principles: sacrificing failed entries to achieve perfect timing on significant zones. Source: Analysis vs Strategy vs Method, Value Left Side of Charts, Evolution of Cycles, Gold Trading with the Kids, Entry Timing (YmdLBEThXvQ).",
+      "root": {
+        "id": "t5_1",
+        "question": "Has the reading model (cycles) given you a directional bias?",
+        "quote_es": "Los ciclos te posicionan. No necesito ni las zonas de trabajo para atacar el precio.",
+        "yes": {
+          "id": "t5_2",
+          "question": "Is price at a zone confluence (e.g., Low Zone + 38 of another cycle)?",
+          "yes": {
+            "id": "t5_3",
+            "action": "HIGH CONVICTION ENTRY — This is a 'sí o sí' (mandatory) trade",
+            "explanation": "When zones from different cycles or levels converge, the probability is highest. Example from Evolution of Cycles: Low zone coinciding with blue 38 = mandatory buy. 'Esta coincidencia de la zona baja con el 38 azul es ya un motivo sí o sí de compra.'",
+            "quote_es": "Esto es compra. Sí o sí.",
+            "then": {
+              "id": "t5_3a",
+              "question": "Are you entering with single entry or fractional entry?",
+              "yes_label": "Single Entry",
+              "no_label": "Fractional Entry (2 parts recommended, 3+ gets confusing)",
+              "yes": {
+                "id": "t5_3b",
+                "action": "Enter full position. Stop defined by business plan line. Lot size per business plan.",
+                "explanation": "Single entry with full position. Stop loss is defined by your business plan's risk line, not by arbitrary levels. Lot size is calculated from your risk parameters."
+              },
+              "no": {
+                "id": "t5_3c",
+                "action": "Enter first part at zone. Second part at deeper level if available. Max 2 parts recommended.",
+                "explanation": "Fractional entry works best with 2 parts. From 3 parts it becomes confusing. 'La gente que mejor trabaja con entrada fraccionada lo hace con dos. A partir de tres se hace confusa.'"
+              }
+            }
+          },
+          "no": {
+            "id": "t5_4",
+            "question": "Are there liquidity grab opportunities aligned with your directional bias?",
+            "quote_es": "Solo con esto puedes tener una metodología, una estrategia, una estrategia de trabajo. Solo con esto.",
+            "yes": {
+              "id": "t5_5",
+              "question": "Has price broken lows (if bias is long) or broken highs (if bias is short)?",
+              "yes": {
+                "id": "t5_6",
+                "action": "ENTER on the liquidity grab — price has taken stops and should reverse",
+                "explanation": "Liquidity grabs that break low points (in uptrend bias) or high points (in downtrend bias) are standalone entry reasons. 'Sitios de liquidez, en este caso, que rompan puntos bajos, porque mi modelo me dice que el precio tiene que subir más.' No cycles needed for the entry itself — the cycles already positioned you.",
+                "quote_es": "No hace falta ningún puto ciclo porque los ciclos ya te han posicionado."
+              },
+              "no": {
+                "id": "t5_7",
+                "action": "WAIT for price to grab liquidity or reach a zone",
+                "explanation": "The bias is set but no clean entry exists yet. Wait for price to sweep stops or reach a defined zone before entering."
+              }
+            },
+            "no": {
+              "id": "t5_8",
+              "question": "Is price at a Fibonacci level (38.2, 61.8, 161.8, or 200) that aligns with your bias?",
+              "yes": {
+                "id": "t5_9",
+                "question": "Is it a 61.8 level from a valid structure with confirmed failure of highs/lows?",
+                "yes": {
+                  "id": "t5_10",
+                  "action": "ENTER — Any 61.8 after failure of highs/lows is a reason to trade",
+                  "explanation": "Once there's been a failure of highs (for shorts) or lows (for longs), every 61.8 retracement becomes a valid entry point. 'A partir de aquí ya cualquier 61.8, esto ya era motivo de venta.'",
+                  "quote_es": "A partir de aquí ya cualquier 61.8, esto ya era motivo de venta."
+                },
+                "no": {
+                  "id": "t5_11",
+                  "action": "EVALUATE — Fibonacci level alone may be sufficient depending on context",
+                  "explanation": "A standalone Fibonacci level aligned with bias can be traded, but conviction is lower than zone confluences or post-failure entries. Consider the left side context."
+                }
+              },
+              "no": {
+                "id": "t5_12",
+                "action": "WAIT — No valid entry signal. Let the reading model guide you to the next opportunity.",
+                "explanation": "Don't force entries. The model will present opportunities. 'No puedo tener una estrategia para atacar el precio si no tengo una localización en el mapa.'"
+              }
+            }
+          }
+        },
+        "no": {
+          "id": "t5_13",
+          "action": "STOP — Do NOT trade without directional bias from the reading model",
+          "explanation": "You must have a reading model (cycles) that positions you before applying any entry strategy. Strategy without a map is gambling. 'Lo que nunca debería tener es una estrategia para atacar el precio si no tengo una localización en el mapa. Tengo que tener un modelo de lectura y un modelo de ataque.'"
+        }
+      },
+      "entry_timing_protocol": {
+        "principle": "Entry timing involves accepting that some entries will fail in order to achieve perfect timing on the entries that matter most — significant zones.",
+        "detail": "You sacrifice accuracy on minor setups to position perfectly when price reaches high-confluence, significant zones. Failed entries on minor zones are the cost of being ready for the big ones.",
+        "implication": "Do not fear failed entries. They are a deliberate part of the strategy. The goal is not 100% accuracy — it is maximum profit from the trades that do work.",
+        "quote_es": "El timing de entrada implica sacrificar entradas fallidas para lograr un timing perfecto en las zonas significativas.",
+        "source_video": "YmdLBEThXvQ"
+      }
+    },
+    {
+      "tree_name": "T6_Trade_Classification",
+      "tree_description": "How to classify trade outcomes. There are 5 types: Complete Loser, Null Trade, Positive Trade, Winning Trade, Very Winning Trade. Understanding this is essential for business plan tracking. CRITICAL INSIGHT: Managing failure (how you handle losses) is MORE important than accuracy %. Source: Many Ways to Win and Lose, Failure Management (JgTMWX3hjY0).",
+      "root": {
+        "id": "t6_1",
+        "question": "Did the trade hit the full stop loss (max loss per business plan)?",
+        "yes": {
+          "id": "t6_2",
+          "action": "COMPLETE LOSER (Operación completamente perdedora)",
+          "explanation": "Price went straight to stop without any opportunity for management. Loss equals the maximum defined in the business plan. Example: If business plan says max loss is $50, the trade lost $50. 'Entro al mercado, pongo el stop, y no me da tiempo a hacer nada, el precio va directo al stop.'"
+        },
+        "no": {
+          "id": "t6_3",
+          "question": "Did you exit early because price moved against you quickly with no reversal intent?",
+          "quote_es": "Yo no permito que me saque el stop completo.",
+          "yes": {
+            "id": "t6_4",
+            "action": "NULL TRADE (Operación nula)",
+            "explanation": "You cut the loss early. Instead of losing the full $50, you lost $25 (example). The loss is less than the business plan maximum. This is active risk management — refusing to let price take the full stop when it clearly has no intention of reversing. 'Una operación nula, si el precio rápidamente se mueve en mi contra y veo que no tiene intención de moverse a mi favor, generalmente no mantengo esas operaciones.'"
+          },
+          "no": {
+            "id": "t6_5",
+            "question": "Did the trade reach at least one partial profit level?",
+            "yes": {
+              "id": "t6_6",
+              "question": "Did the total of all partials reach the business plan profit target?",
+              "yes": {
+                "id": "t6_7",
+                "question": "Did the trade exceed the business plan target significantly (left runners to extended levels)?",
+                "yes": {
+                  "id": "t6_8",
+                  "action": "VERY WINNING TRADE (Operación muy ganadora)",
+                  "explanation": "The trade surpassed the planned target. Example: Plan was $300, trade made $500+. These are the trades that significantly boost the account. They happen maybe 10-20 times per year for a sharp trader. 'Esto es una operación muy ganadora. Son las operaciones típicas que de repente tu cuenta sube mucho.'",
+                  "quote_es": "Por tanto, esto es una operación muy ganadora."
+                },
+                "no": {
+                  "id": "t6_9",
+                  "action": "WINNING TRADE (Operación ganadora)",
+                  "explanation": "The trade met the business plan objective through partials and/or final exit. Total profit equals the target. Example: Target was $300, sum of partials + final = $300. 'He sumado 300 euros. Para considerar una operación ganadora, con parciales o sin parciales, tengo que hacer 300.'"
+                }
+              },
+              "no": {
+                "id": "t6_10",
+                "action": "POSITIVE TRADE (Operación positiva — NOT a winner)",
+                "explanation": "The trade reached a partial but then reversed to breakeven or small profit. Made some money (e.g., $40) but far less than the target ($300). These trades will NEVER grow your account. They exist only to offset losses from complete losers and null trades. 'Una operación positiva no hará nunca crecer tu cuenta, sirven para recuperar una operación completamente perdedora o nula.'",
+                "quote_es": "Estas operaciones positivas nunca van a hacer crecer tu cuenta."
+              }
+            },
+            "no": {
+              "id": "t6_11",
+              "action": "BREAKEVEN or small loss — classify as NULL or near-null based on P&L",
+              "explanation": "The trade didn't reach even the first partial. If stopped at breakeven (after moving stop), it's effectively null. If stopped at partial stop (half), it's a reduced loss."
+            }
+          }
+        }
+      },
+      "failure_management_principle": {
+        "rule": "Managing failure is MORE IMPORTANT than accuracy percentage.",
+        "detail": "A trader who handles losses well (cuts quickly, maintains discipline, doesn't revenge trade) will outperform a trader with higher accuracy but poor loss management. The quality of your losses determines your long-term survival.",
+        "implication": "Focus on the PROCESS of handling losers, not on avoiding them. Null trades and early exits on bad setups are signs of good failure management, not weakness.",
+        "quote_es": "La gestión del fallo es más importante que el porcentaje de acierto.",
+        "source_video": "JgTMWX3hjY0"
+      }
+    },
+    {
+      "tree_name": "T7_Post_Entry_Management",
+      "tree_description": "How to manage a trade after entry: stop adjustments, partials, and trailing. Based on the most commonly used approach among successful students. Source: Students Preferred Ratios, Good/Bad Use of Partials, Super Winning Trades, Trading Gold & Silver.",
+      "root": {
+        "id": "t7_1",
+        "question": "Are you using a fixed ratio approach or a super-winner approach?",
+        "yes_label": "Fixed Ratio (easier psychologically, recommended to master FIRST)",
+        "no_label": "Super-Winner approach (for experienced traders)",
+        "yes": {
+          "id": "t7_2",
+          "question": "What is your ratio setup?",
+          "note": "Most common comfortable ratio is 1:4. This works for both single and fractional entries.",
+          "sub_tree": {
+            "id": "t7_2a",
+            "question": "Has price reached 1:1 risk-reward?",
+            "yes": {
+              "id": "t7_2b",
+              "question": "Are you using Version A (no partials) or Version B (with partials)?",
+              "yes_label": "Version A: No partials",
+              "no_label": "Version B: With partials",
+              "yes": {
+                "id": "t7_2c",
+                "action": "Move stop to HALF the original distance. No partial taken. Target remains at 1:4.",
+                "explanation": "At 1:1, move the stop to half. If the trade fails from here, you lose only half the original risk. The trade continues to the 1:4 target. 'Cuando el precio está en el 1 a 1, colocan el stop a la mitad. Se acabó la gestión.'",
+                "quote_es": "Se acabó la gestión."
+              },
+              "no": {
+                "id": "t7_2d",
+                "action": "Take PARTIAL (half position) and move stop to HALF. Remaining position targets extended level.",
+                "explanation": "At 1:1 take half off. Move stop to half for the remaining. If partial was at 1:1, final target is 1:7. If partial was at 1:2, final target is 1:6. 'Al 1 a 1 sacan parcial, stop a la mitad.'",
+                "then": {
+                  "id": "t7_2e",
+                  "question": "Was the partial at 1:1 or 1:2?",
+                  "yes_label": "Partial at 1:1",
+                  "no_label": "Partial at 1:2",
+                  "yes": {
+                    "id": "t7_2f",
+                    "action": "Remaining position targets 1:7",
+                    "explanation": "Partial at 1:1 means the remaining runs to 1:7 to compensate."
+                  },
+                  "no": {
+                    "id": "t7_2g",
+                    "action": "Remaining position targets 1:6",
+                    "explanation": "Partial at 1:2 means the remaining runs to 1:6."
+                  }
+                }
+              }
+            },
+            "no": {
+              "id": "t7_2h",
+              "question": "Has price reached 1:2?",
+              "yes": {
+                "id": "t7_2i",
+                "action": "Alternative: Move stop to half at 1:2 instead of 1:1",
+                "explanation": "Some traders prefer to wait until 1:2 before adjusting the stop to half. This gives the trade more room. Same mechanics apply — stop to half, optional partial."
+              },
+              "no": {
+                "id": "t7_2j",
+                "action": "HOLD — No management action yet. Monitor trade.",
+                "explanation": "Trade hasn't reached the first management level. Maintain original stop and position."
+              }
+            }
+          }
+        },
+        "no": {
+          "id": "t7_3",
+          "question": "Have you ALREADY decided at entry where you will let the trade run to?",
+          "quote_es": "El secreto, al menos el que me funciona a mí: decidir dónde vas a salir cuando entras.",
+          "yes": {
+            "id": "t7_4",
+            "question": "Has the first protective partial been taken?",
+            "yes": {
+              "id": "t7_5",
+              "question": "Is the trade already profitable overall (accounting for partials taken)?",
+              "yes": {
+                "id": "t7_6",
+                "action": "LET IT RUN to predetermined exit — Do NOT be intimidated by price movements",
+                "explanation": "The trade is profitable. The remaining positions run to the failure level or predetermined target. You will see erratic price movements — this is normal. Do not close early because of fear. 'Ya tomaste la decisión cuando lo hiciste. Así que no te eches para atrás.' Most times it WON'T reach the super-winner target, but when it does, it transforms the account.",
+                "quote_es": "Si no decidimos esto en ese momento, de forma objetiva y clara, cuando te encuentres movimientos erráticos del precio, no puedes achicarte.",
+                "sub_decisions": {
+                  "id": "t7_6a",
+                  "question": "Has floating profit exceeded 10% of total account balance?",
+                  "yes": {
+                    "id": "t7_6b",
+                    "action": "SECURE PROFITS — Take some positions off to lock in gains",
+                    "explanation": "When floating exceeds 10% of balance, you need to secure some profit. This is a risk management rule. 'Llevamos más de un 10% siempre os digo en flotante que tenemos que coger beneficios.'",
+                    "quote_es": "Llevamos más de un 10% siempre os digo en flotante que tenemos que coger beneficios."
+                  },
+                  "no": {
+                    "id": "t7_6c",
+                    "action": "Continue holding — keep adding if new entry signals appear in the same direction",
+                    "explanation": "As the movement continues, keep incorporating new positions at valid entry points. This compounds the trade. 'Vas incorporando al movimiento. Si van bien, sigues sumando, sumando, sumando.'"
+                  }
+                }
+              },
+              "no": {
+                "id": "t7_7",
+                "action": "First partial MUST protect the rest — this is non-negotiable",
+                "explanation": "The first partial's purpose is to secure the remaining positions. It ensures the trade won't cost money even if the rest fails. 'Lo primero que hago cuando pongo 2 o 3 operaciones aquí es decidir dónde tomo parciales. Dónde doy por sentado que esta operación no me va a costar dinero.'",
+                "quote_es": "Esa es una mano, por eso es el primer parcial que asegura el resto."
+              }
+            },
+            "no": {
+              "id": "t7_8",
+              "action": "Take the PROTECTIVE PARTIAL first — at the nearest Fibonacci level or key zone",
+              "explanation": "Before thinking about super-winners, secure the trade. Take the first partial at the nearest significant level (e.g., 61 zone, key resistance). This partial protects all remaining positions. From this point forward, the trade cannot lose money overall."
+            }
+          },
+          "no": {
+            "id": "t7_9",
+            "action": "DECIDE NOW — You must know your final target BEFORE or immediately after entering",
+            "explanation": "You cannot manage a super-winner trade without a predetermined exit. If you don't decide beforehand, doubt will overwhelm you during erratic movements. 'Si no lo decides antes de hacerlo o al menos inmediatamente después de hacerlo, vas a tener muchas más dudas. Pero muchas más dudas.'",
+            "quote_es": "Es mucho más fácil gestionarlo mentalmente si lo decido antes."
+          }
+        }
+      }
+    },
+    {
+      "tree_name": "T8_Partial_Profit_Strategy",
+      "tree_description": "Detailed rules on when and how to take partial profits. Too many partials destroy statistics; too few create psychological pressure. Source: Good/Bad Use of Partials, Evolution of Cycles, Trading Gold & Silver.",
+      "root": {
+        "id": "t8_1",
+        "question": "What is your partial-taking style?",
+        "note": "There is no single best approach. This is deeply personal. 'La cuestión de parciales, cada uno la interpreta a su manera.'",
+        "sub_tree": {
+          "id": "t8_1a",
+          "question": "Are you a conservative trader (many partials) or aggressive trader (few partials)?",
+          "yes_label": "Conservative — Multiple partials along the way",
+          "no_label": "Aggressive — Single partial, let rest run",
+          "yes": {
+            "id": "t8_2",
+            "action": "Take partials at each significant Fibonacci level as price reaches them",
+            "explanation": "This is psychologically easier but WARNING: too many partials dilute the final result. When price makes a 700-pip move but you've been releasing positions at every level, the total money is far less than 700 pips would suggest. 'En el fondo esos 700 pips no son 700 pips. Sí, la posición final llega a 700 pips, pero la cantidad de dinero que has hecho ahí con tantos parciales no me da estadísticamente para compensar el error.'",
+            "then": {
+              "id": "t8_2a",
+              "action": "EVALUATE YOUR STATISTICS — Do the numbers actually work with this many partials?",
+              "explanation": "You must check: does the sum of many small partials compensate for the losing streaks? If not, you're surviving on partials but never growing the account. 'Detrás de todo lo que haces hay números.'"
+            }
+          },
+          "no": {
+            "id": "t8_3",
+            "action": "Take ONE partial at the first key level (e.g., 61 zone), then let the rest run to final target",
+            "explanation": "This is Joaquín's personal approach for large-target trades. One partial to secure the trade, everything else rides. 'Fíjate cómo por ejemplo yo puedo ir a buscar este objetivo y mi primer y único parcial es aquí, en esta zona de 61 con ese azul. Y fíjate que yo no cojo más.' The result: long losing/breakeven streaks, but when winners hit, they compensate massively.",
+            "then": {
+              "id": "t8_3a",
+              "question": "Is the partial at a level that coincides with a zone or key Fibonacci?",
+              "yes": {
+                "id": "t8_3b",
+                "action": "TAKE THE PARTIAL — this is a mandatory partial level (motivo de parcial sí o sí)",
+                "explanation": "When key levels coincide — for example, cycle 61 zone + the resistance level — this is an obligatory partial. 'Esto es motivo de parcial, sí o sí.'",
+                "quote_es": "Esto es motivo de parcial, sí o sí."
+              },
+              "no": {
+                "id": "t8_3c",
+                "action": "HOLD — Wait for a proper level to take the partial",
+                "explanation": "Don't take partials at random levels. Wait for a meaningful Fibonacci or zone coincidence."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "tree_name": "T9_161_200_Zone_Trading",
+      "tree_description": "Specific decision tree for trading the 161.8% to 200% Fibonacci zone, which behaves differently across asset classes and requires special handling. Source: Better Explained Live, Work on Context in Chart, Value Left Side of Charts, Gold Trading with the Kids.",
+      "root": {
+        "id": "t9_1",
+        "question": "Has price reached the 161.8% Fibonacci extension?",
+        "yes": {
+          "id": "t9_2",
+          "question": "Does price react (reverse) at 161.8?",
+          "yes": {
+            "id": "t9_3",
+            "action": "FIRST ATTEMPT — Trade the reversal, but be prepared for failure",
+            "explanation": "The first reaction at 161.8 is a valid trade. But if it fails (price returns to 161.8), the behavior pattern shifts to failure-based progression toward 200. 'Si en este primer intento el precio no quiere tirar...'",
+            "quote_es": "Si en este primer intento el precio no quiere tirar..."
+          },
+          "no": {
+            "id": "t9_4",
+            "question": "Is the distance between 161.8 and 200 large (high timeframe pattern)?",
+            "yes": {
+              "id": "t9_5",
+              "action": "EXPECT FAILURE-BASED PROGRESSION to 200 — Price will make repeated attempts",
+              "explanation": "When the distance is large, price typically doesn't shoot straight to 200. Instead, it makes repeated failures: hits 161.8, fails, retraces, hits a new 161.8, fails again, progressively working toward 200. 'Normalmente, para llegar ahí, lo hará normalmente así: fracasos.' This is especially true in indices and commodities.",
+              "quote_es": "Si este primer nivel no se comporta bien, lo más probable es que el precio, para alcanzar ese nivel, lo haga a base de fracasos.",
+              "then": {
+                "id": "t9_5a",
+                "question": "Can you work the small moves within the failures?",
+                "yes": {
+                  "id": "t9_5b",
+                  "action": "Trade the internal cycles within the 161-200 zone using Points of Control",
+                  "explanation": "Points of control form within this zone. Use them for both long and short attempts in the internal movements. 'Apoyarte en los puntos de control para intentar largos, especialmente cuando anticipas un movimiento hacia el nivel 200.'"
+                },
+                "no": {
+                  "id": "t9_5c",
+                  "action": "WAIT for price to reach 200 — enter there with buffer for spike",
+                  "explanation": "If the internal movements don't offer clean entries, wait for the 200 level. Add a buffer zone for potential spikes. 'Si el precio rompe este nivel 161.8 y viene al 200, ¿yo te voy a intentar aquí? Sí. Pero le voy a dar un colchoncito para la mecha.'"
+                }
+              }
+            },
+            "no": {
+              "id": "t9_6",
+              "action": "Price may go directly to 200 — smaller patterns move faster",
+              "explanation": "On smaller timeframes or patterns, the 161.8-200 distance is small enough that price can cover it in one move. The failure-based progression is less common here."
+            }
+          }
+        },
+        "no": {
+          "id": "t9_7",
+          "action": "WAIT — Monitor for approach to 161.8 extension level",
+          "explanation": "Price hasn't reached the extension yet. Continue managing based on the cycle zones."
+        }
+      }
+    },
+    {
+      "tree_name": "T10_Risk_And_Business_Plan",
+      "tree_description": "Risk management framework: max loss, setbacks, adaptation, and the five factors of profitability. Managing failure (how you handle losses) is more important than accuracy %. Source: Must Keep This In Mind, Setbacks - Enemy of Novice Traders, Many Ways to Win and Lose, Failure Management (JgTMWX3hjY0).",
+      "root": {
+        "id": "t10_1",
+        "question": "Do you have a complete business plan with defined max loss, profit targets, and lot sizing?",
+        "yes": {
+          "id": "t10_2",
+          "question": "Are ALL FIVE profitability factors aligned?",
+          "note": "The five factors are: (1) Discipline, (2) Numbers (risk/reward), (3) Method, (4) Assets, (5) Personal Condition",
+          "quote_es": "Si uno falla, no serás exitoso. Has conseguido crear una mezcla correcta de estos cinco factores.",
+          "yes": {
+            "id": "t10_3",
+            "question": "Are the assets you trade still behaving as expected for your method?",
+            "yes": {
+              "id": "t10_4",
+              "question": "Has your personal condition changed (availability, emotional state, life circumstances)?",
+              "yes": {
+                "id": "t10_5",
+                "action": "ADAPT — Your method may need adjustment for your new personal condition",
+                "explanation": "Personal changes affect trading. If your availability changed, your timeframes may need to change. If your emotional state changed, your risk tolerance may be different. 'Tu condición personal no es la misma.' Past success does NOT guarantee future success if conditions change.",
+                "quote_es": "Te empiezas a dar cuenta de que tu condición personal no es la misma."
+              },
+              "no": {
+                "id": "t10_6",
+                "action": "CONTINUE — All factors aligned. Execute the plan.",
+                "explanation": "Everything is in order. The cocktail of factors is well mixed. Execute with discipline."
+              }
+            },
+            "no": {
+              "id": "t10_7",
+              "action": "ADAPT ASSETS — Find assets that match your method's current requirements",
+              "explanation": "Assets change behavior over time. What worked for 2-3 years may stop working. You need to find assets that suit your methodology AND your personal condition. 'Los activos que trabajas no se comportan igual. Te empiezas a dar cuenta de que los activos se mueven diferente.'",
+              "quote_es": "¿Qué pasa cuando te das cuenta de que los activos con los que trabajas no se comportan igual?"
+            }
+          },
+          "no": {
+            "id": "t10_8",
+            "action": "IDENTIFY the weak factor and fix it before trading",
+            "explanation": "If any of the five factors is missing, you cannot be profitable. Discipline and numbers tend to be stable. The volatile factors are assets and personal condition. Method should be solid if proven. Diagnose which factor broke."
+          }
+        },
+        "no": {
+          "id": "t10_9",
+          "action": "STOP TRADING — Build a complete business plan first",
+          "explanation": "Without a business plan you have no max loss, no profit targets, no lot sizing rules. You are gambling. The business plan defines: max loss per trade, profit target per trade, lot sizing formula, which assets to trade, what timeframes, and session schedule."
+        }
+      },
+      "failure_management": {
+        "principle": "Managing failure is MORE important than win rate. How you lose determines survival.",
+        "protocol": [
+          "Accept that losses are inevitable and part of the business model.",
+          "Cut losses early when price shows no reversal intent (Null Trade strategy).",
+          "Never revenge trade after a loss.",
+          "Track the QUALITY of your losses, not just their frequency.",
+          "A string of well-managed losses is a sign of good trading, not bad trading."
+        ],
+        "source_video": "JgTMWX3hjY0"
+      }
+    },
+    {
+      "tree_name": "T11_Method_Architecture",
+      "tree_description": "The three-layer architecture of the complete method: Reading Model + Attack Model + Management = Complete Method. Understanding these as separate things is critical. Source: Analysis vs Strategy vs Method.",
+      "root": {
+        "id": "t11_1",
+        "question": "Do you understand the difference between Reading Model, Attack Model, and Management?",
+        "yes": {
+          "id": "t11_2",
+          "question": "Do you have a Reading Model (how you interpret the chart)?",
+          "yes": {
+            "id": "t11_3",
+            "question": "Do you have an Attack Model (how you execute entries based on the reading)?",
+            "yes": {
+              "id": "t11_4",
+              "question": "Do you have Management rules (risk, stops, partials, exits)?",
+              "yes": {
+                "id": "t11_5",
+                "action": "COMPLETE METHOD — You have all three layers. Execute.",
+                "explanation": "Reading Model (cycles/fractality) + Attack Model (entries via zones, liquidity grabs, patterns) + Management (business plan, stops, partials) = Complete Method. 'Modelo de lectura, modelo de ataque, y todo eso delineado con gestión. Punto.'"
+              },
+              "no": {
+                "id": "t11_6",
+                "action": "BUILD MANAGEMENT RULES — Define your personal risk, entry, exit, and post-entry rules",
+                "explanation": "Management is highly personal. It includes: what kind of risk you take, what kind of entries you make, what kind of exits, what kind of post-entry management. No two students trade the same. 'La estrategia es mucho más compleja y, sobre todo, mucho más individual.'"
+              }
+            },
+            "no": {
+              "id": "t11_7",
+              "action": "DEVELOP ATTACK MODEL — Choose your entry method (zones, liquidity grabs, patterns, or combination)",
+              "explanation": "There are many valid attack models. Liquidity grabs alone can be a complete strategy. Zone entries with patterns work. The YouTube course shows some patterns, but there are thousands of ways to attack. 'Hay mil formas de atacar el precio. Mira, aquí hay liquidez que no enseño en los vídeos. Pero esto es trading 101.'"
+            }
+          },
+          "no": {
+            "id": "t11_8",
+            "action": "LEARN THE READING MODEL FIRST — Cycles, fractality, zones, points of control",
+            "explanation": "The reading model is the foundation. It positions you on the chart and tells you where price is likely to go. Without it, any strategy is blind. 'Cualquier metodología necesita tener una forma de leer los gráficos. La tenemos a través de los ciclos y eso es lo único que muestran esos vídeos de YouTube.'"
+          }
+        },
+        "no": {
+          "id": "t11_9",
+          "action": "CRITICAL DISTINCTION — Learn what each layer is BEFORE trying to trade",
+          "explanation": "People confuse these constantly. The YouTube course = Reading Model ONLY. It is NOT a strategy. A strategy requires reading + execution + management. 'La gente mezcla todo: método, lectura, ataque, estrategia. La gente no sabe de qué está hablando.'",
+          "quote_es": "Cuando hablas con alguien de estrategia, cada uno tiene un concepto diferente. Esto es un lío gordo. Modelo de lectura, modelo de ataque, y todo eso delineado con gestión. Punto."
+        }
+      }
+    },
+    {
+      "tree_name": "T12_Super_Winner_Psychology",
+      "tree_description": "The psychological framework for holding trades to super-winner status. This is about overcoming fear of giving back profits and accepting that most attempts won't reach the target. Source: Super Winning Trades, Good/Bad Use of Partials.",
+      "root": {
+        "id": "t12_1",
+        "question": "Have you mastered the fixed-ratio management style first?",
+        "quote_es": "Cuando tengas dominada esa gestión de ratio fijo, entonces expandir tu mente y tu capacidad de estirar.",
+        "yes": {
+          "id": "t12_2",
+          "question": "Are you willing to accept that MOST attempts at super-winners will fail?",
+          "yes": {
+            "id": "t12_3",
+            "question": "Is the trade already secured (protective partial taken, remaining positions in profit)?",
+            "yes": {
+              "id": "t12_4",
+              "question": "Did you decide the final exit target BEFORE or immediately after entry?",
+              "yes": {
+                "id": "t12_5",
+                "action": "HOLD through erratic movements — The decision is made. Do not back down.",
+                "explanation": "The price will make many erratic movements before reaching your target. Hard retracements, sideways consolidation, fake reversals. You already made the decision. You already know the trade is a winner even if the remaining positions fail. The remaining 1-2 positions are the 'extra' — the attempt at the big move. Maybe 10-20 per year actually hit the target. 'Cuando te encuentres estos movimientos erráticos del precio, no puedes achicarte. Ya tomaste la decisión cuando lo hiciste.'",
+                "quote_es": "Si no lo intentas, nunca lo tienes.",
+                "sub_decisions": {
+                  "id": "t12_5a",
+                  "question": "Is your predetermined target the 'failure' of a significant cycle?",
+                  "yes": {
+                    "id": "t12_5b",
+                    "action": "Hold until failure target is hit OR price takes you out",
+                    "explanation": "Example: 'I decide those trades will exit at the failure of the blue cycle. If it doesn't reach there, to hell with it, let it take me out.' 'Esas operaciones van a salir ahí. Ahí. Y si no llega, pues que me saque.'"
+                  },
+                  "no": {
+                    "id": "t12_5c",
+                    "action": "Hold until predetermined Fibonacci extension or zone target",
+                    "explanation": "If your target is a specific level (200 extension, zone boundary), hold until it's reached or the trade stops out."
+                  }
+                }
+              },
+              "no": {
+                "id": "t12_6",
+                "action": "DECIDE NOW — Without a predetermined exit, doubt will overwhelm you",
+                "explanation": "If you haven't decided where the trade exits, you will face every erratic movement with uncertainty. 'Si no está decidido, de forma objetiva y clara, vas a tener muchas más dudas.'"
+              }
+            },
+            "no": {
+              "id": "t12_7",
+              "action": "SECURE THE TRADE FIRST — Take protective partial before thinking about super-winners",
+              "explanation": "You cannot attempt a super-winner with an unsecured trade. First take the partial that makes the overall trade profitable. Then and only then do the remaining positions become candidates for the big run."
+            }
+          },
+          "no": {
+            "id": "t12_8",
+            "action": "STICK WITH FIXED RATIO — Super-winners are NOT for everyone",
+            "explanation": "If you use fixed ratios (bang, bang, same ratio), you will NEVER have a super-winning trade. That's okay. It's psychologically easier. 'Es mucho más fácil de aceptar psicológicamente. Pero en la vida, nunca vas a tener una operación muy ganadora.' Only pursue super-winners when you can truly accept the failure rate."
+          }
+        },
+        "no": {
+          "id": "t12_9",
+          "action": "MASTER FIXED RATIO FIRST — Do not attempt super-winners before mastering basics",
+          "explanation": "The progression is: (1) Master fixed ratio management, (2) Then expand your mind to stretch targets. 'Cuando tengas dominada esa gestión de ratio fijo, entonces expandir tu mente y tu capacidad de estirar, estirar, estirar. Porque lo manejas mejor psicológicamente. Entonces es cuando pasa esto.'"
+        }
+      }
+    },
+    {
+      "tree_name": "T13_Chart_Analysis_Methodology",
+      "tree_description": "The three ways to study charts and how to use each for improvement. Source: Fractality Practice Example.",
+      "root": {
+        "id": "t13_1",
+        "question": "What type of chart analysis are you doing?",
+        "options": {
+          "past_complete": {
+            "id": "t13_2",
+            "action": "PAST, COMPLETED, GLOBAL CHART — See the entire movement to understand the big picture",
+            "explanation": "This is the first way. You see a complete chart and identify what price did globally. Useful for understanding the overall fractal structure."
+          },
+          "past_reviewed": {
+            "id": "t13_3",
+            "action": "PAST, REVIEWED CHART — Go through the nuances of how the movement was constructed (MOST IMPORTANT)",
+            "explanation": "This is Joaquín's recommended method. Take a completed movement and review it bar by bar, understanding internal fractality. 'Para mí, sin duda, el más importante es el gráfico pasado, revisado. Es lo que más te puede ayudar para que después, en el gráfico en movimiento, lo hagas mejor.' This is how you internalize the methodology.",
+            "quote_es": "Este ejercicio lo he hecho miles de veces para verificar cosas."
+          },
+          "moving_chart": {
+            "id": "t13_4",
+            "action": "MOVING CHART — Live, day-to-day evolution of price where you apply the method",
+            "explanation": "This is real-time trading. The live chart where fractals form in real time. The quality of your live reading depends on how much past reviewed chart work you've done."
+          }
+        }
+      }
+    }
+  ],
+  "cross_references": {
+    "T1_feeds_T2": "Cycle identification (T1) is the prerequisite for understanding evolution (T2). You cannot evaluate evolution without first having an active cycle.",
+    "T2_feeds_T5": "Evolution/break outcomes (T2) inform entry strategy (T5). A broken cycle creates new points of control; an evolved cycle creates new zones to trade.",
+    "T3_validates_T1": "Retracement completion (T3) confirms that a new fractal's impulse has begun, which feeds back into cycle identification (T1) for the next level.",
+    "T4_before_T5": "Context reading (T4) MUST happen before entry strategy (T5). The reading model positions you; the attack model executes.",
+    "T5_feeds_T7": "Entry strategy (T5) determines which management approach (T7) to use. Zone confluences may warrant super-winner attempts; weaker entries get fixed-ratio management.",
+    "T6_driven_by_T7": "Trade classification (T6) is the result of how management (T7) plays out. The five outcomes emerge from how you handle the trade after entry.",
+    "T8_within_T7": "Partial strategy (T8) is a sub-component of post-entry management (T7). The two trees work together.",
+    "T9_special_case_of_T4": "The 161-200 zone trading (T9) is a specific context scenario (T4) that requires its own decision framework due to asset-class differences.",
+    "T10_constrains_all": "Risk and business plan (T10) constrains ALL other trees. No trade happens without business plan compliance.",
+    "T11_is_the_meta": "Method architecture (T11) is the meta-tree that explains how all other trees fit together.",
+    "T12_extends_T7": "Super-winner psychology (T12) extends post-entry management (T7) for experienced traders only.",
+    "T13_improves_all": "Chart analysis methodology (T13) is the training framework that improves execution of all other trees."
+  },
+  "execution_flow": [
+    "1. T10 — Verify business plan and risk parameters are set",
+    "2. T11 — Confirm you have all three layers (reading + attack + management)",
+    "3. T13 — Study charts using past-reviewed method to build skill",
+    "4. T1 — Identify cycles on the current chart",
+    "5. T4 — Read context from left side of chart (failures, origins, liquidity)",
+    "6. T2 — Evaluate if current cycles have evolved or broken",
+    "7. T3 — Verify retracement completion for active fractals",
+    "8. T9 — If in 161-200 zone, apply special handling",
+    "9. T5 — Execute entry strategy based on reading model output",
+    "10. T7/T8 — Manage trade post-entry (stops, partials)",
+    "11. T12 — If applicable, hold for super-winner",
+    "12. T6 — Classify trade outcome and log for business plan tracking"
+  ],
+  "last_updated": "2026-02-25",
+  "new_in_v2": [
+    "Point of Control validation protocol (fractal + 1/3 rule) — from SbIr86IVdvA",
+    "Break level confirmation (1/3 rule, false breakout = manipulation) — from OMNRlfZzZmU",
+    "PoC obsolescence rule (larger retracements kill previous PoCs) — from SbIr86IVdvA",
+    "Trend break rule (only last control cycle break = trend break) — from uYgJBc6TehE",
+    "Failure management principle (managing losses > accuracy %) — from JgTMWX3hjY0",
+    "Entry timing protocol (sacrifice failed entries for perfect timing on significant zones) — from YmdLBEThXvQ"
+  ]
+}
