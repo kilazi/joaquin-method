@@ -435,11 +435,18 @@ These concepts are referenced but not fully defined in the analyzed videos:
 - Q&A sessions (clarify known gaps)
 - Guest videos with other traders
 
-### 6. Mobile-Optimized Trading Companion
-**Status:** Not started
-**Description:** The current webapp works on mobile but isn't optimized for in-session trading use. Design a mobile-first version:
-- Quick-access buttons for the most common entry scenarios
-- Swipe-based step navigation
-- Shake to restart decision tree
-- Notification reminders for trading rules (T17 drawdown checks)
-- Offline support (PWA with service worker)
+### 6. Mobile UI for Remote Claude Code Control
+**Status:** Not started (ties into brainstorm #2 — voice/messaging integration)
+**Description:** A mobile-first interface (web app or Telegram bot) that connects to Claude Code running persistently on the home machine. Send commands from your phone, get results back, trigger actions remotely — without needing to sit at the computer.
+**Use cases:**
+- "Analyze this chart" — send a screenshot from phone, Claude Code processes it against the Joaquin method knowledge base
+- "What's the status of X?" — query running sessions
+- "Deploy the latest changes" — trigger git push / deploy from phone
+- "Start processing these 5 new Joaquin videos" — kick off batch jobs
+- "Log this trade" — voice note or text → Claude Code logs it with method compliance
+**Architecture ideas:**
+- Home machine runs Claude Code in persistent/sleep mode, watching for incoming requests
+- Telegram Bot API or simple webhook endpoint on the home machine
+- Messages go in → Claude Code picks them up → executes → sends result back
+- Could piggyback on Kortex API as the message bus
+- Reference: MoldBot project (Steve's similar implementation)
