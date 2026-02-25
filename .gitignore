@@ -5,6 +5,7 @@
 */*.jpg
 *.mp4
 *.mp3
+!clips/*.mp3
 
 # Temp files
 __pycache__/
