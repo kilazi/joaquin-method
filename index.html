@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Método Joaquín Vega — Decision Trees</title>
+<title>Metodo Joaquin Vega — Trading Decision Trees</title>
 <style>
 :root {
   --bg: #0f1117;
@@ -23,431 +23,135 @@
   --purple: #a78bfa;
   --purple-bg: #2d2548;
   --cyan: #22d3ee;
+  --orange: #fb923c;
+  --orange-bg: #3b2816;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  height: 100vh;
-  overflow: hidden;
-}
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); height:100vh; overflow:hidden; }
+.app { display:flex; height:100vh; }
 
-/* Layout */
-.app { display: flex; height: 100vh; }
-.sidebar {
-  width: 280px;
-  min-width: 280px;
-  background: var(--surface);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.sidebar-header {
-  padding: 16px;
-  border-bottom: 1px solid var(--border);
-}
-.sidebar-header h1 {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-.sidebar-header p {
-  font-size: 11px;
-  color: var(--text-dim);
-}
-.sidebar-nav {
-  flex: 1;
-  overflow-y: auto;
-  padding: 8px;
-}
-.nav-group {
-  margin-bottom: 12px;
-}
-.nav-group-title {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  color: var(--text-dim);
-  padding: 6px 8px;
-  font-weight: 600;
-}
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
-  transition: all 0.15s;
-  color: var(--text);
-}
-.nav-item:hover { background: var(--surface2); }
-.nav-item.active { background: var(--accent-dim); color: #fff; }
-.nav-item .tree-num {
-  font-size: 10px;
-  font-weight: 700;
-  background: var(--surface2);
-  color: var(--text-dim);
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.nav-item.active .tree-num { background: rgba(255,255,255,0.2); color: #fff; }
+/* Sidebar */
+.sidebar { width:280px; min-width:280px; background:var(--surface); border-right:1px solid var(--border); display:flex; flex-direction:column; overflow:hidden; }
+.sidebar-header { padding:16px; border-bottom:1px solid var(--border); }
+.sidebar-header h1 { font-size:15px; font-weight:700; color:var(--accent); margin-bottom:2px; }
+.sidebar-header p { font-size:11px; color:var(--text-dim); }
+.sidebar-nav { flex:1; overflow-y:auto; padding:8px; }
+.nav-group { margin-bottom:10px; }
+.nav-group-title { font-size:10px; text-transform:uppercase; letter-spacing:1.2px; color:var(--text-dim); padding:6px 8px; font-weight:600; }
+.nav-item { display:flex; align-items:center; gap:8px; padding:7px 10px; border-radius:6px; cursor:pointer; font-size:13px; transition:all .15s; color:var(--text); }
+.nav-item:hover { background:var(--surface2); }
+.nav-item.active { background:var(--accent-dim); color:#fff; }
+.nav-ico { font-size:14px; width:22px; text-align:center; flex-shrink:0; }
+.nav-item.active .nav-ico { color:#fff; }
 
-/* Main content */
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.main-header {
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-.main-header h2 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-.main-header .desc {
-  font-size: 12px;
-  color: var(--text-dim);
-  max-width: 700px;
-  line-height: 1.5;
-}
-.mode-toggle {
-  display: flex;
-  gap: 4px;
-  background: var(--surface);
-  border-radius: 8px;
-  padding: 3px;
-  flex-shrink: 0;
-}
-.mode-btn {
-  padding: 6px 12px;
-  border: none;
-  background: transparent;
-  color: var(--text-dim);
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 500;
-  transition: all 0.15s;
-}
-.mode-btn.active { background: var(--accent); color: #fff; }
+/* Main */
+.main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+.main-header { padding:14px 24px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:flex-start; gap:16px; }
+.main-header h2 { font-size:18px; font-weight:700; margin-bottom:3px; }
+.main-header .desc { font-size:12px; color:var(--text-dim); max-width:700px; line-height:1.5; }
+.mode-toggle { display:flex; gap:4px; background:var(--surface); border-radius:8px; padding:3px; flex-shrink:0; }
+.mode-btn { padding:6px 12px; border:none; background:transparent; color:var(--text-dim); border-radius:6px; cursor:pointer; font-size:12px; font-weight:500; transition:all .15s; }
+.mode-btn.active { background:var(--accent); color:#fff; }
+.tree-container { flex:1; overflow:auto; padding:24px; }
 
-/* Tree view */
-.tree-container {
-  flex: 1;
-  overflow: auto;
-  padding: 24px;
-}
-
-/* Step-by-step mode */
-.step-view {
-  max-width: 640px;
-  margin: 0 auto;
-  padding-top: 20px;
-}
-.step-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 16px;
-  animation: fadeIn 0.3s ease;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.step-badge {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 3px 8px;
-  border-radius: 4px;
-  margin-bottom: 12px;
-}
-.step-badge.question { background: rgba(108,140,255,0.15); color: var(--accent); }
-.step-badge.action { background: rgba(52,211,153,0.15); color: var(--green); }
-.step-badge.wait { background: rgba(251,191,36,0.15); color: var(--yellow); }
-.step-badge.stop { background: rgba(248,113,113,0.15); color: var(--red); }
-
-.step-question {
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.4;
-  margin-bottom: 16px;
-}
-.step-action {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.4;
-  margin-bottom: 12px;
-}
-.step-explanation {
-  font-size: 13px;
-  color: var(--text-dim);
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
-.step-quote {
-  font-size: 12px;
-  font-style: italic;
-  color: var(--purple);
-  background: var(--purple-bg);
-  padding: 10px 14px;
-  border-radius: 8px;
-  border-left: 3px solid var(--purple);
-  margin-bottom: 16px;
-  line-height: 1.5;
-}
-.step-buttons {
-  display: flex;
-  gap: 10px;
-}
-.step-btn {
-  flex: 1;
-  padding: 12px 16px;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.step-btn.yes {
-  background: var(--green);
-  color: #000;
-}
-.step-btn.yes:hover { background: #4ade80; }
-.step-btn.no {
-  background: var(--red);
-  color: #000;
-}
-.step-btn.no:hover { background: #fca5a5; }
-.step-btn.option {
-  background: var(--surface2);
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-.step-btn.option:hover { background: var(--border); }
-.step-btn.restart {
-  background: var(--surface2);
-  color: var(--text-dim);
-  border: 1px solid var(--border);
-}
-.step-btn.restart:hover { background: var(--border); }
-
-/* Full tree mode */
-.full-tree {
-  min-width: fit-content;
-}
-.tree-node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.node-box {
-  background: var(--surface);
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  padding: 14px 18px;
-  max-width: 300px;
-  min-width: 200px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.15s;
-  position: relative;
-}
-.node-box:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(108,140,255,0.15);
-}
-.node-box.question-node { border-color: var(--accent); }
-.node-box.action-node { border-color: var(--green); background: var(--green-bg); }
-.node-box.wait-node { border-color: var(--yellow); background: var(--yellow-bg); }
-.node-box.stop-node { border-color: var(--red); background: var(--red-bg); }
-.node-box .node-label {
-  font-size: 12px;
-  line-height: 1.4;
-  font-weight: 500;
-}
-.node-children {
-  display: flex;
-  gap: 20px;
-  margin-top: 20px;
-  position: relative;
-}
-.node-children::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  width: 2px;
-  height: 20px;
-  background: var(--border);
-}
-.branch {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.branch-label {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-.branch-label.yes-label { background: var(--green-bg); color: var(--green); }
-.branch-label.no-label { background: var(--red-bg); color: var(--red); }
-
-/* Flow overview */
-.flow-section {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 20px 0;
-}
-.flow-step {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 14px 0;
-  border-left: 2px solid var(--border);
-  margin-left: 15px;
-  padding-left: 24px;
-  position: relative;
-}
-.flow-step::before {
-  content: attr(data-num);
-  position: absolute;
-  left: -14px;
-  top: 12px;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.flow-step .flow-tree {
-  font-weight: 700;
-  color: var(--accent);
-  font-size: 13px;
-  min-width: 30px;
-}
-.flow-step .flow-desc {
-  font-size: 13px;
-  color: var(--text-dim);
-  line-height: 1.5;
-}
-.flow-step .flow-desc strong { color: var(--text); }
+/* Step cards */
+.step-view { max-width:640px; margin:0 auto; padding-top:12px; }
+.step-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; animation:fadeIn .3s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+.step-badge { display:inline-block; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:3px 8px; border-radius:4px; margin-bottom:12px; }
+.step-badge.question { background:rgba(108,140,255,.15); color:var(--accent); }
+.step-badge.action { background:rgba(52,211,153,.15); color:var(--green); }
+.step-badge.wait { background:rgba(251,191,36,.15); color:var(--yellow); }
+.step-badge.stop { background:rgba(248,113,113,.15); color:var(--red); }
+.step-badge.enter { background:rgba(52,211,153,.25); color:var(--green); }
+.step-question { font-size:17px; font-weight:600; line-height:1.4; margin-bottom:16px; }
+.step-action { font-size:16px; font-weight:700; line-height:1.4; margin-bottom:12px; }
+.step-explanation { font-size:13px; color:var(--text-dim); line-height:1.6; margin-bottom:16px; }
+.step-quote { font-size:12px; font-style:italic; color:var(--purple); background:var(--purple-bg); padding:10px 14px; border-radius:8px; border-left:3px solid var(--purple); margin-bottom:16px; line-height:1.5; }
+.step-protocol { font-size:12px; color:var(--cyan); background:rgba(34,211,238,.08); padding:12px 14px; border-radius:8px; border-left:3px solid var(--cyan); margin-bottom:16px; line-height:1.7; }
+.step-protocol strong { color:var(--text); }
+.step-buttons { display:flex; gap:10px; }
+.step-btn { flex:1; padding:12px 16px; border:none; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; transition:all .15s; }
+.step-btn.yes { background:var(--green); color:#000; }
+.step-btn.yes:hover { background:#4ade80; }
+.step-btn.no { background:var(--red); color:#000; }
+.step-btn.no:hover { background:#fca5a5; }
+.step-btn.option { background:var(--surface2); color:var(--text); border:1px solid var(--border); }
+.step-btn.option:hover { background:var(--border); }
+.step-btn.restart { background:var(--surface2); color:var(--text-dim); border:1px solid var(--border); }
+.step-btn.restart:hover { background:var(--border); }
+.step-btn.continue { background:var(--accent); color:#fff; flex:unset; padding:10px 20px; margin-top:12px; }
 
 /* Breadcrumb */
-.breadcrumb {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-.crumb {
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.crumb.yes-crumb { background: var(--green-bg); color: var(--green); }
-.crumb.no-crumb { background: var(--red-bg); color: var(--red); }
-.crumb:hover { opacity: 0.8; }
+.breadcrumb { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
+.crumb { font-size:11px; padding:3px 8px; border-radius:4px; cursor:pointer; transition:all .15s; }
+.crumb.yes-crumb { background:var(--green-bg); color:var(--green); }
+.crumb.no-crumb { background:var(--red-bg); color:var(--red); }
 
-/* Stats bar */
-.stats-bar {
-  padding: 10px 24px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 24px;
-  font-size: 11px;
-  color: var(--text-dim);
-  background: var(--surface);
-}
-.stat-item span { color: var(--text); font-weight: 600; }
+/* Flow */
+.flow-section { max-width:700px; margin:0 auto; padding:20px 0; }
+.flow-step { display:flex; align-items:center; gap:14px; padding:12px 16px; border-left:2px solid var(--border); margin-left:15px; padding-left:24px; position:relative; cursor:pointer; border-radius:0 8px 8px 0; transition:all .15s; }
+.flow-step:hover { background:var(--surface2); }
+.flow-step::before { content:attr(data-num); position:absolute; left:-14px; top:50%; transform:translateY(-50%); width:26px; height:26px; border-radius:50%; background:var(--accent); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.flow-step .flow-tree { font-weight:700; color:var(--accent); font-size:13px; min-width:30px; }
+.flow-step .flow-desc { font-size:13px; color:var(--text); line-height:1.5; }
+.flow-step .flow-arrow { margin-left:auto; color:var(--text-dim); font-size:16px; }
+
+/* AI Search */
+.ai-panel { max-width:640px; margin:0 auto; padding-top:12px; }
+.ai-input-wrap { position:relative; margin-bottom:20px; }
+.ai-input { width:100%; padding:14px 50px 14px 16px; background:var(--surface); border:1px solid var(--border); border-radius:10px; color:var(--text); font-size:14px; outline:none; transition:border-color .15s; }
+.ai-input:focus { border-color:var(--accent); }
+.ai-input::placeholder { color:var(--text-dim); }
+.ai-send { position:absolute; right:8px; top:50%; transform:translateY(-50%); background:var(--accent); border:none; color:#fff; width:34px; height:34px; border-radius:8px; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; }
+.ai-send:hover { background:var(--accent-dim); }
+.ai-examples { display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
+.ai-example { padding:10px 14px; background:var(--surface); border:1px solid var(--border); border-radius:8px; cursor:pointer; font-size:13px; color:var(--text-dim); transition:all .15s; }
+.ai-example:hover { border-color:var(--accent); color:var(--text); }
+.ai-result { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:20px; animation:fadeIn .3s ease; }
+.ai-result h3 { font-size:15px; font-weight:700; margin-bottom:12px; color:var(--green); }
+.ai-result p { font-size:13px; line-height:1.6; color:var(--text-dim); margin-bottom:10px; }
+.ai-result .tree-link { display:inline-block; padding:6px 12px; background:var(--accent-dim); color:#fff; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer; margin-top:8px; margin-right:6px; transition:all .15s; }
+.ai-result .tree-link:hover { background:var(--accent); }
+.ai-result .match-node { background:var(--surface2); border-radius:8px; padding:12px; margin:10px 0; border-left:3px solid var(--accent); }
+.ai-result .match-node .match-path { font-size:11px; color:var(--accent); margin-bottom:4px; }
+.ai-result .match-node .match-text { font-size:13px; }
+
+/* Stats */
+.stats-bar { padding:10px 24px; border-top:1px solid var(--border); display:flex; gap:24px; font-size:11px; color:var(--text-dim); background:var(--surface); flex-wrap:wrap; }
+.stat-item span { color:var(--text); font-weight:600; }
+
+/* Full tree mode */
+.full-tree { min-width:fit-content; }
+.tree-node { display:flex; flex-direction:column; align-items:center; }
+.node-box { background:var(--surface); border:2px solid var(--border); border-radius:10px; padding:12px 16px; max-width:280px; min-width:180px; text-align:center; cursor:pointer; transition:all .15s; }
+.node-box:hover { border-color:var(--accent); transform:translateY(-2px); box-shadow:0 4px 20px rgba(108,140,255,.15); }
+.node-box.question-node { border-color:var(--accent); }
+.node-box.action-node { border-color:var(--green); background:var(--green-bg); }
+.node-box.wait-node { border-color:var(--yellow); background:var(--yellow-bg); }
+.node-box.stop-node { border-color:var(--red); background:var(--red-bg); }
+.node-box .node-label { font-size:11px; line-height:1.4; font-weight:500; }
+.node-children { display:flex; gap:16px; margin-top:16px; position:relative; }
+.branch { display:flex; flex-direction:column; align-items:center; }
+.branch-label { font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; margin-bottom:8px; }
+.branch-label.yes-label { background:var(--green-bg); color:var(--green); }
+.branch-label.no-label { background:var(--red-bg); color:var(--red); }
 
 /* Mobile */
-@media (max-width: 768px) {
-  .sidebar { display: none; }
-  .sidebar.open {
-    display: flex;
-    position: fixed;
-    top: 0; left: 0; bottom: 0;
-    z-index: 100;
-    width: 280px;
-    box-shadow: 4px 0 20px rgba(0,0,0,0.5);
-  }
-  .mobile-header {
-    display: flex !important;
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    align-items: center;
-    gap: 12px;
-  }
-  .hamburger {
-    background: none; border: none;
-    color: var(--text);
-    font-size: 20px;
-    cursor: pointer;
-    padding: 4px;
-  }
-  .main-header { padding: 12px 16px; }
-  .step-view { padding-top: 10px; }
-  .step-card { padding: 16px; }
-  .step-question { font-size: 15px; }
-  .tree-container { padding: 16px; }
+@media (max-width:768px) {
+  .sidebar { display:none; }
+  .sidebar.open { display:flex; position:fixed; top:0;left:0;bottom:0; z-index:100; width:280px; box-shadow:4px 0 20px rgba(0,0,0,.5); }
+  .mobile-header { display:flex !important; padding:12px 16px; border-bottom:1px solid var(--border); align-items:center; gap:12px; }
+  .hamburger { background:none; border:none; color:var(--text); font-size:20px; cursor:pointer; }
+  .main-header { padding:10px 16px; flex-wrap:wrap; }
+  .tree-container { padding:16px; }
+  .step-card { padding:16px; }
+  .step-question { font-size:15px; }
+  .stats-bar { padding:8px 16px; gap:12px; }
 }
-.mobile-header { display: none; }
-.overlay {
-  display: none;
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 99;
-}
-.overlay.open { display: block; }
-
-/* Tooltip */
-.tooltip {
-  position: fixed;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 12px;
-  max-width: 300px;
-  z-index: 1000;
-  pointer-events: none;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-  line-height: 1.5;
-}
+.mobile-header { display:none; }
+.overlay { display:none; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,.5); z-index:99; }
+.overlay.open { display:block; }
 </style>
 </head>
 <body>
@@ -456,7 +160,7 @@ body {
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <h1>Metodo Joaquin Vega</h1>
-      <p>Modified Fibonacci Trading Method</p>
+      <p>Modified Fibonacci Trading</p>
     </div>
     <nav class="sidebar-nav" id="sidebarNav"></nav>
   </aside>
@@ -467,104 +171,183 @@ body {
     </div>
     <div class="main-header" id="mainHeader">
       <div>
-        <h2 id="treeTitle">Execution Flow</h2>
-        <p class="desc" id="treeDesc">The complete trading session workflow — from preparation to trade classification.</p>
+        <h2 id="treeTitle">Should I Enter?</h2>
+        <p class="desc" id="treeDesc">The primary entry decision checklist based on the Joaquin Vega method.</p>
       </div>
-      <div class="mode-toggle">
+      <div class="mode-toggle" id="modeToggle">
         <button class="mode-btn active" id="modeStep" onclick="setMode('step')">Step-by-Step</button>
         <button class="mode-btn" id="modeTree" onclick="setMode('tree')">Full Tree</button>
       </div>
     </div>
     <div class="tree-container" id="treeContainer"></div>
-    <div class="stats-bar">
-      <div class="stat-item"><span>13</span> Decision Trees</div>
-      <div class="stat-item"><span>148</span> Nodes</div>
-      <div class="stat-item"><span>15</span> Source Videos</div>
-      <div class="stat-item"><span>72%</span> Method Coverage</div>
-    </div>
+    <div class="stats-bar" id="statsBar"></div>
   </main>
 </div>
 
 <script>
-// Decision tree data — loaded from JSON
-let TREES = null;
-let currentTree = null;
-let currentMode = 'step';
-let stepHistory = [];
-let currentNode = null;
+let TREES = null, currentTree = null, currentMode = 'step', stepHistory = [], currentNode = null;
 
-// Navigation structure
-const NAV_GROUPS = [
-  {
-    title: 'Start Here',
-    items: [
-      { id: 'flow', label: 'Execution Flow', icon: '>' },
-    ]
-  },
-  {
-    title: 'Reading Model',
-    items: [
-      { id: 'T1_Cycle_Identification', label: 'Cycle Identification' },
-      { id: 'T2_Fractality_And_Evolution', label: 'Fractality & Evolution' },
-      { id: 'T3_Retracement_Completion', label: 'Retracement Completion' },
-      { id: 'T4_Context_Reading', label: 'Context Reading' },
-    ]
-  },
-  {
-    title: 'Attack Model',
-    items: [
-      { id: 'T5_Liquidity_And_Entry_Strategy', label: 'Entry Strategy' },
-      { id: 'T9_161_200_Zone_Trading', label: '161-200 Zone Trading' },
-    ]
-  },
-  {
-    title: 'Management',
-    items: [
-      { id: 'T6_Trade_Classification', label: 'Trade Classification' },
-      { id: 'T7_Post_Entry_Management', label: 'Post-Entry Management' },
-      { id: 'T8_Partial_Profit_Strategy', label: 'Partial Strategy' },
-      { id: 'T12_Super_Winner_Psychology', label: 'Super-Winner Psychology' },
-    ]
-  },
-  {
-    title: 'Foundation',
-    items: [
-      { id: 'T10_Risk_And_Business_Plan', label: 'Risk & Business Plan' },
-      { id: 'T11_Method_Architecture', label: 'Method Architecture' },
-      { id: 'T13_Chart_Analysis_Methodology', label: 'Chart Analysis Method' },
-    ]
+// "Should I Enter?" mega-tree — synthesized from T1,T4,T5,T10
+const ENTRY_TREE = {
+  tree_name: "Should_I_Enter",
+  tree_description: "The primary entry decision checklist. Walk through this before every trade to verify all conditions are met.",
+  root: {
+    id:"e1", question:"Do you have a business plan with defined max loss, profit target, and lot sizing?",
+    note:"Without a plan you are gambling. 'Lo que nunca deberia tener es una estrategia para atacar el precio si no tengo una localizacion en el mapa.'",
+    yes:{
+      id:"e2", question:"Have you identified Points of Control on the chart?",
+      note:"PoC = origin of significant movement. Validated when price surpasses fractal high by >= 1/3 of retracement height. Fractal = peak with 2 closed candles left and right.",
+      yes:{
+        id:"e3", question:"Is there an ACTIVE CYCLE? (impulse from PoC + retracement to 38.2%)",
+        quote_es:"El retroceso es la condicion imprescindible para que definamos que cuando hay retroceso de ese impulso al 38.2, ahi es el momento en el que podemos marcar todas sus zonas.",
+        yes:{
+          id:"e4", question:"Have you checked CONTEXT from the left side of the chart?",
+          note:"Check: activated failures, liquidity left behind, historical PoCs, movement origins (correct vs defective per 25% rule).",
+          yes:{
+            id:"e5", question:"Has the cycle evolved or broken since you marked it?",
+            note:"If price entered High/Low zone: discard other zones. If movement > original impulse AND retraces to 38.2%: EVOLUTION — old cycle dead, mark new zones.",
+            yes_label:"Still valid",
+            no_label:"Evolved/Broken",
+            yes:{
+              id:"e6", question:"Is price currently in a TRADEABLE ZONE aligned with your directional bias?",
+              note:"Uptrend: buy in Low Zones. Downtrend: sell in High Zones. The 61.8 zone is a normal working zone within the cycle.",
+              yes:{
+                id:"e7", question:"Do you have a CONFLUENCE? (multiple levels agreeing at this point)",
+                note:"Zone confluence = Low Zone + 38 of another cycle, or 61.8 + liquidity level, etc.",
+                yes:{
+                  id:"e8", action:"ENTER — High conviction trade ('si o si')",
+                  explanation:"Multiple zones/levels converge at this point. This is a mandatory entry signal. Enter with your business plan's lot size. Define your stop and target BEFORE entering. First partial must protect the rest of the position.",
+                  quote_es:"Esta coincidencia de la zona baja con el 38 azul es ya un motivo si o si de compra."
+                },
+                no:{
+                  id:"e9", question:"Is there a liquidity grab aligned with your bias? (price broke lows in uptrend bias, or broke highs in downtrend bias)",
+                  yes:{
+                    id:"e10", action:"ENTER on the liquidity grab",
+                    explanation:"Price swept stops and should reverse. Cycles already positioned you; the liquidity grab is the entry trigger. 'No hace falta ningun puto ciclo porque los ciclos ya te han posicionado.'",
+                    quote_es:"Sitios de liquidez que rompan puntos bajos, porque mi modelo me dice que el precio tiene que subir mas."
+                  },
+                  no:{
+                    id:"e11", question:"Is price at a 61.8 level from a structure with confirmed failure of highs/lows?",
+                    yes:{
+                      id:"e12", action:"ENTER — Any 61.8 after failure is a reason to trade",
+                      explanation:"Once there's been a failure of highs (for shorts) or lows (for longs), every 61.8 retracement becomes a valid entry point.",
+                      quote_es:"A partir de aqui ya cualquier 61.8, esto ya era motivo de venta."
+                    },
+                    no:{
+                      id:"e13", action:"DO NOT ENTER — Wait for a better trigger",
+                      explanation:"You have the bias and the zone, but no clean entry trigger. Wait for: (1) a liquidity grab, (2) a zone confluence to form, (3) a 61.8 post-failure entry, or (4) a specific pattern entry. Patience."
+                    }
+                  }
+                }
+              },
+              no:{
+                id:"e14", question:"Is price in the 161.8-200 zone?",
+                yes:{
+                  id:"e15", question:"Is this indices/commodities or currencies?",
+                  yes_label:"Indices/Commodities",
+                  no_label:"Currencies",
+                  yes:{
+                    id:"e16", action:"Target 200 level — 161.8 fails often in indices. Give buffer for spike.",
+                    explanation:"In indices and commodities, the 161.8 level often doesn't hold. The 200 level works much better. Add a 'cushion' for the wick. Trade the failure-based progression between 161.8 and 200."
+                  },
+                  no:{
+                    id:"e17", action:"161.8 is a valid first target — 200 as secondary.",
+                    explanation:"In currencies, the 161.8 level tends to produce better reactions."
+                  }
+                },
+                no:{
+                  id:"e18", action:"DO NOT ENTER — Price is not in a tradeable zone",
+                  explanation:"Wait for price to reach a defined zone. The reading model will present the opportunity. Do not force entries. 'No puedo tener una estrategia para atacar el precio si no tengo una localizacion en el mapa.'"
+                }
+              }
+            },
+            no:{
+              id:"e19", action:"REMAP — Cycle has evolved or broken. Identify new PoCs and mark new cycle before entering.",
+              explanation:"If broken: the cycle is dead, all zones invalid. Look for new PoCs from the breakout movement. If evolved: larger fractal has formed, mark new zones from the larger impulse. 'Los fractales menores se rompen porque se estan formando fractales mayores.'"
+            }
+          },
+          no:{
+            id:"e20", action:"CHECK CONTEXT FIRST — Never trade without reading the left side",
+            explanation:"Before entering ANY trade, check: (1) What failures are activated? (2) What liquidity has been left behind? (3) Where are historical PoCs? (4) Is the movement origin correct (reached 25%) or defective? Context can override the immediate map direction. 'Nos falta contexto. No porque este en zona de venta asumimos que es para vender.'"
+          }
+        },
+        no:{
+          id:"e21", action:"WAIT — No active cycle. Cannot mark zones without 38.2% retracement.",
+          explanation:"The impulse exists but hasn't retraced to 38.2% yet. No zones can be marked. Continue monitoring. Also verify retracement is complete: price must touch 130% level to confirm retracement is finished."
+        }
+      },
+      no:{
+        id:"e22", action:"IDENTIFY PoCs FIRST — Scan the chart for origins of significant movements",
+        explanation:"Use the fractal identification protocol: find peaks with 2 closed candles left and right. Validate by checking if price surpassed the fractal high by >= 1/3 of retracement height. Calculation: measure retracement in pips, divide by 3."
+      }
+    },
+    no:{
+      id:"e23", action:"STOP — Build a business plan before trading",
+      explanation:"Define: max loss per trade, profit target per trade, lot sizing formula, which assets to trade, what timeframes, session schedule. Without this, everything else is gambling."
+    }
   }
+};
+
+const NAV_GROUPS = [
+  { title:'Quick Start', items:[
+    {id:'entry', label:'Should I Enter?', ico:'?'},
+    {id:'search', label:'AI Search', ico:'S'},
+    {id:'flow', label:'Session Workflow', ico:'>'},
+  ]},
+  { title:'Reading Model', items:[
+    {id:'T1_Cycle_Identification', label:'Cycle Identification', ico:'1'},
+    {id:'T2_Fractality_And_Evolution', label:'Fractality & Evolution', ico:'2'},
+    {id:'T3_Retracement_Completion', label:'Retracement Completion', ico:'3'},
+    {id:'T4_Context_Reading', label:'Context Reading', ico:'4'},
+  ]},
+  { title:'Attack Model', items:[
+    {id:'T5_Liquidity_And_Entry_Strategy', label:'Entry Strategy', ico:'5'},
+    {id:'T9_161_200_Zone_Trading', label:'161-200 Zone', ico:'9'},
+  ]},
+  { title:'Management', items:[
+    {id:'T6_Trade_Classification', label:'Trade Classification', ico:'6'},
+    {id:'T7_Post_Entry_Management', label:'Post-Entry Mgmt', ico:'7'},
+    {id:'T8_Partial_Profit_Strategy', label:'Partial Strategy', ico:'8'},
+    {id:'T12_Super_Winner_Psychology', label:'Super-Winner', ico:'12'},
+  ]},
+  { title:'Foundation', items:[
+    {id:'T10_Risk_And_Business_Plan', label:'Risk & Business Plan', ico:'10'},
+    {id:'T11_Method_Architecture', label:'Method Architecture', ico:'11'},
+    {id:'T13_Chart_Analysis_Methodology', label:'Chart Analysis', ico:'13'},
+  ]}
 ];
 
 async function init() {
-  try {
-    const resp = await fetch('trees.json');
-    TREES = await resp.json();
-  } catch(e) {
-    // Fallback: try loading from decision_trees.json
-    try {
-      const resp = await fetch('../decision_trees.json');
-      TREES = await resp.json();
-    } catch(e2) {
-      document.getElementById('treeContainer').innerHTML = '<p style="padding:40px;color:var(--red)">Error loading decision trees. Make sure trees.json is in the webapp folder.</p>';
-      return;
-    }
-  }
+  try { TREES = await (await fetch('trees.json')).json(); }
+  catch(e) { try { TREES = await (await fetch('../decision_trees.json')).json(); } catch(e2) {
+    document.getElementById('treeContainer').innerHTML='<p style="padding:40px;color:var(--red)">Error loading trees.json</p>'; return;
+  }}
+  const nTrees = TREES.trees.length + 1; // +1 for entry tree
+  const nNodes = countAllNodes();
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat-item"><span>${nTrees}</span> Decision Trees</div>
+    <div class="stat-item"><span>${nNodes}</span> Nodes</div>
+    <div class="stat-item"><span>${TREES.source_videos}</span> Source Videos</div>
+  `;
   renderNav();
-  showFlow();
+  selectTree('entry');
+}
+
+function countAllNodes() {
+  let c = 0;
+  function count(n) { if(!n)return; c++; if(n.yes)count(n.yes); if(n.no)count(n.no); if(n.then)count(n.then); if(n.sub_decisions)count(n.sub_decisions); if(n.sub_tree){count(n.sub_tree.yes);count(n.sub_tree.no);} if(n.options)Object.values(n.options).forEach(count); }
+  TREES.trees.forEach(t=>count(t.root));
+  count(ENTRY_TREE.root);
+  return c;
 }
 
 function renderNav() {
   const nav = document.getElementById('sidebarNav');
   let html = '';
-  NAV_GROUPS.forEach(group => {
-    html += `<div class="nav-group"><div class="nav-group-title">${group.title}</div>`;
-    group.items.forEach(item => {
-      const num = item.id === 'flow' ? '>' : item.id.match(/T(\d+)/)?.[1] || '?';
-      html += `<div class="nav-item" data-id="${item.id}" onclick="selectTree('${item.id}')">
-        <span class="tree-num">${num}</span>
-        <span>${item.label}</span>
-      </div>`;
+  NAV_GROUPS.forEach(g => {
+    html += `<div class="nav-group"><div class="nav-group-title">${g.title}</div>`;
+    g.items.forEach(it => {
+      html += `<div class="nav-item" data-id="${it.id}" onclick="selectTree('${it.id}')"><span class="nav-ico">${it.ico}</span><span>${it.label}</span></div>`;
     });
     html += '</div>';
   });
@@ -572,66 +355,154 @@ function renderNav() {
 }
 
 function selectTree(id) {
-  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
   document.querySelector(`.nav-item[data-id="${id}"]`)?.classList.add('active');
   closeSidebar();
+  document.getElementById('modeToggle').style.display = (id==='search'||id==='flow') ? 'none' : 'flex';
 
-  if (id === 'flow') {
-    showFlow();
+  if(id==='entry') {
+    currentTree = ENTRY_TREE;
+    document.getElementById('treeTitle').textContent = 'Should I Enter This Trade?';
+    document.getElementById('treeDesc').textContent = 'Walk through every condition before entering. Based on the complete Joaquin Vega methodology.';
+    if(currentMode==='step') startStepMode(ENTRY_TREE); else renderFullTree(ENTRY_TREE);
     return;
   }
+  if(id==='search') { showSearch(); return; }
+  if(id==='flow') { showFlow(); return; }
 
-  const tree = TREES.trees.find(t => t.tree_name === id);
-  if (!tree) return;
-
+  const tree = TREES.trees.find(t=>t.tree_name===id);
+  if(!tree) return;
   currentTree = tree;
-  document.getElementById('treeTitle').textContent = tree.tree_name.replace(/_/g, ' ').replace(/^T\d+\s/, '');
+  document.getElementById('treeTitle').textContent = tree.tree_name.replace(/_/g,' ').replace(/^T\d+\s/,'');
   document.getElementById('treeDesc').textContent = tree.tree_description;
-
-  if (currentMode === 'step') {
-    startStepMode(tree);
-  } else {
-    renderFullTree(tree);
-  }
+  if(currentMode==='step') startStepMode(tree); else renderFullTree(tree);
 }
 
-function setMode(mode) {
-  currentMode = mode;
-  document.getElementById('modeStep').classList.toggle('active', mode === 'step');
-  document.getElementById('modeTree').classList.toggle('active', mode === 'tree');
-  if (currentTree) {
-    if (mode === 'step') startStepMode(currentTree);
-    else renderFullTree(currentTree);
-  }
+function setMode(m) {
+  currentMode = m;
+  document.getElementById('modeStep').classList.toggle('active', m==='step');
+  document.getElementById('modeTree').classList.toggle('active', m==='tree');
+  if(currentTree) { if(m==='step') startStepMode(currentTree); else renderFullTree(currentTree); }
 }
 
-// --- Execution Flow ---
+// --- Execution Flow (Interactive) ---
 function showFlow() {
   currentTree = null;
   document.getElementById('treeTitle').textContent = 'Trading Session Workflow';
-  document.getElementById('treeDesc').textContent = 'Follow this sequence for a complete trading session. Click any tree reference to jump to it.';
-
+  document.getElementById('treeDesc').textContent = 'Click any step to jump directly into that decision tree.';
   const flow = TREES.execution_flow;
-  const container = document.getElementById('treeContainer');
-
+  const c = document.getElementById('treeContainer');
   let html = '<div class="flow-section">';
-  flow.forEach((step, i) => {
-    const match = step.match(/^(\d+)\.\s(T\d+)\s—\s(.+)$/);
-    if (match) {
-      const [, num, treeRef, desc] = match;
-      html += `<div class="flow-step" data-num="${num}">
-        <span class="flow-tree" style="cursor:pointer" onclick="selectTree('${getTreeId(treeRef)}')">${treeRef}</span>
-        <span class="flow-desc"><strong>${desc}</strong></span>
+  flow.forEach(step => {
+    const m = step.match(/^(\d+)\.\s(T\d+)\s—\s(.+)$/);
+    if(m) {
+      const [,num,ref,desc] = m;
+      const tid = getTreeId(ref);
+      html += `<div class="flow-step" data-num="${num}" onclick="selectTree('${tid}')">
+        <span class="flow-tree">${ref}</span>
+        <span class="flow-desc">${desc}</span>
+        <span class="flow-arrow">&#8250;</span>
       </div>`;
     }
   });
   html += '</div>';
-  container.innerHTML = html;
+  c.innerHTML = html;
 }
 
 function getTreeId(ref) {
-  const tree = TREES.trees.find(t => t.tree_name.startsWith(ref));
-  return tree ? tree.tree_name : ref;
+  const t = TREES.trees.find(t=>t.tree_name.startsWith(ref));
+  return t ? t.tree_name : ref;
+}
+
+// --- AI Search ---
+function showSearch() {
+  currentTree = null;
+  document.getElementById('treeTitle').textContent = 'Find Where You Are';
+  document.getElementById('treeDesc').textContent = 'Describe your trading situation and find the relevant decision tree node.';
+  const c = document.getElementById('treeContainer');
+  c.innerHTML = `<div class="ai-panel">
+    <div class="ai-input-wrap">
+      <input class="ai-input" id="aiInput" placeholder="Describe your situation... e.g. 'price just entered the high zone'" onkeydown="if(event.key==='Enter')doSearch()">
+      <button class="ai-send" onclick="doSearch()">&#8594;</button>
+    </div>
+    <div class="ai-examples" id="aiExamples">
+      <div class="ai-example" onclick="searchFor('Price retraced to 38.2% from a point of control')">Price retraced to 38.2% from a point of control</div>
+      <div class="ai-example" onclick="searchFor('Price just entered the high zone of my cycle')">Price just entered the high zone of my cycle</div>
+      <div class="ai-example" onclick="searchFor('I have a winning trade, should I hold for super-winner?')">I have a winning trade, should I hold for super-winner?</div>
+      <div class="ai-example" onclick="searchFor('Price broke below my cycle break level')">Price broke below my cycle break level</div>
+      <div class="ai-example" onclick="searchFor('I see a liquidity grab below recent lows in an uptrend')">I see a liquidity grab below recent lows in an uptrend</div>
+      <div class="ai-example" onclick="searchFor('Movement didnt reach 25% - defective origin')">Movement didn't reach 25% — defective origin</div>
+      <div class="ai-example" onclick="searchFor('Price at 161.8 on gold')">Price at 161.8 on gold</div>
+      <div class="ai-example" onclick="searchFor('How many partials should I take?')">How many partials should I take?</div>
+    </div>
+    <div id="aiResults"></div>
+  </div>`;
+  setTimeout(()=>document.getElementById('aiInput')?.focus(), 100);
+}
+
+function searchFor(q) {
+  document.getElementById('aiInput').value = q;
+  doSearch();
+}
+
+function doSearch() {
+  const q = document.getElementById('aiInput').value.trim().toLowerCase();
+  if(!q) return;
+  document.getElementById('aiExamples').style.display = 'none';
+  // Search all nodes across all trees + entry tree
+  const allTrees = [ENTRY_TREE, ...TREES.trees];
+  const results = [];
+
+  function searchNode(node, tree, path) {
+    if(!node) return;
+    const texts = [node.question||'', node.action||'', node.explanation||'', node.note||'', node.quote_es||'', node.quote_en||''].join(' ').toLowerCase();
+    // Score by keyword matching
+    const words = q.split(/\s+/).filter(w=>w.length>2);
+    let score = 0;
+    words.forEach(w => { if(texts.includes(w)) score += 1; });
+    // Boost for exact phrase matches
+    if(texts.includes(q)) score += 5;
+    // Boost partial matches
+    const keyTerms = ['38.2','61.8','130','161','200','high zone','low zone','break','evolv','partial','stop','entry','enter','liquidity','failure','fractal','cycle','point of control','retracement','25%','1/3'];
+    keyTerms.forEach(t => { if(q.includes(t) && texts.includes(t)) score += 3; });
+
+    if(score > 0) {
+      results.push({node, tree, path:[...path], score, text:node.question||node.action||''});
+    }
+    if(node.yes) searchNode(node.yes, tree, [...path,'Yes']);
+    if(node.no) searchNode(node.no, tree, [...path,'No']);
+    if(node.then) searchNode(node.then, tree, [...path,'Then']);
+    if(node.sub_decisions) searchNode(node.sub_decisions, tree, [...path,'Detail']);
+    if(node.sub_tree) { searchNode(node.sub_tree, tree, [...path,'SubTree']); if(node.sub_tree.yes) searchNode(node.sub_tree.yes, tree, [...path,'Yes']); if(node.sub_tree.no) searchNode(node.sub_tree.no, tree, [...path,'No']); }
+    if(node.options) Object.entries(node.options).forEach(([k,v])=>searchNode(v, tree, [...path,k]));
+  }
+
+  allTrees.forEach(t => searchNode(t.root, t, []));
+  results.sort((a,b) => b.score - a.score);
+  const top = results.slice(0, 6);
+
+  const rd = document.getElementById('aiResults');
+  if(top.length === 0) {
+    rd.innerHTML = '<div class="ai-result"><p>No matching nodes found. Try different keywords or describe your situation differently.</p></div>';
+    return;
+  }
+
+  let html = '<div class="ai-result">';
+  html += `<h3>${top.length} relevant nodes found</h3>`;
+  top.forEach(r => {
+    const treeName = r.tree.tree_name === 'Should_I_Enter' ? 'Should I Enter?' : r.tree.tree_name.replace(/_/g,' ').replace(/^T\d+\s/,'');
+    const treeId = r.tree.tree_name === 'Should_I_Enter' ? 'entry' : r.tree.tree_name;
+    const isAction = !!r.node.action;
+    const icon = isAction ? (r.node.action.toUpperCase().includes('WAIT')?'&#9202;':r.node.action.toUpperCase().includes('STOP')||r.node.action.toUpperCase().includes('BROKEN')?'&#9940;':'&#9989;') : '&#10067;';
+    html += `<div class="match-node">
+      <div class="match-path">${icon} ${treeName} &rarr; ${r.path.join(' &rarr; ') || 'Root'}</div>
+      <div class="match-text">${r.text}</div>
+      ${r.node.explanation ? `<p style="font-size:12px;color:var(--text-dim);margin-top:6px">${r.node.explanation.slice(0,200)}${r.node.explanation.length>200?'...':''}</p>` : ''}
+      <span class="tree-link" onclick="selectTree('${treeId}')">Open ${treeName}</span>
+    </div>`;
+  });
+  html += '</div>';
+  rd.innerHTML = html;
 }
 
 // --- Step-by-Step Mode ---
@@ -642,212 +513,112 @@ function startStepMode(tree) {
 }
 
 function renderStep() {
-  const container = document.getElementById('treeContainer');
-  const node = currentNode;
-  const isQuestion = !!node.question;
-  const isAction = !!node.action;
-
-  let actionType = 'action';
-  if (isAction) {
-    const a = node.action.toUpperCase();
-    if (a.includes('WAIT') || a.includes('MONITOR')) actionType = 'wait';
-    else if (a.includes('STOP') || a.includes('BROKEN') || a.includes('DEAD') || a.includes('LOSER')) actionType = 'stop';
+  const c = document.getElementById('treeContainer');
+  const n = currentNode;
+  const isQ = !!n.question, isA = !!n.action;
+  let aType = 'action';
+  if(isA) {
+    const a = n.action.toUpperCase();
+    if(a.includes('WAIT')||a.includes('MONITOR')) aType='wait';
+    else if(a.includes('STOP')||a.includes('BROKEN')||a.includes('DEAD')||a.includes('LOSER')||a.includes('DO NOT ENTER')||a.includes('BUILD')) aType='stop';
+    else if(a.includes('ENTER')||a.includes('HIGH CONVICTION')) aType='enter';
   }
 
   let html = '<div class="step-view">';
-
-  // Breadcrumb
-  if (stepHistory.length > 0) {
+  if(stepHistory.length > 0) {
     html += '<div class="breadcrumb">';
-    stepHistory.forEach((h, i) => {
-      const cls = h.choice === 'yes' ? 'yes-crumb' : 'no-crumb';
-      const label = h.choiceLabel || h.choice;
-      html += `<span class="crumb ${cls}" onclick="goBack(${i})">${label}</span>`;
+    stepHistory.forEach((h,i) => {
+      const cls = h.choice==='no'?'no-crumb':'yes-crumb';
+      html += `<span class="crumb ${cls}" onclick="goBack(${i})">${h.choiceLabel||h.choice}</span>`;
     });
     html += '</div>';
   }
-
   html += '<div class="step-card">';
 
-  if (isQuestion) {
+  if(isQ) {
     html += `<div class="step-badge question">Decision</div>`;
-    html += `<div class="step-question">${node.question}</div>`;
-
-    if (node.quote_es) {
-      html += `<div class="step-quote">"${node.quote_es}"</div>`;
+    html += `<div class="step-question">${n.question}</div>`;
+    if(n.quote_es) html += `<div class="step-quote">"${n.quote_es}"</div>`;
+    if(n.note) html += `<div class="step-explanation">${n.note}</div>`;
+    // Show protocol if exists
+    if(n.protocol) {
+      html += '<div class="step-protocol">';
+      Object.entries(n.protocol).forEach(([k,v]) => {
+        html += `<strong>${k.replace(/_/g,' ')}:</strong> ${v}<br>`;
+      });
+      html += '</div>';
     }
-    if (node.note) {
-      html += `<div class="step-explanation">${node.note}</div>`;
-    }
 
-    // Check for options (T13-style)
-    if (node.options) {
+    if(n.options) {
       html += '<div class="step-buttons" style="flex-direction:column">';
-      for (const [key, val] of Object.entries(node.options)) {
-        const label = key.replace(/_/g, ' ').replace(/^\w/, c => c.toUpperCase());
-        html += `<button class="step-btn option" onclick="chooseOption('${key}')">${label}</button>`;
+      for(const [k,v] of Object.entries(n.options)) {
+        html += `<button class="step-btn option" onclick="chooseOption('${k}')">${k.replace(/_/g,' ').replace(/^\w/,c=>c.toUpperCase())}</button>`;
       }
       html += '</div>';
-    }
-    // Check for sub_tree (T7/T8-style)
-    else if (node.sub_tree) {
+    } else if(n.sub_tree) {
+      const yL=n.yes_label||'Yes', nL=n.no_label||'No';
+      html += `<div class="step-buttons"><button class="step-btn yes" onclick="chooseSubTree('yes','${yL}')">${yL}</button><button class="step-btn no" onclick="chooseSubTree('no','${nL}')">${nL}</button></div>`;
+    } else if(n.yes||n.no) {
+      const yL=n.yes_label||'Yes', nL=n.no_label||'No';
       html += '<div class="step-buttons">';
-      const st = node.sub_tree;
-      const yLabel = node.yes_label || 'Yes';
-      const nLabel = node.no_label || 'No';
-      html += `<button class="step-btn yes" onclick="chooseSubTree('yes', '${yLabel}')">${yLabel}</button>`;
-      html += `<button class="step-btn no" onclick="chooseSubTree('no', '${nLabel}')">${nLabel}</button>`;
+      if(n.yes) html += `<button class="step-btn yes" onclick="choose('yes','${yL}')">${yL}</button>`;
+      if(n.no) html += `<button class="step-btn no" onclick="choose('no','${nL}')">${nL}</button>`;
       html += '</div>';
     }
-    // Normal yes/no
-    else if (node.yes || node.no) {
-      const yLabel = node.yes_label || 'Yes';
-      const nLabel = node.no_label || 'No';
-      html += '<div class="step-buttons">';
-      if (node.yes) html += `<button class="step-btn yes" onclick="choose('yes', '${yLabel}')">${yLabel}</button>`;
-      if (node.no) html += `<button class="step-btn no" onclick="choose('no', '${nLabel}')">${nLabel}</button>`;
+  } else if(isA) {
+    const badge = aType==='enter' ? 'ENTER' : aType==='wait'?'Wait':aType==='stop'?'Stop':'Action';
+    html += `<div class="step-badge ${aType}">${badge}</div>`;
+    html += `<div class="step-action">${n.action}</div>`;
+    if(n.explanation) html += `<div class="step-explanation">${n.explanation}</div>`;
+    if(n.quote_es) html += `<div class="step-quote">"${n.quote_es}"</div>`;
+    if(n.protocol) {
+      html += '<div class="step-protocol">';
+      Object.entries(n.protocol).forEach(([k,v]) => { html += `<strong>${k.replace(/_/g,' ')}:</strong> ${v}<br>`; });
       html += '</div>';
     }
-  } else if (isAction) {
-    html += `<div class="step-badge ${actionType}">${actionType === 'wait' ? 'Wait' : actionType === 'stop' ? 'Stop' : 'Action'}</div>`;
-    html += `<div class="step-action">${node.action}</div>`;
-    if (node.explanation) html += `<div class="step-explanation">${node.explanation}</div>`;
-    if (node.quote_es) html += `<div class="step-quote">"${node.quote_es}"</div>`;
-
-    // Check for "then" continuation
-    if (node.then) {
-      html += `<button class="step-btn yes" style="margin-top:12px;flex:unset;padding:10px 20px" onclick="goThen()">Continue &rarr;</button>`;
-    }
-    // Check for sub_decisions
-    if (node.sub_decisions) {
-      html += `<button class="step-btn yes" style="margin-top:12px;flex:unset;padding:10px 20px" onclick="goSubDecision()">Next Decision &rarr;</button>`;
-    }
-
-    html += '<div style="margin-top:16px"><button class="step-btn restart" onclick="startStepMode(currentTree)">Restart Tree</button></div>';
+    if(n.then) html += `<button class="step-btn continue" onclick="goThen()">Continue &rarr;</button>`;
+    if(n.sub_decisions) html += `<button class="step-btn continue" onclick="goSubDecision()">Next Decision &rarr;</button>`;
+    html += '<div style="margin-top:16px"><button class="step-btn restart" onclick="startStepMode(currentTree)">Restart</button></div>';
   }
-
   html += '</div></div>';
-  container.innerHTML = html;
-  container.scrollTop = 0;
+  c.innerHTML = html;
+  c.scrollTop = 0;
 }
 
-function choose(choice, label) {
-  stepHistory.push({ node: currentNode, choice, choiceLabel: label });
-  currentNode = choice === 'yes' ? currentNode.yes : currentNode.no;
-  renderStep();
-}
+function choose(ch,l) { stepHistory.push({node:currentNode,choice:ch,choiceLabel:l}); currentNode=ch==='yes'?currentNode.yes:currentNode.no; renderStep(); }
+function chooseOption(k) { stepHistory.push({node:currentNode,choice:'yes',choiceLabel:k.replace(/_/g,' ')}); currentNode=currentNode.options[k]; renderStep(); }
+function chooseSubTree(ch,l) { stepHistory.push({node:currentNode,choice:ch,choiceLabel:l}); const st=currentNode.sub_tree; currentNode=ch==='yes'?(st.yes||st):(st.no||st); renderStep(); }
+function goThen() { stepHistory.push({node:currentNode,choice:'yes',choiceLabel:'Continue'}); currentNode=currentNode.then; renderStep(); }
+function goSubDecision() { stepHistory.push({node:currentNode,choice:'yes',choiceLabel:'Next'}); currentNode=currentNode.sub_decisions; renderStep(); }
+function goBack(i) { currentNode=stepHistory[i].node; stepHistory=stepHistory.slice(0,i); renderStep(); }
 
-function chooseOption(key) {
-  stepHistory.push({ node: currentNode, choice: 'yes', choiceLabel: key.replace(/_/g, ' ') });
-  currentNode = currentNode.options[key];
-  renderStep();
-}
-
-function chooseSubTree(choice, label) {
-  stepHistory.push({ node: currentNode, choice, choiceLabel: label });
-  const st = currentNode.sub_tree;
-  currentNode = choice === 'yes' ? (st.yes || st) : (st.no || st);
-  renderStep();
-}
-
-function goThen() {
-  stepHistory.push({ node: currentNode, choice: 'yes', choiceLabel: 'Continue' });
-  currentNode = currentNode.then;
-  renderStep();
-}
-
-function goSubDecision() {
-  stepHistory.push({ node: currentNode, choice: 'yes', choiceLabel: 'Next' });
-  currentNode = currentNode.sub_decisions;
-  renderStep();
-}
-
-function goBack(index) {
-  currentNode = stepHistory[index].node;
-  stepHistory = stepHistory.slice(0, index);
-  renderStep();
-}
-
-// --- Full Tree Mode ---
+// --- Full Tree ---
 function renderFullTree(tree) {
-  const container = document.getElementById('treeContainer');
-  container.innerHTML = `<div class="full-tree">${renderNodeHTML(tree.root, 0)}</div>`;
+  document.getElementById('treeContainer').innerHTML = `<div class="full-tree">${renderNodeHTML(tree.root,0)}</div>`;
+}
+function renderNodeHTML(n,d) {
+  if(!n) return '';
+  const isQ=!!n.question, isA=!!n.action;
+  let cls='question-node';
+  if(isA){ const a=n.action.toUpperCase(); if(a.includes('WAIT')||a.includes('MONITOR'))cls='wait-node'; else if(a.includes('STOP')||a.includes('BROKEN')||a.includes('DEAD')||a.includes('LOSER')||a.includes('DO NOT'))cls='stop-node'; else cls='action-node'; }
+  const label = (isQ?n.question:n.action); const short = label.length>55?label.slice(0,52)+'...':label;
+  const title = isQ?n.question:`${n.action}\n\n${n.explanation||''}`;
+  let h = `<div class="tree-node"><div class="node-box ${cls}" title="${title.replace(/"/g,'&quot;')}"><div class="node-label">${short}</div></div>`;
+  if(isQ) {
+    if(n.yes||n.no) { h+='<div class="node-children">'; if(n.yes) h+=`<div class="branch"><span class="branch-label yes-label">${n.yes_label||'Yes'}</span>${renderNodeHTML(n.yes,d+1)}</div>`; if(n.no) h+=`<div class="branch"><span class="branch-label no-label">${n.no_label||'No'}</span>${renderNodeHTML(n.no,d+1)}</div>`; h+='</div>'; }
+    else if(n.options) { h+='<div class="node-children">'; for(const[k,v] of Object.entries(n.options)) h+=`<div class="branch"><span class="branch-label yes-label">${k.replace(/_/g,' ')}</span>${renderNodeHTML(v,d+1)}</div>`; h+='</div>'; }
+    else if(n.sub_tree) { h+='<div class="node-children">'; if(n.sub_tree.yes) h+=`<div class="branch"><span class="branch-label yes-label">${n.yes_label||'Yes'}</span>${renderNodeHTML(n.sub_tree.yes,d+1)}</div>`; if(n.sub_tree.no) h+=`<div class="branch"><span class="branch-label no-label">${n.no_label||'No'}</span>${renderNodeHTML(n.sub_tree.no,d+1)}</div>`; h+='</div>'; }
+  }
+  if(n.then) h+=`<div class="node-children"><div class="branch"><span class="branch-label yes-label">then</span>${renderNodeHTML(n.then,d+1)}</div></div>`;
+  if(n.sub_decisions) h+=`<div class="node-children"><div class="branch"><span class="branch-label yes-label">detail</span>${renderNodeHTML(n.sub_decisions,d+1)}</div></div>`;
+  h+='</div>';
+  return h;
 }
 
-function renderNodeHTML(node, depth) {
-  if (!node) return '';
-  const isQuestion = !!node.question;
-  const isAction = !!node.action;
+// Mobile
+function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('overlay').classList.add('open'); }
+function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
 
-  let cls = 'question-node';
-  if (isAction) {
-    const a = node.action.toUpperCase();
-    if (a.includes('WAIT') || a.includes('MONITOR')) cls = 'wait-node';
-    else if (a.includes('STOP') || a.includes('BROKEN') || a.includes('DEAD') || a.includes('LOSER')) cls = 'stop-node';
-    else cls = 'action-node';
-  }
-
-  const label = isQuestion
-    ? node.question.length > 60 ? node.question.slice(0, 57) + '...' : node.question
-    : node.action.length > 60 ? node.action.slice(0, 57) + '...' : node.action;
-
-  const title = isQuestion ? node.question : `${node.action}\n\n${node.explanation || ''}`;
-
-  let html = `<div class="tree-node">
-    <div class="node-box ${cls}" title="${title.replace(/"/g, '&quot;')}">
-      <div class="node-label">${label}</div>
-    </div>`;
-
-  if (isQuestion) {
-    const hasYesNo = node.yes || node.no;
-    const hasOptions = node.options;
-    const hasSubTree = node.sub_tree;
-
-    if (hasYesNo) {
-      html += '<div class="node-children">';
-      if (node.yes) {
-        const yLabel = node.yes_label || 'Yes';
-        html += `<div class="branch"><span class="branch-label yes-label">${yLabel}</span>${renderNodeHTML(node.yes, depth+1)}</div>`;
-      }
-      if (node.no) {
-        const nLabel = node.no_label || 'No';
-        html += `<div class="branch"><span class="branch-label no-label">${nLabel}</span>${renderNodeHTML(node.no, depth+1)}</div>`;
-      }
-      html += '</div>';
-    } else if (hasOptions) {
-      html += '<div class="node-children">';
-      for (const [key, val] of Object.entries(node.options)) {
-        html += `<div class="branch"><span class="branch-label yes-label">${key.replace(/_/g, ' ')}</span>${renderNodeHTML(val, depth+1)}</div>`;
-      }
-      html += '</div>';
-    } else if (hasSubTree) {
-      html += `<div class="node-children">${renderNodeHTML(node.sub_tree, depth+1)}</div>`;
-    }
-  }
-
-  // Render "then" and "sub_decisions" continuations
-  if (node.then) {
-    html += `<div class="node-children"><div class="branch"><span class="branch-label yes-label">then</span>${renderNodeHTML(node.then, depth+1)}</div></div>`;
-  }
-  if (node.sub_decisions) {
-    html += `<div class="node-children"><div class="branch"><span class="branch-label yes-label">detail</span>${renderNodeHTML(node.sub_decisions, depth+1)}</div></div>`;
-  }
-
-  html += '</div>';
-  return html;
-}
-
-// --- Mobile ---
-function openSidebar() {
-  document.getElementById('sidebar').classList.add('open');
-  document.getElementById('overlay').classList.add('open');
-}
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('open');
-}
-
-// Init
 init();
 </script>
 </body>

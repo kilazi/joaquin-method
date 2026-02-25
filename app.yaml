@@ -1,0 +1,12 @@
+runtime: python312
+handlers:
+- url: /trees.json
+  static_files: trees.json
+  upload: trees.json
+  mime_type: application/json
+- url: /
+  static_files: index.html
+  upload: index.html
+- url: /(.*)
+  static_files: \1
+  upload: (.*)
