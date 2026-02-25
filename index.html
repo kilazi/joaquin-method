@@ -210,13 +210,13 @@ const ENTRY_TREE = {
             no_label:"Evolved/Broken",
             yes:{
               id:"e6", question:"Is price currently in a TRADEABLE ZONE aligned with your directional bias?",
-              note:"Uptrend: buy in Low Zones. Downtrend: sell in High Zones. The 61.8 zone is a normal working zone within the cycle.",
+              note:"Uptrend: buy in Low Zones. Downtrend: sell in High Zones. The 61.8 zone is a normal working zone within the cycle. CONTEXT QUALITY matters: Good context = full lot. Regular = 50-75%. Weak = skip or 25% max (see T18).",
               yes:{
                 id:"e7", question:"Do you have a CONFLUENCE? (multiple levels agreeing at this point)",
                 note:"Zone confluence = Low Zone + 38 of another cycle, or 61.8 + liquidity level, etc.",
                 yes:{
                   id:"e8", action:"ENTER — High conviction trade ('si o si')",
-                  explanation:"Multiple zones/levels converge at this point. This is a mandatory entry signal. Enter with your business plan's lot size. Define your stop and target BEFORE entering. First partial must protect the rest of the position.",
+                  explanation:"Multiple zones/levels converge at this point. This is a mandatory entry signal. Enter with your business plan's lot size (adjusted for context quality). Define your stop and target BEFORE entering. First partial must protect the rest. Consider a HEDGE (T14) in the opposite direction. Never use a stop < 12 pips in Forex. If in >15% drawdown, reduce lot (T17).",
                   quote_es:"Esta coincidencia de la zona baja con el 38 azul es ya un motivo si o si de compra."
                 },
                 no:{
@@ -235,7 +235,7 @@ const ENTRY_TREE = {
                     },
                     no:{
                       id:"e13", action:"DO NOT ENTER — Wait for a better trigger",
-                      explanation:"You have the bias and the zone, but no clean entry trigger. Wait for: (1) a liquidity grab, (2) a zone confluence to form, (3) a 61.8 post-failure entry, or (4) a specific pattern entry. Patience."
+                      explanation:"You have the bias and the zone, but no clean entry trigger. Wait for: (1) a liquidity grab, (2) a zone confluence to form, (3) a 61.8 post-failure entry, or (4) a specific pattern entry. BEWARE of Deception Patterns (T15) — false breakouts where price lures traders in before reversing at 161.8%. If price shows weak movement, consider a Null Operation (T19) — exit at breakeven."
                     }
                   }
                 }
@@ -283,10 +283,19 @@ const ENTRY_TREE = {
     },
     no:{
       id:"e23", action:"STOP — Build a business plan before trading",
-      explanation:"Define: max loss per trade, profit target per trade, lot sizing formula, which assets to trade, what timeframes, session schedule. Without this, everything else is gambling."
+      explanation:"Define: max loss per trade, profit target per trade, lot sizing formula, which assets to trade, what timeframes, session schedule. Without this, everything else is gambling. Restaurant analogy: charge 4x cost (1:4 R:R minimum). Maintain consistent 'menu'. Check T16."
     }
   }
 };
+
+// Additional entry checks from v3.0 data (40 videos)
+// Enrichments integrated into ENTRY_TREE node explanations:
+// - e1: Added restaurant analogy (T16), 1:4 minimum ratio
+// - e6: Added context quality check from T18 (good/regular/weak → lot size adjustment)
+// - e8: Added hedging note from T14 (enter with hedge ready if position goes against)
+// - e13: Added deception pattern awareness from T15 (watch for patron de engano)
+// - e18: Added null operation concept from T19 (exit at breakeven if weak)
+// Drawdown pre-check: if currently in > 15% drawdown, reduce lot size (T17)
 
 const NAV_GROUPS = [
   { title:'Quick Start', items:[
@@ -299,21 +308,27 @@ const NAV_GROUPS = [
     {id:'T2_Fractality_And_Evolution', label:'Fractality & Evolution', ico:'2'},
     {id:'T3_Retracement_Completion', label:'Retracement Completion', ico:'3'},
     {id:'T4_Context_Reading', label:'Context Reading', ico:'4'},
+    {id:'T18_Context_Assessment', label:'Context Assessment', ico:'18'},
   ]},
   { title:'Attack Model', items:[
     {id:'T5_Liquidity_And_Entry_Strategy', label:'Entry Strategy', ico:'5'},
     {id:'T9_161_200_Zone_Trading', label:'161-200 Zone', ico:'9'},
+    {id:'T15_Deception_Pattern', label:'Deception Pattern', ico:'15'},
   ]},
   { title:'Management', items:[
     {id:'T6_Trade_Classification', label:'Trade Classification', ico:'6'},
     {id:'T7_Post_Entry_Management', label:'Post-Entry Mgmt', ico:'7'},
     {id:'T8_Partial_Profit_Strategy', label:'Partial Strategy', ico:'8'},
     {id:'T12_Super_Winner_Psychology', label:'Super-Winner', ico:'12'},
+    {id:'T14_Hedging_And_Coberturas', label:'Hedging & Coberturas', ico:'14'},
+    {id:'T19_Null_Operations', label:'Null Operations', ico:'19'},
   ]},
   { title:'Foundation', items:[
     {id:'T10_Risk_And_Business_Plan', label:'Risk & Business Plan', ico:'10'},
     {id:'T11_Method_Architecture', label:'Method Architecture', ico:'11'},
     {id:'T13_Chart_Analysis_Methodology', label:'Chart Analysis', ico:'13'},
+    {id:'T16_Business_Plan_Compliance', label:'Business Plan Check', ico:'16'},
+    {id:'T17_Drawdown_Management', label:'Drawdown Mgmt', ico:'17'},
   ]}
 ];
 
@@ -434,6 +449,10 @@ function showSearch() {
       <div class="ai-example" onclick="searchFor('Movement didnt reach 25% - defective origin')">Movement didn't reach 25% — defective origin</div>
       <div class="ai-example" onclick="searchFor('Price at 161.8 on gold')">Price at 161.8 on gold</div>
       <div class="ai-example" onclick="searchFor('How many partials should I take?')">How many partials should I take?</div>
+      <div class="ai-example" onclick="searchFor('When should I hedge my position?')">When should I hedge my position?</div>
+      <div class="ai-example" onclick="searchFor('Im in 15% drawdown what should I do')">I'm in 15% drawdown, what should I do?</div>
+      <div class="ai-example" onclick="searchFor('Price looks like a false breakout deception')">Price looks like a false breakout / deception pattern</div>
+      <div class="ai-example" onclick="searchFor('Weak context should I still enter?')">Weak context — should I still enter?</div>
     </div>
     <div id="aiResults"></div>
   </div>`;
@@ -463,7 +482,7 @@ function doSearch() {
     // Boost for exact phrase matches
     if(texts.includes(q)) score += 5;
     // Boost partial matches
-    const keyTerms = ['38.2','61.8','130','161','200','high zone','low zone','break','evolv','partial','stop','entry','enter','liquidity','failure','fractal','cycle','point of control','retracement','25%','1/3'];
+    const keyTerms = ['38.2','61.8','130','161','200','high zone','low zone','break','evolv','partial','stop','entry','enter','liquidity','failure','fractal','cycle','point of control','retracement','25%','1/3','hedge','cobertura','drawdown','deception','engano','context','null operation','imbalance','business plan','12 pips','divided position','segment'];
     keyTerms.forEach(t => { if(q.includes(t) && texts.includes(t)) score += 3; });
 
     if(score > 0) {

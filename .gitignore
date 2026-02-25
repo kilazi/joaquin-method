@@ -1,0 +1,12 @@
+# Video directories (too large for git)
+*/video.mp4
+*/audio.mp3
+*/transcription.json
+*/*.jpg
+*.mp4
+*.mp3
+
+# Temp files
+__pycache__/
+*.pyc
+.DS_Store
