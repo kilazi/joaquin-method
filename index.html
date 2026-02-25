@@ -165,6 +165,34 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .mobile-header { display:none; }
 .overlay { display:none; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,.5); z-index:99; }
 .overlay.open { display:block; }
+
+/* Media bar */
+.media-bar { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.media-chip { display:inline-flex; align-items:center; gap:5px; padding:5px 10px; border-radius:6px; font-size:11px; font-weight:600; cursor:pointer; transition:all .15s; border:1px solid var(--border); background:var(--surface2); color:var(--text-dim); text-decoration:none; }
+.media-chip:hover { border-color:var(--accent); color:var(--text); transform:translateY(-1px); }
+.media-chip.chip-audio { border-color:var(--purple); color:var(--purple); }
+.media-chip.chip-audio:hover { background:var(--purple-bg); }
+.media-chip.chip-frame { border-color:var(--cyan); color:var(--cyan); }
+.media-chip.chip-frame:hover { background:rgba(34,211,238,.08); }
+.media-chip.chip-yt { border-color:var(--red); color:var(--red); }
+.media-chip.chip-yt:hover { background:var(--red-bg); }
+.media-chip .chip-ico { font-size:13px; }
+
+/* Lightbox */
+.lightbox { display:none; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,.85); z-index:200; justify-content:center; align-items:center; flex-direction:column; gap:12px; }
+.lightbox.open { display:flex; }
+.lightbox img { max-width:90vw; max-height:75vh; border-radius:8px; box-shadow:0 8px 40px rgba(0,0,0,.5); }
+.lightbox-caption { color:var(--text-dim); font-size:12px; max-width:600px; text-align:center; line-height:1.5; }
+.lightbox-nav { display:flex; gap:12px; margin-top:8px; }
+.lightbox-btn { padding:8px 16px; border:1px solid var(--border); background:var(--surface); color:var(--text); border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; transition:all .15s; }
+.lightbox-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+.lightbox-close { position:absolute; top:16px; right:20px; background:none; border:none; color:var(--text-dim); font-size:28px; cursor:pointer; }
+.lightbox-close:hover { color:var(--text); }
+
+/* Frame thumbnails inline */
+.frame-thumbs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
+.frame-thumb { width:80px; height:50px; border-radius:6px; border:2px solid var(--border); cursor:pointer; object-fit:cover; transition:all .15s; }
+.frame-thumb:hover { border-color:var(--cyan); transform:scale(1.05); box-shadow:0 2px 12px rgba(34,211,238,.2); }
 </style>
 </head>
 <body>
@@ -205,11 +233,22 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   </main>
 </div>
 
+<!-- Lightbox for frame viewing -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+  <div class="lightbox-nav" id="lightboxNav"></div>
+</div>
+
 <script>
-let TREES = null, currentTree = null, currentMode = 'step', stepHistory = [], currentNode = null;
+let TREES = null, currentTree = null, currentTreeId = null, currentMode = 'step', stepHistory = [], currentNode = null;
 let LANG = 'en'; // 'en' or 'es'
 let CLIPS = null; // audio clips manifest
+let MEDIA = null; // media manifest (frames, youtube links)
 let currentAudio = null; // currently playing audio
+let lightboxFrames = []; // frames for current lightbox session
+let lightboxIdx = 0;
 
 // --- Language System ---
 function setLang(l) {
@@ -484,8 +523,115 @@ const NAV_GROUPS_DATA = [
   ]}
 ];
 
+// --- Media System ---
+async function loadMedia() {
+  try { MEDIA = await (await fetch('media_manifest.json')).json(); } catch(e) { MEDIA = {tree_media:{}}; }
+}
+
+function getMediaForTree(treeId) {
+  if(!MEDIA?.tree_media) return null;
+  // Map nav IDs to tree keys
+  let key = treeId;
+  if(treeId === 'entry') key = 'entry';
+  else {
+    // Try exact match first, then try T-prefix
+    const m = treeId.match(/^T(\d+)/);
+    if(m) key = 'T' + m[1];
+  }
+  return MEDIA.tree_media[key] || null;
+}
+
+function renderMediaBar(treeId) {
+  const media = getMediaForTree(treeId);
+  if(!media) return '';
+  let html = '<div class="media-bar">';
+  // Audio clips
+  if(media.clips?.length) {
+    media.clips.forEach(clipId => {
+      const clip = CLIPS?.clips?.find(c=>c.id===clipId);
+      if(clip) {
+        const label = LANG==='es' ? clip.phrase_es?.slice(0,40) : clip.phrase_en?.slice(0,40);
+        html += `<span class="media-chip chip-audio" onclick="event.stopPropagation();playClip('${clipId}')" title="${LANG==='es'?clip.phrase_es:clip.phrase_en}"><span class="chip-ico">&#9654;</span>${label||clipId}...</span>`;
+      }
+    });
+  }
+  // Frames
+  if(media.frames?.length) {
+    const label = t(`${media.frames.length} screenshot${media.frames.length>1?'s':''}`, `${media.frames.length} captura${media.frames.length>1?'s':''}`);
+    html += `<span class="media-chip chip-frame" onclick="openLightbox('${treeId}',0)"><span class="chip-ico">&#128247;</span>${label}</span>`;
+  }
+  // YouTube links
+  if(media.youtube_links?.length) {
+    media.youtube_links.forEach(yt => {
+      const label = LANG==='es' ? (yt.label_es||yt.title) : (yt.label_en||yt.title);
+      const short = label.length > 35 ? label.slice(0,32)+'...' : label;
+      const url = `https://www.youtube.com/watch?v=${yt.video_id}${yt.timestamp?'&t='+Math.floor(yt.timestamp)+'s':''}`;
+      html += `<a class="media-chip chip-yt" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><span class="chip-ico">&#9654;</span>${short}</a>`;
+    });
+  }
+  html += '</div>';
+  return html;
+}
+
+function renderFrameThumbs(treeId) {
+  const media = getMediaForTree(treeId);
+  if(!media?.frames?.length) return '';
+  let html = '<div class="frame-thumbs">';
+  media.frames.forEach((fr,i) => {
+    const cap = LANG==='es' ? (fr.caption_es||'') : (fr.caption_en||'');
+    html += `<img class="frame-thumb" src="${fr.file}" alt="${cap}" title="${cap}" onclick="openLightbox('${treeId}',${i})" loading="lazy">`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function openLightbox(treeId, idx) {
+  const media = getMediaForTree(treeId);
+  if(!media?.frames?.length) return;
+  lightboxFrames = media.frames;
+  lightboxIdx = idx;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function updateLightbox() {
+  const fr = lightboxFrames[lightboxIdx];
+  if(!fr) return;
+  document.getElementById('lightboxImg').src = fr.file;
+  const cap = LANG==='es' ? (fr.caption_es||'') : (fr.caption_en||'');
+  const counter = `${lightboxIdx+1}/${lightboxFrames.length}`;
+  document.getElementById('lightboxCaption').textContent = `${counter} — ${cap}`;
+  let navHtml = '';
+  if(lightboxFrames.length > 1) {
+    navHtml += `<button class="lightbox-btn" onclick="lightboxPrev()">&larr; ${t('Prev','Ant')}</button>`;
+    navHtml += `<button class="lightbox-btn" onclick="lightboxNext()">${t('Next','Sig')} &rarr;</button>`;
+  }
+  if(fr.source_video) {
+    const ytUrl = `https://www.youtube.com/watch?v=${fr.source_video}${fr.timestamp?'&t='+Math.floor(fr.timestamp)+'s':''}`;
+    navHtml += `<a class="lightbox-btn" href="${ytUrl}" target="_blank" rel="noopener" style="text-decoration:none">&#9654; YouTube</a>`;
+  }
+  document.getElementById('lightboxNav').innerHTML = navHtml;
+}
+
+function lightboxPrev() { lightboxIdx = (lightboxIdx - 1 + lightboxFrames.length) % lightboxFrames.length; updateLightbox(); }
+function lightboxNext() { lightboxIdx = (lightboxIdx + 1) % lightboxFrames.length; updateLightbox(); }
+
+// Keyboard nav for lightbox
+document.addEventListener('keydown', e => {
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key==='Escape') closeLightbox();
+  if(e.key==='ArrowLeft') lightboxPrev();
+  if(e.key==='ArrowRight') lightboxNext();
+});
+
 async function init() {
-  await loadClips();
+  await Promise.all([loadClips(), loadMedia()]);
   try { TREES = await (await fetch('trees.json')).json(); }
   catch(e) { try { TREES = await (await fetch('../decision_trees.json')).json(); } catch(e2) {
     document.getElementById('treeContainer').innerHTML='<p style="padding:40px;color:var(--red)">Error loading trees.json</p>'; return;
@@ -540,11 +686,12 @@ function selectTree(id) {
 
   if(id==='entry') {
     currentTree = ENTRY_TREE;
+    currentTreeId = 'entry';
     document.getElementById('treeTitle').textContent = t('Should I Enter This Trade?','Debo Entrar en Esta Operacion?');
-    document.getElementById('treeDesc').textContent = t(
+    document.getElementById('treeDesc').innerHTML = t(
       'Walk through every condition before entering. Based on the complete Joaquin Vega methodology.',
       'Recorre cada condicion antes de entrar. Basado en la metodologia completa de Joaquin Vega.'
-    );
+    ) + renderMediaBar('entry');
     if(currentMode==='step') startStepMode(ENTRY_TREE); else renderFullTree(ENTRY_TREE);
     return;
   }
@@ -554,8 +701,9 @@ function selectTree(id) {
   const tree = TREES.trees.find(t=>t.tree_name===id);
   if(!tree) return;
   currentTree = tree;
+  currentTreeId = id;
   document.getElementById('treeTitle').textContent = tree.tree_name.replace(/_/g,' ').replace(/^T\d+\s/,'');
-  document.getElementById('treeDesc').textContent = tree.tree_description;
+  document.getElementById('treeDesc').innerHTML = tree.tree_description + renderMediaBar(id);
   if(currentMode==='step') startStepMode(tree); else renderFullTree(tree);
 }
 
@@ -703,6 +851,10 @@ function renderStep() {
   }
 
   let html = '<div class="step-view">';
+  // Show frame thumbnails at root level
+  if(stepHistory.length === 0 && currentTreeId) {
+    html += renderFrameThumbs(currentTreeId);
+  }
   if(stepHistory.length > 0) {
     html += '<div class="breadcrumb">';
     stepHistory.forEach((h,i) => {

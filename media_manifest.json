@@ -1,0 +1,1568 @@
+{
+  "tree_media": {
+    "T1": {
+      "tree_id": "T1",
+      "tree_title": "T1_Cycle_Identification",
+      "frames": [
+        {
+          "file": "frames/3ilsV4UU5Y0_0360s.jpg",
+          "source_video": "3ilsV4UU5Y0",
+          "timestamp": 360,
+          "caption_en": "Cycle structure with Point of Control, impulse, and 38.2% retracement zones marked",
+          "caption_es": "Estructura del ciclo con Punto de Control, impulso y zonas de retroceso al 38.2% marcadas"
+        },
+        {
+          "file": "frames/3ilsV4UU5Y0_0720s.jpg",
+          "source_video": "3ilsV4UU5Y0",
+          "timestamp": 720,
+          "caption_en": "Marking high and low zones after cycle activation",
+          "caption_es": "Marcando zonas altas y bajas tras la activación del ciclo"
+        },
+        {
+          "file": "frames/4b2ZAImaATk_0270s.jpg",
+          "source_video": "4b2ZAImaATk",
+          "timestamp": 270,
+          "caption_en": "Working the 61 zone within an active cycle",
+          "caption_es": "Trabajando la zona del 61 dentro de un ciclo activo"
+        },
+        {
+          "file": "frames/4b2ZAImaATk_0540s.jpg",
+          "source_video": "4b2ZAImaATk",
+          "timestamp": 540,
+          "caption_en": "Reviewing past chart to verify fractal structures",
+          "caption_es": "Revisando gráfico pasado para verificar estructuras fractales"
+        },
+        {
+          "file": "frames/ExKdYnCebqY_0210s.jpg",
+          "source_video": "ExKdYnCebqY",
+          "timestamp": 210,
+          "caption_en": "Five factors of profitability: discipline, numbers, method, assets, personal condition",
+          "caption_es": "Cinco factores de rentabilidad: disciplina, números, método, activos, condición personal"
+        },
+        {
+          "file": "frames/ExKdYnCebqY_0450s.jpg",
+          "source_video": "ExKdYnCebqY",
+          "timestamp": 450,
+          "caption_en": "Adapting when assets change behavior",
+          "caption_es": "Adaptándose cuando los activos cambian su comportamiento"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "3ilsV4UU5Y0",
+          "title": "Understanding Fractality",
+          "timestamp": 360,
+          "label_en": "Cycle structure with Point of Control, impulse, and 38.2% retracement zones marked",
+          "label_es": "Estructura del ciclo con Punto de Control, impulso y zonas de retroceso al 38.2% marcadas"
+        },
+        {
+          "video_id": "4b2ZAImaATk",
+          "title": "Fractality Practice Example",
+          "timestamp": 270,
+          "label_en": "Working the 61 zone within an active cycle",
+          "label_es": "Trabajando la zona del 61 dentro de un ciclo activo"
+        },
+        {
+          "video_id": "ExKdYnCebqY",
+          "title": "Must Keep This In Mind",
+          "timestamp": 210,
+          "label_en": "Five factors of profitability: discipline, numbers, method, assets, personal condition",
+          "label_es": "Cinco factores de rentabilidad: disciplina, números, método, activos, condición personal"
+        }
+      ],
+      "clips": [
+        "punto_de_control",
+        "retroceso_imprescindible",
+        "fractalidad",
+        "zona_de_compra"
+      ]
+    },
+    "T2": {
+      "tree_id": "T2",
+      "tree_title": "T2_Fractality_And_Evolution",
+      "frames": [
+        {
+          "file": "frames/3ilsV4UU5Y0_0360s.jpg",
+          "source_video": "3ilsV4UU5Y0",
+          "timestamp": 360,
+          "caption_en": "Discarding zones when price enters High or Low zone of cycle",
+          "caption_es": "Descartando zonas cuando el precio entra en zona alta o baja del ciclo"
+        },
+        {
+          "file": "frames/3ilsV4UU5Y0_0720s.jpg",
+          "source_video": "3ilsV4UU5Y0",
+          "timestamp": 720,
+          "caption_en": "Cycle evolution: new larger impulse replaces previous cycle",
+          "caption_es": "Evolución del ciclo: un impulso mayor reemplaza el ciclo anterior"
+        },
+        {
+          "file": "frames/4b2ZAImaATk_0270s.jpg",
+          "source_video": "4b2ZAImaATk",
+          "timestamp": 270,
+          "caption_en": "Identifying cycle breaks and new Point of Control formation",
+          "caption_es": "Identificando roturas de ciclo y formación de nuevos Puntos de Control"
+        },
+        {
+          "file": "frames/4b2ZAImaATk_0540s.jpg",
+          "source_video": "4b2ZAImaATk",
+          "timestamp": 540,
+          "caption_en": "Practical example of cycle evolution on live chart",
+          "caption_es": "Ejemplo práctico de evolución de ciclo en gráfico en vivo"
+        },
+        {
+          "file": "frames/ExKdYnCebqY_0210s.jpg",
+          "source_video": "ExKdYnCebqY",
+          "timestamp": 210,
+          "caption_en": "Cycle evolution creating new, larger zones for trading",
+          "caption_es": "Evolución del ciclo creando zonas más grandes para operar"
+        },
+        {
+          "file": "frames/ExKdYnCebqY_0450s.jpg",
+          "source_video": "ExKdYnCebqY",
+          "timestamp": 450,
+          "caption_en": "Cycle evolution creating new, larger zones for trading",
+          "caption_es": "Evolución del ciclo creando zonas más grandes para operar"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "3ilsV4UU5Y0",
+          "title": "Understanding Fractality",
+          "timestamp": 360,
+          "label_en": "Discarding zones when price enters High or Low zone of cycle",
+          "label_es": "Descartando zonas cuando el precio entra en zona alta o baja del ciclo"
+        },
+        {
+          "video_id": "4b2ZAImaATk",
+          "title": "Fractality Practice Example",
+          "timestamp": 270,
+          "label_en": "Identifying cycle breaks and new Point of Control formation",
+          "label_es": "Identificando roturas de ciclo y formación de nuevos Puntos de Control"
+        },
+        {
+          "video_id": "ExKdYnCebqY",
+          "title": "Must Keep This In Mind",
+          "timestamp": 210,
+          "label_en": "Cycle evolution creating new, larger zones for trading",
+          "label_es": "Evolución del ciclo creando zonas más grandes para operar"
+        }
+      ],
+      "clips": [
+        "punto_de_control",
+        "fractalidad"
+      ]
+    },
+    "T3": {
+      "tree_id": "T3",
+      "tree_title": "T3_Retracement_Completion",
+      "frames": [
+        {
+          "file": "frames/GrH-mtabADo_0150s.jpg",
+          "source_video": "GrH-mtabADo",
+          "timestamp": 150,
+          "caption_en": "The 130% Fibonacci level: confirming retracement completion",
+          "caption_es": "El nivel 130% de Fibonacci: confirmando la finalización del retroceso"
+        },
+        {
+          "file": "frames/GrH-mtabADo_0300s.jpg",
+          "source_video": "GrH-mtabADo",
+          "timestamp": 300,
+          "caption_en": "Fast vs slow retracements and the danger of assuming completion",
+          "caption_es": "Retrocesos rápidos vs lentos y el peligro de asumir que han terminado"
+        },
+        {
+          "file": "frames/GrH-mtabADo_0450s.jpg",
+          "source_video": "GrH-mtabADo",
+          "timestamp": 450,
+          "caption_en": "Remeasuring when retracement deepens — the 130 level moves",
+          "caption_es": "Remidiendo cuando el retroceso se profundiza — el nivel 130 se mueve"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "GrH-mtabADo",
+          "title": "Setbacks - Enemy of Novice Traders",
+          "timestamp": 210,
+          "label_en": "Fast vs slow retracements and the danger of assuming completion",
+          "label_es": "Retrocesos rápidos vs lentos y el peligro de asumir que han terminado"
+        }
+      ],
+      "clips": [
+        "retroceso_imprescindible"
+      ]
+    },
+    "T4": {
+      "tree_id": "T4",
+      "tree_title": "T4_Context_Reading",
+      "frames": [
+        {
+          "file": "frames/M70f76duW2s_0240s.jpg",
+          "source_video": "M70f76duW2s",
+          "timestamp": 240,
+          "caption_en": "Reading the left side of the chart for context and movement origins",
+          "caption_es": "Leyendo el lado izquierdo del gráfico para contexto y orígenes del movimiento"
+        },
+        {
+          "file": "frames/M70f76duW2s_0480s.jpg",
+          "source_video": "M70f76duW2s",
+          "timestamp": 480,
+          "caption_en": "Failure activation: when origin doesn't reach 25%, projection to 161.8/200",
+          "caption_es": "Activación de fallo: cuando el origen no llega al 25%, proyección al 161.8/200"
+        },
+        {
+          "file": "frames/QNRJX4b7Qq4_0180s.jpg",
+          "source_video": "QNRJX4b7Qq4",
+          "timestamp": 180,
+          "caption_en": "Pattern 1 and Pattern 2 objective measurements",
+          "caption_es": "Mediciones objetivas de Patrón 1 y Patrón 2"
+        },
+        {
+          "file": "frames/QNRJX4b7Qq4_0360s.jpg",
+          "source_video": "QNRJX4b7Qq4",
+          "timestamp": 360,
+          "caption_en": "161.8 behavior differences between indices and currencies",
+          "caption_es": "Diferencias de comportamiento del 161.8 entre índices y divisas"
+        },
+        {
+          "file": "frames/Tiy6bO9hXJ4_0200s.jpg",
+          "source_video": "Tiy6bO9hXJ4",
+          "timestamp": 200,
+          "caption_en": "Method architecture: Reading Model positions you on the map",
+          "caption_es": "Arquitectura del método: el Modelo de Lectura te posiciona en el mapa"
+        },
+        {
+          "file": "frames/Tiy6bO9hXJ4_0433s.jpg",
+          "source_video": "Tiy6bO9hXJ4",
+          "timestamp": 433,
+          "caption_en": "Method architecture: Reading Model positions you on the map",
+          "caption_es": "Arquitectura del método: el Modelo de Lectura te posiciona en el mapa"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "M70f76duW2s",
+          "title": "Good/Bad Use of Partials",
+          "timestamp": 240,
+          "label_en": "Reading the left side of the chart for context and movement origins",
+          "label_es": "Leyendo el lado izquierdo del gráfico para contexto y orígenes del movimiento"
+        },
+        {
+          "video_id": "QNRJX4b7Qq4",
+          "title": "Students Preferred Ratios",
+          "timestamp": 180,
+          "label_en": "Pattern 1 and Pattern 2 objective measurements",
+          "label_es": "Mediciones objetivas de Patrón 1 y Patrón 2"
+        },
+        {
+          "video_id": "Tiy6bO9hXJ4",
+          "title": "Trading Gold & Silver",
+          "timestamp": 200,
+          "label_en": "Method architecture: Reading Model positions you on the map",
+          "label_es": "Arquitectura del método: el Modelo de Lectura te posiciona en el mapa"
+        }
+      ],
+      "clips": [
+        "sin_ubicacion_del_mapa",
+        "tomas_de_liquidez"
+      ]
+    },
+    "T5": {
+      "tree_id": "T5",
+      "tree_title": "T5_Liquidity_And_Entry_Strategy",
+      "frames": [
+        {
+          "file": "frames/Tiy6bO9hXJ4_0200s.jpg",
+          "source_video": "Tiy6bO9hXJ4",
+          "timestamp": 200,
+          "caption_en": "Zone confluence: Low Zone + 38 of another cycle = mandatory entry",
+          "caption_es": "Confluencia de zonas: Zona Baja + 38 de otro ciclo = entrada obligatoria"
+        },
+        {
+          "file": "frames/Tiy6bO9hXJ4_0433s.jpg",
+          "source_video": "Tiy6bO9hXJ4",
+          "timestamp": 433,
+          "caption_en": "Liquidity grabs aligned with directional bias as entry signals",
+          "caption_es": "Tomas de liquidez alineadas con sesgo direccional como señales de entrada"
+        },
+        {
+          "file": "frames/M70f76duW2s_0240s.jpg",
+          "source_video": "M70f76duW2s",
+          "timestamp": 240,
+          "caption_en": "Context before action: never trade without reading the left side first",
+          "caption_es": "Contexto antes de acción: nunca operes sin leer primero el lado izquierdo"
+        },
+        {
+          "file": "frames/M70f76duW2s_0480s.jpg",
+          "source_video": "M70f76duW2s",
+          "timestamp": 480,
+          "caption_en": "Context before action: never trade without reading the left side first",
+          "caption_es": "Contexto antes de acción: nunca operes sin leer primero el lado izquierdo"
+        },
+        {
+          "file": "frames/ExKdYnCebqY_0210s.jpg",
+          "source_video": "ExKdYnCebqY",
+          "timestamp": 210,
+          "caption_en": "Every 61.8 after failure of highs/lows becomes a valid entry",
+          "caption_es": "Todo 61.8 después del fallo de máximos/mínimos se convierte en entrada válida"
+        },
+        {
+          "file": "frames/ExKdYnCebqY_0450s.jpg",
+          "source_video": "ExKdYnCebqY",
+          "timestamp": 450,
+          "caption_en": "Every 61.8 after failure of highs/lows becomes a valid entry",
+          "caption_es": "Todo 61.8 después del fallo de máximos/mínimos se convierte en entrada válida"
+        },
+        {
+          "file": "frames/aUHXlpn-iRc_0360s.jpg",
+          "source_video": "aUHXlpn-iRc",
+          "timestamp": 360,
+          "caption_en": "Gold trading: identifying liquidity levels on the left side of the chart",
+          "caption_es": "Trading de oro: identificando niveles de liquidez en el lado izquierdo del gráfico"
+        },
+        {
+          "file": "frames/aUHXlpn-iRc_0720s.jpg",
+          "source_video": "aUHXlpn-iRc",
+          "timestamp": 720,
+          "caption_en": "Gold trading: identifying liquidity levels on the left side of the chart",
+          "caption_es": "Trading de oro: identificando niveles de liquidez en el lado izquierdo del gráfico"
+        },
+        {
+          "file": "frames/ncC4_enuX-8_0180s.jpg",
+          "source_video": "ncC4_enuX-8",
+          "timestamp": 180,
+          "caption_en": "Minimum stop loss sizes: never below 12 pips in Forex",
+          "caption_es": "Tamaños mínimos de stop loss: nunca por debajo de 12 pips en Forex"
+        },
+        {
+          "file": "frames/ncC4_enuX-8_0390s.jpg",
+          "source_video": "ncC4_enuX-8",
+          "timestamp": 390,
+          "caption_en": "Deep entry pattern: larger stop with reduced lot size",
+          "caption_es": "Patrón de entrada profunda: stop más grande con lotaje reducido"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "Tiy6bO9hXJ4",
+          "title": "Trading Gold & Silver",
+          "timestamp": 200,
+          "label_en": "Zone confluence: Low Zone + 38 of another cycle = mandatory entry",
+          "label_es": "Confluencia de zonas: Zona Baja + 38 de otro ciclo = entrada obligatoria"
+        },
+        {
+          "video_id": "M70f76duW2s",
+          "title": "Good/Bad Use of Partials",
+          "timestamp": 240,
+          "label_en": "Context before action: never trade without reading the left side first",
+          "label_es": "Contexto antes de acción: nunca operes sin leer primero el lado izquierdo"
+        },
+        {
+          "video_id": "ExKdYnCebqY",
+          "title": "Must Keep This In Mind",
+          "timestamp": 210,
+          "label_en": "Every 61.8 after failure of highs/lows becomes a valid entry",
+          "label_es": "Todo 61.8 después del fallo de máximos/mínimos se convierte en entrada válida"
+        },
+        {
+          "video_id": "aUHXlpn-iRc",
+          "title": "Value Left Side of Charts",
+          "timestamp": 360,
+          "label_en": "Gold trading: identifying liquidity levels on the left side of the chart",
+          "label_es": "Trading de oro: identificando niveles de liquidez en el lado izquierdo del gráfico"
+        },
+        {
+          "video_id": "ncC4_enuX-8",
+          "title": "En trading, DEBES TENER TAMAÑOS DE STOPS MÍNIMOS. Joaquín Vega.",
+          "timestamp": 180,
+          "label_en": "Minimum stop loss sizes: never below 12 pips in Forex",
+          "label_es": "Tamaños mínimos de stop loss: nunca por debajo de 12 pips en Forex"
+        }
+      ],
+      "clips": [
+        "si_o_si",
+        "hay_que_darle_si_o_si",
+        "tomas_de_liquidez",
+        "zona_de_compra"
+      ]
+    },
+    "T6": {
+      "tree_id": "T6",
+      "tree_title": "T6_Trade_Classification",
+      "frames": [
+        {
+          "file": "frames/6U91ZG1e80g_0120s.jpg",
+          "source_video": "6U91ZG1e80g",
+          "timestamp": 120,
+          "caption_en": "The five trade classifications: Complete Loser, Null, Positive, Winner, Very Winner",
+          "caption_es": "Las cinco clasificaciones de operación: Perdedora completa, Nula, Positiva, Ganadora, Muy ganadora"
+        },
+        {
+          "file": "frames/6U91ZG1e80g_0270s.jpg",
+          "source_video": "6U91ZG1e80g",
+          "timestamp": 270,
+          "caption_en": "Null trade: cutting loss early when price shows no reversal intent",
+          "caption_es": "Operación nula: cortando pérdida temprano cuando el precio no muestra intención de giro"
+        },
+        {
+          "file": "frames/6U91ZG1e80g_0390s.jpg",
+          "source_video": "6U91ZG1e80g",
+          "timestamp": 390,
+          "caption_en": "Positive trades never grow your account — they only offset losses",
+          "caption_es": "Las operaciones positivas nunca hacen crecer tu cuenta — solo compensan pérdidas"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "6U91ZG1e80g",
+          "title": "Many Ways to Win and Lose",
+          "timestamp": 180,
+          "label_en": "Null trade: cutting loss early when price shows no reversal intent",
+          "label_es": "Operación nula: cortando pérdida temprano cuando el precio no muestra intención de giro"
+        }
+      ],
+      "clips": []
+    },
+    "T7": {
+      "tree_id": "T7",
+      "tree_title": "T7_Post_Entry_Management",
+      "frames": [
+        {
+          "file": "frames/fk3luzBRmHA_0210s.jpg",
+          "source_video": "fk3luzBRmHA",
+          "timestamp": 210,
+          "caption_en": "Fixed ratio management: 1:4 ratio with stop to half at 1:1",
+          "caption_es": "Gestión de ratio fijo: ratio 1:4 con stop a la mitad al 1:1"
+        },
+        {
+          "file": "frames/fk3luzBRmHA_0420s.jpg",
+          "source_video": "fk3luzBRmHA",
+          "timestamp": 420,
+          "caption_en": "Fixed ratio management: 1:4 ratio with stop to half at 1:1",
+          "caption_es": "Gestión de ratio fijo: ratio 1:4 con stop a la mitad al 1:1"
+        },
+        {
+          "file": "frames/ijMX71M37Uw_0180s.jpg",
+          "source_video": "ijMX71M37Uw",
+          "timestamp": 180,
+          "caption_en": "Mandatory partial at zone coincidence — 'parcial sí o sí'",
+          "caption_es": "Parcial obligatorio en coincidencia de zonas — 'parcial sí o sí'"
+        },
+        {
+          "file": "frames/ijMX71M37Uw_0330s.jpg",
+          "source_video": "ijMX71M37Uw",
+          "timestamp": 330,
+          "caption_en": "Gold trading: managing multiple positions with partials",
+          "caption_es": "Trading de oro: gestionando múltiples posiciones con parciales"
+        },
+        {
+          "file": "frames/koKCbtrB_eI_0210s.jpg",
+          "source_video": "koKCbtrB_eI",
+          "timestamp": 210,
+          "caption_en": "Deciding exit target BEFORE entry — the secret to super-winners",
+          "caption_es": "Decidiendo objetivo de salida ANTES de la entrada — el secreto de las super-ganadoras"
+        },
+        {
+          "file": "frames/koKCbtrB_eI_0450s.jpg",
+          "source_video": "koKCbtrB_eI",
+          "timestamp": 450,
+          "caption_en": "Deciding exit target BEFORE entry — the secret to super-winners",
+          "caption_es": "Decidiendo objetivo de salida ANTES de la entrada — el secreto de las super-ganadoras"
+        },
+        {
+          "file": "frames/aUHXlpn-iRc_0360s.jpg",
+          "source_video": "aUHXlpn-iRc",
+          "timestamp": 360,
+          "caption_en": "Taking protective partial first to secure remaining positions",
+          "caption_es": "Tomando parcial protector primero para asegurar posiciones restantes"
+        },
+        {
+          "file": "frames/aUHXlpn-iRc_0720s.jpg",
+          "source_video": "aUHXlpn-iRc",
+          "timestamp": 720,
+          "caption_en": "Taking protective partial first to secure remaining positions",
+          "caption_es": "Tomando parcial protector primero para asegurar posiciones restantes"
+        },
+        {
+          "file": "frames/g44ncKXTQYY_0120s.jpg",
+          "source_video": "g44ncKXTQYY",
+          "timestamp": 120,
+          "caption_en": "Only add positions when price confirms — never against you",
+          "caption_es": "Solo añadir posiciones cuando el precio confirma — nunca en contra"
+        },
+        {
+          "file": "frames/g44ncKXTQYY_0240s.jpg",
+          "source_video": "g44ncKXTQYY",
+          "timestamp": 240,
+          "caption_en": "Only add positions when price confirms — never against you",
+          "caption_es": "Solo añadir posiciones cuando el precio confirma — nunca en contra"
+        },
+        {
+          "file": "frames/Fr4lEDnT2SM_0180s.jpg",
+          "source_video": "Fr4lEDnT2SM",
+          "timestamp": 180,
+          "caption_en": "Account size awareness: be a sniper with limited resources",
+          "caption_es": "Conciencia del tamaño de cuenta: sé un francotirador con recursos limitados"
+        },
+        {
+          "file": "frames/Fr4lEDnT2SM_0360s.jpg",
+          "source_video": "Fr4lEDnT2SM",
+          "timestamp": 360,
+          "caption_en": "Distribution of operations: plan trade count before entering zones",
+          "caption_es": "Distribución de operaciones: planificar número de trades antes de entrar en zonas"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "fk3luzBRmHA",
+          "title": "Work on Context in Chart",
+          "timestamp": 210,
+          "label_en": "Fixed ratio management: 1:4 ratio with stop to half at 1:1",
+          "label_es": "Gestión de ratio fijo: ratio 1:4 con stop a la mitad al 1:1"
+        },
+        {
+          "video_id": "ijMX71M37Uw",
+          "title": "Gold Trading with the Kids",
+          "timestamp": 180,
+          "label_en": "Mandatory partial at zone coincidence — 'parcial sí o sí'",
+          "label_es": "Parcial obligatorio en coincidencia de zonas — 'parcial sí o sí'"
+        },
+        {
+          "video_id": "koKCbtrB_eI",
+          "title": "Better Explained Live",
+          "timestamp": 240,
+          "label_en": "Deciding exit target BEFORE entry — the secret to super-winners",
+          "label_es": "Decidiendo objetivo de salida ANTES de la entrada — el secreto de las super-ganadoras"
+        },
+        {
+          "video_id": "aUHXlpn-iRc",
+          "title": "Value Left Side of Charts",
+          "timestamp": 360,
+          "label_en": "Taking protective partial first to secure remaining positions",
+          "label_es": "Tomando parcial protector primero para asegurar posiciones restantes"
+        },
+        {
+          "video_id": "g44ncKXTQYY",
+          "title": "En trading, SOLO DEBES AÑADIR POSICIONES si el precio te da la razón. Joaquín Vega.",
+          "timestamp": 120,
+          "label_en": "Only add positions when price confirms — never against you",
+          "label_es": "Solo añadir posiciones cuando el precio confirma — nunca en contra"
+        },
+        {
+          "video_id": "Fr4lEDnT2SM",
+          "title": "En trading, EL TAMAÑO DE TU CUENTA, ES RIDÍCULO. Joaquín Vega.",
+          "timestamp": 180,
+          "label_en": "Account size awareness: be a sniper with limited resources",
+          "label_es": "Conciencia del tamaño de cuenta: sé un francotirador con recursos limitados"
+        }
+      ],
+      "clips": [
+        "si_o_si",
+        "parcial_si_o_si"
+      ]
+    },
+    "T8": {
+      "tree_id": "T8",
+      "tree_title": "T8_Partial_Profit_Strategy",
+      "frames": [
+        {
+          "file": "frames/ijMX71M37Uw_0180s.jpg",
+          "source_video": "ijMX71M37Uw",
+          "timestamp": 180,
+          "caption_en": "Mandatory partial at 61 zone coincidence",
+          "caption_es": "Parcial obligatorio en coincidencia con zona del 61"
+        },
+        {
+          "file": "frames/ijMX71M37Uw_0330s.jpg",
+          "source_video": "ijMX71M37Uw",
+          "timestamp": 330,
+          "caption_en": "Conservative vs aggressive partial-taking styles",
+          "caption_es": "Estilos conservador vs agresivo de toma de parciales"
+        },
+        {
+          "file": "frames/ExKdYnCebqY_0210s.jpg",
+          "source_video": "ExKdYnCebqY",
+          "timestamp": 210,
+          "caption_en": "Evaluating statistics: do your partials actually make the numbers work?",
+          "caption_es": "Evaluando estadísticas: ¿tus parciales realmente hacen que los números funcionen?"
+        },
+        {
+          "file": "frames/ExKdYnCebqY_0450s.jpg",
+          "source_video": "ExKdYnCebqY",
+          "timestamp": 450,
+          "caption_en": "Evaluating statistics: do your partials actually make the numbers work?",
+          "caption_es": "Evaluando estadísticas: ¿tus parciales realmente hacen que los números funcionen?"
+        },
+        {
+          "file": "frames/aUHXlpn-iRc_0360s.jpg",
+          "source_video": "aUHXlpn-iRc",
+          "timestamp": 360,
+          "caption_en": "Single partial then let rest run to failure target",
+          "caption_es": "Un solo parcial y dejar que el resto corra hasta el objetivo de fallo"
+        },
+        {
+          "file": "frames/aUHXlpn-iRc_0720s.jpg",
+          "source_video": "aUHXlpn-iRc",
+          "timestamp": 720,
+          "caption_en": "Single partial then let rest run to failure target",
+          "caption_es": "Un solo parcial y dejar que el resto corra hasta el objetivo de fallo"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "ijMX71M37Uw",
+          "title": "Gold Trading with the Kids",
+          "timestamp": 180,
+          "label_en": "Mandatory partial at 61 zone coincidence",
+          "label_es": "Parcial obligatorio en coincidencia con zona del 61"
+        },
+        {
+          "video_id": "ExKdYnCebqY",
+          "title": "Must Keep This In Mind",
+          "timestamp": 210,
+          "label_en": "Evaluating statistics: do your partials actually make the numbers work?",
+          "label_es": "Evaluando estadísticas: ¿tus parciales realmente hacen que los números funcionen?"
+        },
+        {
+          "video_id": "aUHXlpn-iRc",
+          "title": "Value Left Side of Charts",
+          "timestamp": 360,
+          "label_en": "Single partial then let rest run to failure target",
+          "label_es": "Un solo parcial y dejar que el resto corra hasta el objetivo de fallo"
+        }
+      ],
+      "clips": [
+        "parcial_si_o_si"
+      ]
+    },
+    "T9": {
+      "tree_id": "T9",
+      "tree_title": "T9_161_200_Zone_Trading",
+      "frames": [
+        {
+          "file": "frames/p9aw5DkgFX8_0150s.jpg",
+          "source_video": "p9aw5DkgFX8",
+          "timestamp": 150,
+          "caption_en": "The 161.8 to 200 zone: failure-based progression toward 200",
+          "caption_es": "La zona del 161.8 al 200: progresión basada en fallos hacia el 200"
+        },
+        {
+          "file": "frames/p9aw5DkgFX8_0330s.jpg",
+          "source_video": "p9aw5DkgFX8",
+          "timestamp": 330,
+          "caption_en": "Working internal cycles within the 161-200 zone",
+          "caption_es": "Trabajando ciclos internos dentro de la zona 161-200"
+        },
+        {
+          "file": "frames/QNRJX4b7Qq4_0180s.jpg",
+          "source_video": "QNRJX4b7Qq4",
+          "timestamp": 180,
+          "caption_en": "161.8 works better in currencies, 200 works better in indices",
+          "caption_es": "El 161.8 funciona mejor en divisas, el 200 funciona mejor en índices"
+        },
+        {
+          "file": "frames/QNRJX4b7Qq4_0360s.jpg",
+          "source_video": "QNRJX4b7Qq4",
+          "timestamp": 360,
+          "caption_en": "161.8 works better in currencies, 200 works better in indices",
+          "caption_es": "El 161.8 funciona mejor en divisas, el 200 funciona mejor en índices"
+        },
+        {
+          "file": "frames/M70f76duW2s_0240s.jpg",
+          "source_video": "M70f76duW2s",
+          "timestamp": 240,
+          "caption_en": "Context determines which level (161.8 or 200) is the primary target",
+          "caption_es": "El contexto determina qué nivel (161.8 o 200) es el objetivo principal"
+        },
+        {
+          "file": "frames/M70f76duW2s_0480s.jpg",
+          "source_video": "M70f76duW2s",
+          "timestamp": 480,
+          "caption_en": "Context determines which level (161.8 or 200) is the primary target",
+          "caption_es": "El contexto determina qué nivel (161.8 o 200) es el objetivo principal"
+        },
+        {
+          "file": "frames/aUHXlpn-iRc_0360s.jpg",
+          "source_video": "aUHXlpn-iRc",
+          "timestamp": 360,
+          "caption_en": "Gold trading at 161.8 and 200 levels with left-side context",
+          "caption_es": "Trading de oro en niveles 161.8 y 200 con contexto del lado izquierdo"
+        },
+        {
+          "file": "frames/aUHXlpn-iRc_0720s.jpg",
+          "source_video": "aUHXlpn-iRc",
+          "timestamp": 720,
+          "caption_en": "Gold trading at 161.8 and 200 levels with left-side context",
+          "caption_es": "Trading de oro en niveles 161.8 y 200 con contexto del lado izquierdo"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "p9aw5DkgFX8",
+          "title": "Evolution of Cycles",
+          "timestamp": 180,
+          "label_en": "The 161.8 to 200 zone: failure-based progression toward 200",
+          "label_es": "La zona del 161.8 al 200: progresión basada en fallos hacia el 200"
+        },
+        {
+          "video_id": "QNRJX4b7Qq4",
+          "title": "Students Preferred Ratios",
+          "timestamp": 180,
+          "label_en": "161.8 works better in currencies, 200 works better in indices",
+          "label_es": "El 161.8 funciona mejor en divisas, el 200 funciona mejor en índices"
+        },
+        {
+          "video_id": "M70f76duW2s",
+          "title": "Good/Bad Use of Partials",
+          "timestamp": 240,
+          "label_en": "Context determines which level (161.8 or 200) is the primary target",
+          "label_es": "El contexto determina qué nivel (161.8 o 200) es el objetivo principal"
+        },
+        {
+          "video_id": "aUHXlpn-iRc",
+          "title": "Value Left Side of Charts",
+          "timestamp": 360,
+          "label_en": "Gold trading at 161.8 and 200 levels with left-side context",
+          "label_es": "Trading de oro en niveles 161.8 y 200 con contexto del lado izquierdo"
+        }
+      ],
+      "clips": []
+    },
+    "T10": {
+      "tree_id": "T10",
+      "tree_title": "T10_Risk_And_Business_Plan",
+      "frames": [
+        {
+          "file": "frames/u6K3H8d-4J0_0210s.jpg",
+          "source_video": "u6K3H8d-4J0",
+          "timestamp": 210,
+          "caption_en": "The five factors of profitability aligned for consistent results",
+          "caption_es": "Los cinco factores de rentabilidad alineados para resultados consistentes"
+        },
+        {
+          "file": "frames/u6K3H8d-4J0_0420s.jpg",
+          "source_video": "u6K3H8d-4J0",
+          "timestamp": 420,
+          "caption_en": "Super winning trades: when the account jumps significantly",
+          "caption_es": "Operaciones super ganadoras: cuando la cuenta sube significativamente"
+        },
+        {
+          "file": "frames/GrH-mtabADo_0210s.jpg",
+          "source_video": "GrH-mtabADo",
+          "timestamp": 210,
+          "caption_en": "Setbacks destroy novice traders — understand retracement psychology",
+          "caption_es": "Los retrocesos destruyen a los traders novatos — entender la psicología del retroceso"
+        },
+        {
+          "file": "frames/GrH-mtabADo_0420s.jpg",
+          "source_video": "GrH-mtabADo",
+          "timestamp": 420,
+          "caption_en": "Setbacks destroy novice traders — understand retracement psychology",
+          "caption_es": "Los retrocesos destruyen a los traders novatos — entender la psicología del retroceso"
+        },
+        {
+          "file": "frames/6U91ZG1e80g_0180s.jpg",
+          "source_video": "6U91ZG1e80g",
+          "timestamp": 180,
+          "caption_en": "Business plan defines max loss, profit targets, and lot sizing",
+          "caption_es": "El plan de negocio define pérdida máxima, objetivos de ganancia y tamaño de lote"
+        },
+        {
+          "file": "frames/6U91ZG1e80g_0360s.jpg",
+          "source_video": "6U91ZG1e80g",
+          "timestamp": 360,
+          "caption_en": "Business plan defines max loss, profit targets, and lot sizing",
+          "caption_es": "El plan de negocio define pérdida máxima, objetivos de ganancia y tamaño de lote"
+        },
+        {
+          "file": "frames/1YCSx7gXPF0_0510s.jpg",
+          "source_video": "1YCSx7gXPF0",
+          "timestamp": 510,
+          "caption_en": "Drawdown thresholds: 15% stop, 22.5% reflect, 30% critical",
+          "caption_es": "Umbrales de drawdown: 15% detener, 22.5% reflexionar, 30% crítico"
+        },
+        {
+          "file": "frames/1YCSx7gXPF0_1020s.jpg",
+          "source_video": "1YCSx7gXPF0",
+          "timestamp": 1020,
+          "caption_en": "Drawdown thresholds: 15% stop, 22.5% reflect, 30% critical",
+          "caption_es": "Umbrales de drawdown: 15% detener, 22.5% reflexionar, 30% crítico"
+        },
+        {
+          "file": "frames/Fr4lEDnT2SM_0180s.jpg",
+          "source_video": "Fr4lEDnT2SM",
+          "timestamp": 180,
+          "caption_en": "Small accounts require extreme selectivity — limited bullets",
+          "caption_es": "Cuentas pequeñas requieren selectividad extrema — balas limitadas"
+        },
+        {
+          "file": "frames/Fr4lEDnT2SM_0360s.jpg",
+          "source_video": "Fr4lEDnT2SM",
+          "timestamp": 360,
+          "caption_en": "Small accounts require extreme selectivity — limited bullets",
+          "caption_es": "Cuentas pequeñas requieren selectividad extrema — balas limitadas"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "u6K3H8d-4J0",
+          "title": "Super Winning Trades",
+          "timestamp": 210,
+          "label_en": "The five factors of profitability aligned for consistent results",
+          "label_es": "Los cinco factores de rentabilidad alineados para resultados consistentes"
+        },
+        {
+          "video_id": "GrH-mtabADo",
+          "title": "Setbacks - Enemy of Novice Traders",
+          "timestamp": 210,
+          "label_en": "Setbacks destroy novice traders — understand retracement psychology",
+          "label_es": "Los retrocesos destruyen a los traders novatos — entender la psicología del retroceso"
+        },
+        {
+          "video_id": "6U91ZG1e80g",
+          "title": "Many Ways to Win and Lose",
+          "timestamp": 180,
+          "label_en": "Business plan defines max loss, profit targets, and lot sizing",
+          "label_es": "El plan de negocio define pérdida máxima, objetivos de ganancia y tamaño de lote"
+        },
+        {
+          "video_id": "1YCSx7gXPF0",
+          "title": "Debate entre traders SOBRE EL DRAWDOWN EN TRADING. Joaquín Vega, Pablo Ortiz y Víctor Gómez ( 1/3 ).",
+          "timestamp": 510,
+          "label_en": "Drawdown thresholds: 15% stop, 22.5% reflect, 30% critical",
+          "label_es": "Umbrales de drawdown: 15% detener, 22.5% reflexionar, 30% crítico"
+        },
+        {
+          "video_id": "Fr4lEDnT2SM",
+          "title": "En trading, EL TAMAÑO DE TU CUENTA, ES RIDÍCULO. Joaquín Vega.",
+          "timestamp": 180,
+          "label_en": "Small accounts require extreme selectivity — limited bullets",
+          "label_es": "Cuentas pequeñas requieren selectividad extrema — balas limitadas"
+        }
+      ],
+      "clips": [
+        "plan_de_negocio",
+        "colchon"
+      ]
+    },
+    "T11": {
+      "tree_id": "T11",
+      "tree_title": "T11_Method_Architecture",
+      "frames": [
+        {
+          "file": "frames/Tiy6bO9hXJ4_0169s.jpg",
+          "source_video": "Tiy6bO9hXJ4",
+          "timestamp": 169,
+          "caption_en": "Three-layer architecture: Reading + Attack + Management = Complete Method",
+          "caption_es": "Arquitectura de tres capas: Lectura + Ataque + Gestión = Método Completo"
+        },
+        {
+          "file": "frames/Tiy6bO9hXJ4_0304s.jpg",
+          "source_video": "Tiy6bO9hXJ4",
+          "timestamp": 304,
+          "caption_en": "Three-layer architecture: Reading + Attack + Management = Complete Method",
+          "caption_es": "Arquitectura de tres capas: Lectura + Ataque + Gestión = Método Completo"
+        },
+        {
+          "file": "frames/Tiy6bO9hXJ4_0527s.jpg",
+          "source_video": "Tiy6bO9hXJ4",
+          "timestamp": 527,
+          "caption_en": "The YouTube course is only the Reading Model — NOT a strategy",
+          "caption_es": "El curso de YouTube es solo el Modelo de Lectura — NO es una estrategia"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "Tiy6bO9hXJ4",
+          "title": "Trading Gold & Silver",
+          "timestamp": 200,
+          "label_en": "Three-layer architecture: Reading + Attack + Management = Complete Method",
+          "label_es": "Arquitectura de tres capas: Lectura + Ataque + Gestión = Método Completo"
+        }
+      ],
+      "clips": [
+        "sin_ubicacion_del_mapa"
+      ]
+    },
+    "T12": {
+      "tree_id": "T12",
+      "tree_title": "T12_Super_Winner_Psychology",
+      "frames": [
+        {
+          "file": "frames/koKCbtrB_eI_0210s.jpg",
+          "source_video": "koKCbtrB_eI",
+          "timestamp": 210,
+          "caption_en": "Super-winners: holding through erratic movements with predetermined exit",
+          "caption_es": "Super-ganadoras: mantener a través de movimientos erráticos con salida predeterminada"
+        },
+        {
+          "file": "frames/koKCbtrB_eI_0450s.jpg",
+          "source_video": "koKCbtrB_eI",
+          "timestamp": 450,
+          "caption_en": "10-20 super-winners per year for a skilled trader",
+          "caption_es": "10-20 super-ganadoras al año para un trader hábil"
+        },
+        {
+          "file": "frames/ijMX71M37Uw_0180s.jpg",
+          "source_video": "ijMX71M37Uw",
+          "timestamp": 180,
+          "caption_en": "Psychology of letting profits run vs the fear of giving back gains",
+          "caption_es": "Psicología de dejar correr ganancias vs el miedo de devolver beneficios"
+        },
+        {
+          "file": "frames/ijMX71M37Uw_0330s.jpg",
+          "source_video": "ijMX71M37Uw",
+          "timestamp": 330,
+          "caption_en": "Psychology of letting profits run vs the fear of giving back gains",
+          "caption_es": "Psicología de dejar correr ganancias vs el miedo de devolver beneficios"
+        },
+        {
+          "file": "frames/G_22Hli7Hls_0570s.jpg",
+          "source_video": "G_22Hli7Hls",
+          "timestamp": 570,
+          "caption_en": "Methods are just triggers — the real method is post-entry management",
+          "caption_es": "Los métodos son solo disparadores — el verdadero método es la gestión post-entrada"
+        },
+        {
+          "file": "frames/G_22Hli7Hls_1170s.jpg",
+          "source_video": "G_22Hli7Hls",
+          "timestamp": 1170,
+          "caption_en": "5-phase mastery: risk, profit, post-entry, discipline, triggers",
+          "caption_es": "Dominio en 5 fases: riesgo, beneficio, post-entrada, disciplina, disparadores"
+        },
+        {
+          "file": "frames/aY_rYYg3GZ0_0180s.jpg",
+          "source_video": "aY_rYYg3GZ0",
+          "timestamp": 180,
+          "caption_en": "Adapting the results curve — when favorable vs unfavorable",
+          "caption_es": "Adaptando la curva de resultados — cuando es favorable vs desfavorable"
+        },
+        {
+          "file": "frames/aY_rYYg3GZ0_0330s.jpg",
+          "source_video": "aY_rYYg3GZ0",
+          "timestamp": 330,
+          "caption_en": "Adapting the results curve — when favorable vs unfavorable",
+          "caption_es": "Adaptando la curva de resultados — cuando es favorable vs desfavorable"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "koKCbtrB_eI",
+          "title": "Better Explained Live",
+          "timestamp": 240,
+          "label_en": "Super-winners: holding through erratic movements with predetermined exit",
+          "label_es": "Super-ganadoras: mantener a través de movimientos erráticos con salida predeterminada"
+        },
+        {
+          "video_id": "ijMX71M37Uw",
+          "title": "Gold Trading with the Kids",
+          "timestamp": 180,
+          "label_en": "Psychology of letting profits run vs the fear of giving back gains",
+          "label_es": "Psicología de dejar correr ganancias vs el miedo de devolver beneficios"
+        },
+        {
+          "video_id": "G_22Hli7Hls",
+          "title": "UN MÉTODO DE TRADING, NO ES LO QUE TE HAN CONTADO. Joaquín Vega.",
+          "timestamp": 570,
+          "label_en": "Methods are just triggers — the real method is post-entry management",
+          "label_es": "Los métodos son solo disparadores — el verdadero método es la gestión post-entrada"
+        },
+        {
+          "video_id": "aY_rYYg3GZ0",
+          "title": "En trading, SI TU CURVA DE RESULTADOS CAE MUCHO, ES POR TU CULPA. Joaquín Vega.",
+          "timestamp": 180,
+          "label_en": "Adapting the results curve — when favorable vs unfavorable",
+          "label_es": "Adaptando la curva de resultados — cuando es favorable vs desfavorable"
+        }
+      ],
+      "clips": []
+    },
+    "T13": {
+      "tree_id": "T13",
+      "tree_title": "T13_Chart_Analysis_Methodology",
+      "frames": [
+        {
+          "file": "frames/4b2ZAImaATk_0210s.jpg",
+          "source_video": "4b2ZAImaATk",
+          "timestamp": 210,
+          "caption_en": "Past reviewed chart method: bar-by-bar analysis of completed movements",
+          "caption_es": "Método de gráfico pasado revisado: análisis barra a barra de movimientos completados"
+        },
+        {
+          "file": "frames/4b2ZAImaATk_0390s.jpg",
+          "source_video": "4b2ZAImaATk",
+          "timestamp": 390,
+          "caption_en": "Three ways to study charts: past complete, past reviewed, moving chart",
+          "caption_es": "Tres formas de estudiar gráficos: pasado completo, pasado revisado, gráfico en movimiento"
+        },
+        {
+          "file": "frames/4b2ZAImaATk_0600s.jpg",
+          "source_video": "4b2ZAImaATk",
+          "timestamp": 600,
+          "caption_en": "Identifying fractal structures in historical price action",
+          "caption_es": "Identificando estructuras fractales en la acción histórica del precio"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "4b2ZAImaATk",
+          "title": "Fractality Practice Example",
+          "timestamp": 270,
+          "label_en": "Three ways to study charts: past complete, past reviewed, moving chart",
+          "label_es": "Tres formas de estudiar gráficos: pasado completo, pasado revisado, gráfico en movimiento"
+        }
+      ],
+      "clips": [
+        "fractalidad"
+      ]
+    },
+    "T14": {
+      "tree_id": "T14",
+      "tree_title": "T14_Hedging_And_Coberturas",
+      "frames": [
+        {
+          "file": "frames/UagTOjoC4us_0150s.jpg",
+          "source_video": "UagTOjoC4us",
+          "timestamp": 150,
+          "caption_en": "Hedging simplifies management — opening opposing positions at critical zones",
+          "caption_es": "La cobertura simplifica la gestión — abriendo posiciones contrarias en zonas críticas"
+        },
+        {
+          "file": "frames/UagTOjoC4us_0330s.jpg",
+          "source_video": "UagTOjoC4us",
+          "timestamp": 330,
+          "caption_en": "Hedging simplifies management — opening opposing positions at critical zones",
+          "caption_es": "La cobertura simplifica la gestión — abriendo posiciones contrarias en zonas críticas"
+        },
+        {
+          "file": "frames/LtSfnLbTPMI_0240s.jpg",
+          "source_video": "LtSfnLbTPMI",
+          "timestamp": 240,
+          "caption_en": "Hedging as essential: always maintain opposing positions for safety",
+          "caption_es": "La cobertura como esencial: siempre mantener posiciones contrarias por seguridad"
+        },
+        {
+          "file": "frames/LtSfnLbTPMI_0450s.jpg",
+          "source_video": "LtSfnLbTPMI",
+          "timestamp": 450,
+          "caption_en": "Zone indifference: total detachment from any direction",
+          "caption_es": "Indiferencia de zona: desprendimiento total de cualquier dirección"
+        },
+        {
+          "file": "frames/-1ynDl64noU_0060s.jpg",
+          "source_video": "-1ynDl64noU",
+          "timestamp": 60,
+          "caption_en": "Constant hedging: always maintaining dual-direction positions on SP500",
+          "caption_es": "Cobertura constante: siempre manteniendo posiciones de doble dirección en SP500"
+        },
+        {
+          "file": "frames/-1ynDl64noU_0150s.jpg",
+          "source_video": "-1ynDl64noU",
+          "timestamp": 150,
+          "caption_en": "Constant hedging: always maintaining dual-direction positions on SP500",
+          "caption_es": "Cobertura constante: siempre manteniendo posiciones de doble dirección en SP500"
+        },
+        {
+          "file": "frames/I9ZbsIRYxAg_0090s.jpg",
+          "source_video": "I9ZbsIRYxAg",
+          "timestamp": 90,
+          "caption_en": "CFDs preferred for hedging: easy opposing positions on same instrument",
+          "caption_es": "CFDs preferidos para cobertura: posiciones contrarias fáciles en el mismo instrumento"
+        },
+        {
+          "file": "frames/I9ZbsIRYxAg_0180s.jpg",
+          "source_video": "I9ZbsIRYxAg",
+          "timestamp": 180,
+          "caption_en": "CFDs preferred for hedging: easy opposing positions on same instrument",
+          "caption_es": "CFDs preferidos para cobertura: posiciones contrarias fáciles en el mismo instrumento"
+        },
+        {
+          "file": "frames/bzJTdS2tw5M_0030s.jpg",
+          "source_video": "bzJTdS2tw5M",
+          "timestamp": 30,
+          "caption_en": "SP500 hedging example: entering at reversal zones with dual positions",
+          "caption_es": "Ejemplo de cobertura en SP500: entrando en zonas de giro con posiciones duales"
+        },
+        {
+          "file": "frames/bzJTdS2tw5M_0060s.jpg",
+          "source_video": "bzJTdS2tw5M",
+          "timestamp": 60,
+          "caption_en": "SP500 hedging example: entering at reversal zones with dual positions",
+          "caption_es": "Ejemplo de cobertura en SP500: entrando en zonas de giro con posiciones duales"
+        },
+        {
+          "file": "frames/UKv_l1zUPr8_0120s.jpg",
+          "source_video": "UKv_l1zUPr8",
+          "timestamp": 120,
+          "caption_en": "Hedging yields good results: profiting from both directions",
+          "caption_es": "La cobertura da buenos resultados: ganando en ambas direcciones"
+        },
+        {
+          "file": "frames/UKv_l1zUPr8_0240s.jpg",
+          "source_video": "UKv_l1zUPr8",
+          "timestamp": 240,
+          "caption_en": "Hedging yields good results: profiting from both directions",
+          "caption_es": "La cobertura da buenos resultados: ganando en ambas direcciones"
+        },
+        {
+          "file": "frames/jdb0RQrQcbE_0030s.jpg",
+          "source_video": "jdb0RQrQcbE",
+          "timestamp": 30,
+          "caption_en": "All positions stopped but still winning — the power of hedging",
+          "caption_es": "Todas las posiciones cerradas pero ganando — el poder de la cobertura"
+        },
+        {
+          "file": "frames/jdb0RQrQcbE_0090s.jpg",
+          "source_video": "jdb0RQrQcbE",
+          "timestamp": 90,
+          "caption_en": "All positions stopped but still winning — the power of hedging",
+          "caption_es": "Todas las posiciones cerradas pero ganando — el poder de la cobertura"
+        },
+        {
+          "file": "frames/zcP866VYuI8_0390s.jpg",
+          "source_video": "zcP866VYuI8",
+          "timestamp": 390,
+          "caption_en": "Dual-direction thinking: 'I don't want high accuracy, I want to make money'",
+          "caption_es": "Pensamiento de doble dirección: 'No quiero mucho acierto, quiero ganar mucho dinero'"
+        },
+        {
+          "file": "frames/zcP866VYuI8_0780s.jpg",
+          "source_video": "zcP866VYuI8",
+          "timestamp": 780,
+          "caption_en": "Dual-direction thinking: 'I don't want high accuracy, I want to make money'",
+          "caption_es": "Pensamiento de doble dirección: 'No quiero mucho acierto, quiero ganar mucho dinero'"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "UagTOjoC4us",
+          "title": "The proper use of hedging in trading greatly simplifies management. Joaquín Vega.",
+          "timestamp": 150,
+          "label_en": "Hedging simplifies management — opening opposing positions at critical zones",
+          "label_es": "La cobertura simplifica la gestión — abriendo posiciones contrarias en zonas críticas"
+        },
+        {
+          "video_id": "LtSfnLbTPMI",
+          "title": "LAS COBERTURAS, PARTE ESENCIAL DE MI TRADING. Joaquín Vega.",
+          "timestamp": 240,
+          "label_en": "Hedging as essential: always maintain opposing positions for safety",
+          "label_es": "La cobertura como esencial: siempre mantener posiciones contrarias por seguridad"
+        },
+        {
+          "video_id": "-1ynDl64noU",
+          "title": "En trading, haciendo COBERTURAS CONSTANTES. Joaquín Vega.",
+          "timestamp": 60,
+          "label_en": "Constant hedging: always maintaining dual-direction positions on SP500",
+          "label_es": "Cobertura constante: siempre manteniendo posiciones de doble dirección en SP500"
+        },
+        {
+          "video_id": "I9ZbsIRYxAg",
+          "title": "En trading, POR ESTO ME GUSTAN LOS CFD,s , POR LA OPCIÓN DE COBERTURAS. Joaquín Vega.",
+          "timestamp": 90,
+          "label_en": "CFDs preferred for hedging: easy opposing positions on same instrument",
+          "label_es": "CFDs preferidos para cobertura: posiciones contrarias fáciles en el mismo instrumento"
+        },
+        {
+          "video_id": "bzJTdS2tw5M",
+          "title": "Ejemplo de cobertura en SP500. Joaquín Vega.",
+          "timestamp": 30,
+          "label_en": "SP500 hedging example: entering at reversal zones with dual positions",
+          "label_es": "Ejemplo de cobertura en SP500: entrando en zonas de giro con posiciones duales"
+        },
+        {
+          "video_id": "UKv_l1zUPr8",
+          "title": "In trading, the concept of hedging can yield very good results. Joaquín Vega.",
+          "timestamp": 120,
+          "label_en": "Hedging yields good results: profiting from both directions",
+          "label_es": "La cobertura da buenos resultados: ganando en ambas direcciones"
+        },
+        {
+          "video_id": "jdb0RQrQcbE",
+          "title": "El mercado, ME SACÓ TODAS LAS POSICIONES Y GANO. Así es el trading. Joaquín Vega.",
+          "timestamp": 30,
+          "label_en": "All positions stopped but still winning — the power of hedging",
+          "label_es": "Todas las posiciones cerradas pero ganando — el poder de la cobertura"
+        },
+        {
+          "video_id": "zcP866VYuI8",
+          "title": "En trading, NO QUIERO TENER MUCHO ACIERTO, QUIERO GANAR MUCHO DINERO. Joaquín Vega.",
+          "timestamp": 390,
+          "label_en": "Dual-direction thinking: 'I don't want high accuracy, I want to make money'",
+          "label_es": "Pensamiento de doble dirección: 'No quiero mucho acierto, quiero ganar mucho dinero'"
+        }
+      ],
+      "clips": [
+        "no_sigo_tendencias",
+        "doble_direccion",
+        "cobertura"
+      ]
+    },
+    "T15": {
+      "tree_id": "T15",
+      "tree_title": "T15_Deception_Pattern",
+      "frames": [
+        {
+          "file": "frames/1vfxDbav44U_0120s.jpg",
+          "source_video": "1vfxDbav44U",
+          "timestamp": 120,
+          "caption_en": "Deception Pattern: stop-then-turn sequence approaching 161.8%",
+          "caption_es": "Patrón de Engaño: secuencia de parar-luego-girar acercándose al 161.8%"
+        },
+        {
+          "file": "frames/1vfxDbav44U_0240s.jpg",
+          "source_video": "1vfxDbav44U",
+          "timestamp": 240,
+          "caption_en": "Big players distributing while retail buys the rally",
+          "caption_es": "Grandes jugadores distribuyendo mientras el minorista compra el rally"
+        },
+        {
+          "file": "frames/1vfxDbav44U_0390s.jpg",
+          "source_video": "1vfxDbav44U",
+          "timestamp": 390,
+          "caption_en": "161.8% reversal zone: where the deception completes",
+          "caption_es": "Zona de giro del 161.8%: donde el engaño se completa"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "1vfxDbav44U",
+          "title": "En mi trading, UTILIZO ESTE PATRÓN DE ENGAÑO. Joaquín Vega.",
+          "timestamp": 180,
+          "label_en": "Big players distributing while retail buys the rally",
+          "label_es": "Grandes jugadores distribuyendo mientras el minorista compra el rally"
+        }
+      ],
+      "clips": []
+    },
+    "T16": {
+      "tree_id": "T16",
+      "tree_title": "T16_Business_Plan_Compliance",
+      "frames": [
+        {
+          "file": "frames/J-sqjzmntCE_0420s.jpg",
+          "source_video": "J-sqjzmntCE",
+          "timestamp": 420,
+          "caption_en": "Positive numerical expectancy: more winning sequences than losing",
+          "caption_es": "Expectativa numérica positiva: más secuencias ganadoras que perdedoras"
+        },
+        {
+          "file": "frames/J-sqjzmntCE_0840s.jpg",
+          "source_video": "J-sqjzmntCE",
+          "timestamp": 840,
+          "caption_en": "Consistent 'menu' — don't change your strategy constantly",
+          "caption_es": "Menú consistente — no cambies tu estrategia constantemente"
+        },
+        {
+          "file": "frames/aY_rYYg3GZ0_0180s.jpg",
+          "source_video": "aY_rYYg3GZ0",
+          "timestamp": 180,
+          "caption_en": "Results curve falling? It's your fault — adapt your approach",
+          "caption_es": "¿Tu curva de resultados cae? Es tu culpa — adapta tu enfoque"
+        },
+        {
+          "file": "frames/aY_rYYg3GZ0_0330s.jpg",
+          "source_video": "aY_rYYg3GZ0",
+          "timestamp": 330,
+          "caption_en": "Results curve falling? It's your fault — adapt your approach",
+          "caption_es": "¿Tu curva de resultados cae? Es tu culpa — adapta tu enfoque"
+        },
+        {
+          "file": "frames/Fr4lEDnT2SM_0180s.jpg",
+          "source_video": "Fr4lEDnT2SM",
+          "timestamp": 180,
+          "caption_en": "Account size determines operation style — sniper vs scattergun",
+          "caption_es": "El tamaño de cuenta determina el estilo de operación — francotirador vs ametralladora"
+        },
+        {
+          "file": "frames/Fr4lEDnT2SM_0360s.jpg",
+          "source_video": "Fr4lEDnT2SM",
+          "timestamp": 360,
+          "caption_en": "Account size determines operation style — sniper vs scattergun",
+          "caption_es": "El tamaño de cuenta determina el estilo de operación — francotirador vs ametralladora"
+        },
+        {
+          "file": "frames/CInOSEOYEIg_0180s.jpg",
+          "source_video": "CInOSEOYEIg",
+          "timestamp": 180,
+          "caption_en": "Time-space-reward relationship for evaluating trade worthiness",
+          "caption_es": "Relación tiempo-espacio-recompensa para evaluar si vale la pena operar"
+        },
+        {
+          "file": "frames/CInOSEOYEIg_0390s.jpg",
+          "source_video": "CInOSEOYEIg",
+          "timestamp": 390,
+          "caption_en": "Time-space-reward relationship for evaluating trade worthiness",
+          "caption_es": "Relación tiempo-espacio-recompensa para evaluar si vale la pena operar"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "J-sqjzmntCE",
+          "title": "CREA UN PLAN DE NEGOCIO CORRECTO para tu trading ( 3 de 3 ). Joaquín Vega.",
+          "timestamp": 420,
+          "label_en": "Positive numerical expectancy: more winning sequences than losing",
+          "label_es": "Expectativa numérica positiva: más secuencias ganadoras que perdedoras"
+        },
+        {
+          "video_id": "aY_rYYg3GZ0",
+          "title": "En trading, SI TU CURVA DE RESULTADOS CAE MUCHO, ES POR TU CULPA. Joaquín Vega.",
+          "timestamp": 180,
+          "label_en": "Results curve falling? It's your fault — adapt your approach",
+          "label_es": "¿Tu curva de resultados cae? Es tu culpa — adapta tu enfoque"
+        },
+        {
+          "video_id": "Fr4lEDnT2SM",
+          "title": "En trading, EL TAMAÑO DE TU CUENTA, ES RIDÍCULO. Joaquín Vega.",
+          "timestamp": 180,
+          "label_en": "Account size determines operation style — sniper vs scattergun",
+          "label_es": "El tamaño de cuenta determina el estilo de operación — francotirador vs ametralladora"
+        },
+        {
+          "video_id": "CInOSEOYEIg",
+          "title": "EL RATIO DE PROFIT POR OPERACIÓN EN TU TRADING. Joaquín Vega.",
+          "timestamp": 180,
+          "label_en": "Time-space-reward relationship for evaluating trade worthiness",
+          "label_es": "Relación tiempo-espacio-recompensa para evaluar si vale la pena operar"
+        }
+      ],
+      "clips": [
+        "plan_de_negocio"
+      ]
+    },
+    "T17": {
+      "tree_id": "T17",
+      "tree_title": "T17_Drawdown_Management",
+      "frames": [
+        {
+          "file": "frames/1YCSx7gXPF0_0390s.jpg",
+          "source_video": "1YCSx7gXPF0",
+          "timestamp": 390,
+          "caption_en": "Drawdown debate: 15% threshold triggers stop-trading protocol",
+          "caption_es": "Debate sobre drawdown: el umbral del 15% activa protocolo de detener trading"
+        },
+        {
+          "file": "frames/1YCSx7gXPF0_0750s.jpg",
+          "source_video": "1YCSx7gXPF0",
+          "timestamp": 750,
+          "caption_en": "22.5% drawdown: consider 6-month break and full reassessment",
+          "caption_es": "Drawdown del 22.5%: considerar descanso de 6 meses y reevaluación completa"
+        },
+        {
+          "file": "frames/1YCSx7gXPF0_1140s.jpg",
+          "source_video": "1YCSx7gXPF0",
+          "timestamp": 1140,
+          "caption_en": "Segment trading: change aggressiveness based on account performance",
+          "caption_es": "Trading por segmentos: cambiar agresividad según rendimiento de la cuenta"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "1YCSx7gXPF0",
+          "title": "Debate entre traders SOBRE EL DRAWDOWN EN TRADING. Joaquín Vega, Pablo Ortiz y Víctor Gómez ( 1/3 ).",
+          "timestamp": 510,
+          "label_en": "22.5% drawdown: consider 6-month break and full reassessment",
+          "label_es": "Drawdown del 22.5%: considerar descanso de 6 meses y reevaluación completa"
+        }
+      ],
+      "clips": [
+        "colchon"
+      ]
+    },
+    "T18": {
+      "tree_id": "T18",
+      "tree_title": "T18_Context_Assessment",
+      "frames": [
+        {
+          "file": "frames/HLVeiM-z1S0_0210s.jpg",
+          "source_video": "HLVeiM-z1S0",
+          "timestamp": 210,
+          "caption_en": "Context always commands: good, regular, and weak context classification",
+          "caption_es": "El contexto siempre manda: clasificación de contexto bueno, regular y débil"
+        },
+        {
+          "file": "frames/HLVeiM-z1S0_0450s.jpg",
+          "source_video": "HLVeiM-z1S0",
+          "timestamp": 450,
+          "caption_en": "Second failed pattern = weak context, reduce volume or skip",
+          "caption_es": "Segundo patrón fallido = contexto débil, reducir volumen u omitir"
+        },
+        {
+          "file": "frames/aY_rYYg3GZ0_0180s.jpg",
+          "source_video": "aY_rYYg3GZ0",
+          "timestamp": 180,
+          "caption_en": "Adapting strategy to current results curve status",
+          "caption_es": "Adaptando estrategia al estado actual de la curva de resultados"
+        },
+        {
+          "file": "frames/aY_rYYg3GZ0_0330s.jpg",
+          "source_video": "aY_rYYg3GZ0",
+          "timestamp": 330,
+          "caption_en": "Adapting strategy to current results curve status",
+          "caption_es": "Adaptando estrategia al estado actual de la curva de resultados"
+        },
+        {
+          "file": "frames/5jrIu_WmAsY_0060s.jpg",
+          "source_video": "5jrIu_WmAsY",
+          "timestamp": 60,
+          "caption_en": "Intraday SP500: real-time context assessment and position management",
+          "caption_es": "SP500 intradía: evaluación de contexto en tiempo real y gestión de posiciones"
+        },
+        {
+          "file": "frames/5jrIu_WmAsY_0150s.jpg",
+          "source_video": "5jrIu_WmAsY",
+          "timestamp": 150,
+          "caption_en": "Intraday SP500: real-time context assessment and position management",
+          "caption_es": "SP500 intradía: evaluación de contexto en tiempo real y gestión de posiciones"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "HLVeiM-z1S0",
+          "title": "En trading, EL CONTEXTO, SIEMPRE MANDA. Joaquín Vega.",
+          "timestamp": 210,
+          "label_en": "Context always commands: good, regular, and weak context classification",
+          "label_es": "El contexto siempre manda: clasificación de contexto bueno, regular y débil"
+        },
+        {
+          "video_id": "aY_rYYg3GZ0",
+          "title": "En trading, SI TU CURVA DE RESULTADOS CAE MUCHO, ES POR TU CULPA. Joaquín Vega.",
+          "timestamp": 180,
+          "label_en": "Adapting strategy to current results curve status",
+          "label_es": "Adaptando estrategia al estado actual de la curva de resultados"
+        },
+        {
+          "video_id": "5jrIu_WmAsY",
+          "title": "Un día de TRADING INTRADÍA en SP500. Joaquín Vega.",
+          "timestamp": 60,
+          "label_en": "Intraday SP500: real-time context assessment and position management",
+          "label_es": "SP500 intradía: evaluación de contexto en tiempo real y gestión de posiciones"
+        }
+      ],
+      "clips": [
+        "imprescindible"
+      ]
+    },
+    "T19": {
+      "tree_id": "T19",
+      "tree_title": "T19_Null_Operations",
+      "frames": [
+        {
+          "file": "frames/S7pK5Oj6kyo_0060s.jpg",
+          "source_video": "S7pK5Oj6kyo",
+          "timestamp": 60,
+          "caption_en": "Null operations: exiting at breakeven when price shows weakness",
+          "caption_es": "Operaciones nulas: salir en breakeven cuando el precio muestra debilidad"
+        },
+        {
+          "file": "frames/S7pK5Oj6kyo_0120s.jpg",
+          "source_video": "S7pK5Oj6kyo",
+          "timestamp": 120,
+          "caption_en": "Imbalance level detection: price pushed with effort but lacks strength",
+          "caption_es": "Detección de nivel de desequilibrio: precio empujado con esfuerzo pero sin fuerza"
+        },
+        {
+          "file": "frames/S7pK5Oj6kyo_0210s.jpg",
+          "source_video": "S7pK5Oj6kyo",
+          "timestamp": 210,
+          "caption_en": "All positions to break-even — 'it's going to hit them all, guaranteed'",
+          "caption_es": "Todas las posiciones a break-even — 'me las va a sacar sí o sí'"
+        },
+        {
+          "file": "frames/6U91ZG1e80g_0120s.jpg",
+          "source_video": "6U91ZG1e80g",
+          "timestamp": 120,
+          "caption_en": "Null trade classification: loss less than business plan maximum",
+          "caption_es": "Clasificación de operación nula: pérdida menor al máximo del plan de negocio"
+        },
+        {
+          "file": "frames/6U91ZG1e80g_0270s.jpg",
+          "source_video": "6U91ZG1e80g",
+          "timestamp": 270,
+          "caption_en": "Null trade classification: loss less than business plan maximum",
+          "caption_es": "Clasificación de operación nula: pérdida menor al máximo del plan de negocio"
+        },
+        {
+          "file": "frames/6U91ZG1e80g_0390s.jpg",
+          "source_video": "6U91ZG1e80g",
+          "timestamp": 390,
+          "caption_en": "Null trade classification: loss less than business plan maximum",
+          "caption_es": "Clasificación de operación nula: pérdida menor al máximo del plan de negocio"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "S7pK5Oj6kyo",
+          "title": "Deberías incluir a tu trading LAS OPERACIONES NULAS. Joaquín Vega.",
+          "timestamp": 90,
+          "label_en": "Imbalance level detection: price pushed with effort but lacks strength",
+          "label_es": "Detección de nivel de desequilibrio: precio empujado con esfuerzo pero sin fuerza"
+        },
+        {
+          "video_id": "6U91ZG1e80g",
+          "title": "Many Ways to Win and Lose",
+          "timestamp": 180,
+          "label_en": "Null trade classification: loss less than business plan maximum",
+          "label_es": "Clasificación de operación nula: pérdida menor al máximo del plan de negocio"
+        }
+      ],
+      "clips": [
+        "break_even_si_o_si"
+      ]
+    },
+    "entry": {
+      "tree_id": "entry",
+      "tree_title": "Should I Enter?",
+      "frames": [
+        {
+          "file": "frames/3ilsV4UU5Y0_0360s.jpg",
+          "source_video": "3ilsV4UU5Y0",
+          "timestamp": 360,
+          "caption_en": "Cycle structure with Point of Control, impulse, and 38.2% retracement zones marked",
+          "caption_es": "Estructura del ciclo con Punto de Control, impulso y zonas de retroceso al 38.2% marcadas"
+        },
+        {
+          "file": "frames/3ilsV4UU5Y0_0720s.jpg",
+          "source_video": "3ilsV4UU5Y0",
+          "timestamp": 720,
+          "caption_en": "Marking high and low zones after cycle activation",
+          "caption_es": "Marcando zonas altas y bajas tras la activación del ciclo"
+        },
+        {
+          "file": "frames/Tiy6bO9hXJ4_0200s.jpg",
+          "source_video": "Tiy6bO9hXJ4",
+          "timestamp": 200,
+          "caption_en": "Zone confluence: Low Zone + 38 of another cycle = mandatory entry",
+          "caption_es": "Confluencia de zonas: Zona Baja + 38 de otro ciclo = entrada obligatoria"
+        },
+        {
+          "file": "frames/Tiy6bO9hXJ4_0433s.jpg",
+          "source_video": "Tiy6bO9hXJ4",
+          "timestamp": 433,
+          "caption_en": "Liquidity grabs aligned with directional bias as entry signals",
+          "caption_es": "Tomas de liquidez alineadas con sesgo direccional como señales de entrada"
+        }
+      ],
+      "youtube_links": [
+        {
+          "video_id": "ijMX71M37Uw",
+          "title": "Gold Trading with the Kids",
+          "timestamp": 60,
+          "label_en": "Live entry decision on Gold",
+          "label_es": "Decision de entrada en vivo en Oro"
+        },
+        {
+          "video_id": "wmqmqzn_Ito",
+          "title": "Analysis vs Strategy vs Method",
+          "timestamp": 435,
+          "label_en": "Map location before trading",
+          "label_es": "Ubicacion en el mapa antes de operar"
+        }
+      ],
+      "clips": [
+        "plan_de_negocio",
+        "si_o_si",
+        "punto_de_control",
+        "sin_ubicacion_del_mapa"
+      ]
+    }
+  }
+}
