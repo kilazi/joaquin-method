@@ -1,0 +1,164 @@
+{
+  "clips": [
+    {
+      "id": "si_o_si",
+      "phrase_es": "Eso era venta sí o sí",
+      "phrase_en": "That was a sell, no question",
+      "file": "clips/si_o_si.mp3",
+      "source_video": "ijMX71M37Uw",
+      "start_time": 62.5,
+      "duration": 3.0,
+      "context": "When Joaquin declares a trade setup is absolutely mandatory"
+    },
+    {
+      "id": "hay_que_darle_si_o_si",
+      "phrase_es": "Ya sabéis que estas son las típicas operaciones donde yo le tengo que dar sí o sí",
+      "phrase_en": "You already know these are the typical trades where I must take them, no choice",
+      "file": "clips/hay_que_darle_si_o_si.mp3",
+      "source_video": "ijMX71M37Uw",
+      "start_time": 82.5,
+      "duration": 6.0,
+      "context": "Classic Joaquin emphasizing mandatory entries at extreme zones"
+    },
+    {
+      "id": "punto_de_control",
+      "phrase_es": "Imagínate que esto es un punto de control de una caída",
+      "phrase_en": "Imagine this is a point of control of a drop",
+      "file": "clips/punto_de_control.mp3",
+      "source_video": "3ilsV4UU5Y0",
+      "start_time": 28.3,
+      "duration": 7.5,
+      "context": "Joaquin explaining the foundational concept of point of control"
+    },
+    {
+      "id": "retroceso_imprescindible",
+      "phrase_es": "El retroceso es la condición imprescindible",
+      "phrase_en": "The retracement is the essential condition",
+      "file": "clips/retroceso_imprescindible.mp3",
+      "source_video": "3ilsV4UU5Y0",
+      "start_time": 287.5,
+      "duration": 6.0,
+      "context": "Joaquin's core rule: retracement to 38.2 is mandatory to define a valid cycle"
+    },
+    {
+      "id": "no_sigo_tendencias",
+      "phrase_es": "Yo no funciono así, no sigo tendencias, lo único que sigo es fractalidad",
+      "phrase_en": "I don't work like that, I don't follow trends, the only thing I follow is fractality",
+      "file": "clips/no_sigo_tendencias.mp3",
+      "source_video": "-1ynDl64noU",
+      "start_time": 125.0,
+      "duration": 8.5,
+      "context": "Joaquin's philosophy: fractality over trend-following"
+    },
+    {
+      "id": "fractalidad",
+      "phrase_es": "La fractalidad. Esto es uno de los conceptos más importantes. Y si no se domina, estamos jodidos de cojones",
+      "phrase_en": "Fractality. This is one of the most important concepts. If you don't master it, we're completely screwed",
+      "file": "clips/fractalidad.mp3",
+      "source_video": "3ilsV4UU5Y0",
+      "start_time": 14.5,
+      "duration": 15.0,
+      "context": "Joaquin's most emphatic statement about fractality being essential"
+    },
+    {
+      "id": "plan_de_negocio",
+      "phrase_es": "Un dinero que yo tengo establecido como máxima pérdida en mi plan de negocio, tan simple como eso",
+      "phrase_en": "A fixed amount I've established as maximum loss in my business plan, simple as that",
+      "file": "clips/plan_de_negocio.mp3",
+      "source_video": "6U91ZG1e80g",
+      "start_time": 55.0,
+      "duration": 10.0,
+      "context": "Joaquin explaining the business plan concept for risk management"
+    },
+    {
+      "id": "doble_direccion",
+      "phrase_es": "Tu pensamiento es siempre doble dirección",
+      "phrase_en": "Your thinking is always dual-direction",
+      "file": "clips/doble_direccion.mp3",
+      "source_video": "zcP866VYuI8",
+      "start_time": 744.0,
+      "duration": 5.0,
+      "context": "Core principle: always think in both directions, never commit to just one"
+    },
+    {
+      "id": "cobertura",
+      "phrase_es": "Que entendáis que yo siempre trabajo con doble dirección",
+      "phrase_en": "Understand that I always work with dual-direction",
+      "file": "clips/cobertura.mp3",
+      "source_video": "zcP866VYuI8",
+      "start_time": 5.5,
+      "duration": 6.5,
+      "context": "Joaquin's opening statement about why he uses hedging/coverage"
+    },
+    {
+      "id": "sin_ubicacion_del_mapa",
+      "phrase_es": "Lo que yo no puedo tener es una estrategia de atacar el precio si no tengo una ubicación del mapa. Eso es lo que yo jamás debería de tener",
+      "phrase_en": "I can never have a strategy to attack price without knowing my location on the map. That's what I should never have",
+      "file": "clips/sin_ubicacion_del_mapa.mp3",
+      "source_video": "wmqmqzn_Ito",
+      "start_time": 435.0,
+      "duration": 15.5,
+      "context": "Golden rule: always know where you are on the map before any trading strategy"
+    },
+    {
+      "id": "tomas_de_liquidez",
+      "phrase_es": "Que venga aquí y tire, que venga aquí y tire. Solo por pura liquidez",
+      "phrase_en": "Price comes here and bounces, comes here and bounces. Pure liquidity",
+      "file": "clips/tomas_de_liquidez.mp3",
+      "source_video": "aUHXlpn-iRc",
+      "start_time": 1054.3,
+      "duration": 9.5,
+      "context": "Joaquin showing how price gravitates to liquidity levels"
+    },
+    {
+      "id": "imprescindible",
+      "phrase_es": "Diferenciar los contextos para diferenciar los lotajes de entrada. Esto es imprescindible",
+      "phrase_en": "Differentiate contexts to differentiate entry lot sizes. This is essential",
+      "file": "clips/imprescindible.mp3",
+      "source_video": "HLVeiM-z1S0",
+      "start_time": 521.5,
+      "duration": 11.0,
+      "context": "Joaquin on why context determines position sizing - not patterns"
+    },
+    {
+      "id": "colchon",
+      "phrase_es": "Mi obsesión es tener un colchón que sepa que lo que haga es gratis",
+      "phrase_en": "My obsession is having a cushion so that whatever I do is free",
+      "file": "clips/colchon.mp3",
+      "source_video": "1YCSx7gXPF0",
+      "start_time": 1296.5,
+      "duration": 7.0,
+      "context": "Joaquin on maintaining a profit buffer so new trades are essentially risk-free"
+    },
+    {
+      "id": "parcial_si_o_si",
+      "phrase_es": "Aquí se sacaría un parcial sí o sí",
+      "phrase_en": "Here you'd take a partial, no question",
+      "file": "clips/parcial_si_o_si.mp3",
+      "source_video": "ijMX71M37Uw",
+      "start_time": 489.5,
+      "duration": 3.0,
+      "context": "Mandatory partial profit-taking at key levels"
+    },
+    {
+      "id": "zona_de_compra",
+      "phrase_es": "Sin duda esto es zona de compra",
+      "phrase_en": "Without a doubt, this is a buy zone",
+      "file": "clips/zona_de_compra.mp3",
+      "source_video": "ijMX71M37Uw",
+      "start_time": 343.5,
+      "duration": 3.0,
+      "context": "Decisive zone identification"
+    },
+    {
+      "id": "break_even_si_o_si",
+      "phrase_es": "Cojo las tres posiciones y las pongo en break-even. Que me las va a sacar sí o sí. Todas",
+      "phrase_en": "I take all three positions and put them at break-even. It's going to hit them all, guaranteed",
+      "file": "clips/break_even_si_o_si.mp3",
+      "source_video": "S7pK5Oj6kyo",
+      "start_time": 194.4,
+      "duration": 8.5,
+      "context": "Joaquin on protective break-even placement"
+    }
+  ]
+}

@@ -44,6 +44,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .nav-ico { font-size:14px; width:22px; text-align:center; flex-shrink:0; }
 .nav-item.active .nav-ico { color:#fff; }
 
+/* Lang toggle in sidebar */
+.lang-toggle { display:flex; gap:2px; margin:8px; background:var(--bg); border-radius:8px; padding:3px; }
+.lang-btn { flex:1; padding:6px 8px; border:none; background:transparent; color:var(--text-dim); border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; transition:all .15s; text-align:center; }
+.lang-btn.active { background:var(--accent); color:#fff; }
+.lang-btn:hover:not(.active) { background:var(--surface2); }
+
 /* Main */
 .main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
 .main-header { padding:14px 24px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:flex-start; gap:16px; }
@@ -67,7 +73,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .step-question { font-size:17px; font-weight:600; line-height:1.4; margin-bottom:16px; }
 .step-action { font-size:16px; font-weight:700; line-height:1.4; margin-bottom:12px; }
 .step-explanation { font-size:13px; color:var(--text-dim); line-height:1.6; margin-bottom:16px; }
-.step-quote { font-size:12px; font-style:italic; color:var(--purple); background:var(--purple-bg); padding:10px 14px; border-radius:8px; border-left:3px solid var(--purple); margin-bottom:16px; line-height:1.5; }
+.step-quote { font-size:12px; font-style:italic; color:var(--purple); background:var(--purple-bg); padding:10px 14px; border-radius:8px; border-left:3px solid var(--purple); margin-bottom:16px; line-height:1.5; display:flex; align-items:flex-start; gap:10px; }
+.step-quote .quote-text { flex:1; }
 .step-protocol { font-size:12px; color:var(--cyan); background:rgba(34,211,238,.08); padding:12px 14px; border-radius:8px; border-left:3px solid var(--cyan); margin-bottom:16px; line-height:1.7; }
 .step-protocol strong { color:var(--text); }
 .step-buttons { display:flex; gap:10px; }
@@ -81,6 +88,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .step-btn.restart { background:var(--surface2); color:var(--text-dim); border:1px solid var(--border); }
 .step-btn.restart:hover { background:var(--border); }
 .step-btn.continue { background:var(--accent); color:#fff; flex:unset; padding:10px 20px; margin-top:12px; }
+
+/* Audio play button */
+.audio-btn { background:none; border:2px solid var(--purple); color:var(--purple); width:32px; height:32px; min-width:32px; border-radius:50%; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; transition:all .2s; flex-shrink:0; }
+.audio-btn:hover { background:var(--purple); color:#fff; transform:scale(1.1); }
+.audio-btn.playing { background:var(--purple); color:#fff; animation:pulse 1s infinite; }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
 
 /* Breadcrumb */
 .breadcrumb { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
@@ -162,12 +175,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <h1>Metodo Joaquin Vega</h1>
       <p>Modified Fibonacci Trading</p>
     </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="langEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="langES" onclick="setLang('es')">ES</button>
+    </div>
     <nav class="sidebar-nav" id="sidebarNav"></nav>
   </aside>
   <main class="main">
     <div class="mobile-header">
       <button class="hamburger" onclick="openSidebar()">&#9776;</button>
       <span style="font-size:14px;font-weight:600;color:var(--accent)">Metodo JV</span>
+      <div class="lang-toggle" style="margin:0;margin-left:auto;width:auto;">
+        <button class="lang-btn active" id="langEN2" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="langES2" onclick="setLang('es')">ES</button>
+      </div>
     </div>
     <div class="main-header" id="mainHeader">
       <div>
@@ -186,163 +207,295 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
 <script>
 let TREES = null, currentTree = null, currentMode = 'step', stepHistory = [], currentNode = null;
+let LANG = 'en'; // 'en' or 'es'
+let CLIPS = null; // audio clips manifest
+let currentAudio = null; // currently playing audio
 
-// "Should I Enter?" mega-tree — synthesized from T1,T4,T5,T10
+// --- Language System ---
+function setLang(l) {
+  LANG = l;
+  document.getElementById('langEN').classList.toggle('active', l==='en');
+  document.getElementById('langES').classList.toggle('active', l==='es');
+  document.getElementById('langEN2')?.classList.toggle('active', l==='en');
+  document.getElementById('langES2')?.classList.toggle('active', l==='es');
+  document.documentElement.lang = l;
+  renderNav();
+  // Re-render current view
+  const activeId = document.querySelector('.nav-item.active')?.dataset.id;
+  if(activeId) selectTree(activeId);
+  else selectTree('entry');
+}
+
+function t(en, es) { return LANG === 'es' ? es : en; }
+
+// --- Audio Clips ---
+async function loadClips() {
+  try { CLIPS = await (await fetch('clips/manifest.json')).json(); } catch(e) { CLIPS = {clips:[]}; }
+}
+
+function playClip(clipId) {
+  if(currentAudio) { currentAudio.pause(); currentAudio=null; document.querySelectorAll('.audio-btn.playing').forEach(b=>b.classList.remove('playing')); }
+  const clip = CLIPS?.clips?.find(c=>c.id===clipId);
+  if(!clip) return;
+  const btn = document.querySelector(`.audio-btn[data-clip="${clipId}"]`);
+  const audio = new Audio(clip.file);
+  currentAudio = audio;
+  if(btn) btn.classList.add('playing');
+  audio.play().catch(()=>{});
+  audio.onended = () => { currentAudio=null; if(btn) btn.classList.remove('playing'); };
+  audio.onerror = () => { currentAudio=null; if(btn) btn.classList.remove('playing'); };
+}
+
+function clipButton(clipId) {
+  if(!CLIPS?.clips?.find(c=>c.id===clipId)) return '';
+  return `<button class="audio-btn" data-clip="${clipId}" onclick="event.stopPropagation();playClip('${clipId}')" title="${t('Listen to Joaquin','Escuchar a Joaquin')}">&#9654;</button>`;
+}
+
+// Find matching clip for a quote
+function findClipForQuote(quoteText) {
+  if(!CLIPS?.clips?.length || !quoteText) return '';
+  const qt = quoteText.toLowerCase();
+  for(const c of CLIPS.clips) {
+    if(qt.includes(c.phrase_es?.toLowerCase()) || qt.includes(c.id.replace(/_/g,' '))) {
+      return clipButton(c.id);
+    }
+  }
+  // Check keyword overlap
+  const keywords = ['si o si','punto de control','fracaso','retroceso','colchoncito','liquidez','cobertura','gestion','plan de negocio','fractal','evolucion','rotura','zona'];
+  for(const kw of keywords) {
+    if(qt.includes(kw)) {
+      const match = CLIPS.clips.find(c => c.phrase_es?.toLowerCase().includes(kw) || c.id.includes(kw.replace(/\s/g,'_')));
+      if(match) return clipButton(match.id);
+    }
+  }
+  return '';
+}
+
+// "Should I Enter?" mega-tree — bilingual
 const ENTRY_TREE = {
   tree_name: "Should_I_Enter",
   tree_description: "The primary entry decision checklist. Walk through this before every trade to verify all conditions are met.",
+  tree_description_es: "El checklist principal de entrada. Recorrelo antes de cada operacion para verificar que todas las condiciones se cumplan.",
   root: {
-    id:"e1", question:"Do you have a business plan with defined max loss, profit target, and lot sizing?",
-    note:"Without a plan you are gambling. 'Lo que nunca deberia tener es una estrategia para atacar el precio si no tengo una localizacion en el mapa.'",
+    id:"e1",
+    question:"Do you have a business plan with defined max loss, profit target, and lot sizing?",
+    question_es:"Tienes un plan de negocio con perdida maxima, objetivo de beneficio y tamano de lote definidos?",
+    note:"Without a plan you are gambling.",
+    note_es:"Sin un plan estas apostando. Como dice Joaquin: el trading es un negocio, no un casino.",
+    quote_es:"Lo que nunca deberia tener es una estrategia para atacar el precio si no tengo una localizacion en el mapa.",
+    clip:"plan_de_negocio",
     yes:{
-      id:"e2", question:"Have you identified Points of Control on the chart?",
-      note:"PoC = origin of significant movement. Validated when price surpasses fractal high by >= 1/3 of retracement height. Fractal = peak with 2 closed candles left and right.",
+      id:"e2",
+      question:"Have you identified Points of Control on the chart?",
+      question_es:"Has identificado los Puntos de Control en el grafico?",
+      note:"PoC = origin of significant movement. Validated when price surpasses fractal high by >= 1/3 of retracement height.",
+      note_es:"Punto de Control = origen de un movimiento significativo. Se valida cuando el precio supera el maximo fractal por >= 1/3 de la altura del retroceso.",
+      clip:"punto_de_control",
       yes:{
-        id:"e3", question:"Is there an ACTIVE CYCLE? (impulse from PoC + retracement to 38.2%)",
+        id:"e3",
+        question:"Is there an ACTIVE CYCLE? (impulse from PoC + retracement to 38.2%)",
+        question_es:"Hay un CICLO ACTIVO? (impulso desde el PoC + retroceso al 38.2%)",
         quote_es:"El retroceso es la condicion imprescindible para que definamos que cuando hay retroceso de ese impulso al 38.2, ahi es el momento en el que podemos marcar todas sus zonas.",
+        clip:"retroceso",
         yes:{
-          id:"e4", question:"Have you checked CONTEXT from the left side of the chart?",
+          id:"e4",
+          question:"Have you checked CONTEXT from the left side of the chart?",
+          question_es:"Has revisado el CONTEXTO desde la izquierda del grafico?",
           note:"Check: activated failures, liquidity left behind, historical PoCs, movement origins (correct vs defective per 25% rule).",
+          note_es:"Revisa: fracasos activados, liquidez dejada atras, PoCs historicos, origenes de movimiento (correctos vs defectuosos segun la regla del 25%).",
           yes:{
-            id:"e5", question:"Has the cycle evolved or broken since you marked it?",
-            note:"If price entered High/Low zone: discard other zones. If movement > original impulse AND retraces to 38.2%: EVOLUTION — old cycle dead, mark new zones.",
-            yes_label:"Still valid",
-            no_label:"Evolved/Broken",
+            id:"e5",
+            question:"Has the cycle evolved or broken since you marked it?",
+            question_es:"Ha evolucionado o se ha roto el ciclo desde que lo marcaste?",
+            note:"If price entered High/Low zone: discard other zones. If movement > original impulse AND retraces to 38.2%: EVOLUTION.",
+            note_es:"Si el precio entro en Zona Alta/Baja: descarta las demas zonas. Si el movimiento > impulso original Y retrocede al 38.2%: EVOLUCION — ciclo viejo muerto, marca zonas nuevas.",
+            yes_label:"Still valid", yes_label_es:"Sigue valido",
+            no_label:"Evolved/Broken", no_label_es:"Evolucionado/Roto",
             yes:{
-              id:"e6", question:"Is price currently in a TRADEABLE ZONE aligned with your directional bias?",
-              note:"Uptrend: buy in Low Zones. Downtrend: sell in High Zones. The 61.8 zone is a normal working zone within the cycle. CONTEXT QUALITY matters: Good context = full lot. Regular = 50-75%. Weak = skip or 25% max (see T18).",
+              id:"e6",
+              question:"Is price currently in a TRADEABLE ZONE aligned with your directional bias?",
+              question_es:"Esta el precio actualmente en una ZONA OPERABLE alineada con tu sesgo direccional?",
+              note:"Uptrend: buy in Low Zones. Downtrend: sell in High Zones. CONTEXT QUALITY matters: Good = full lot. Regular = 50-75%. Weak = skip or 25% max.",
+              note_es:"Tendencia alcista: compra en Zonas Bajas. Tendencia bajista: vende en Zonas Altas. LA CALIDAD DEL CONTEXTO importa: Bueno = lote completo. Regular = 50-75%. Debil = no operar o 25% maximo.",
               yes:{
-                id:"e7", question:"Do you have a CONFLUENCE? (multiple levels agreeing at this point)",
+                id:"e7",
+                question:"Do you have a CONFLUENCE? (multiple levels agreeing at this point)",
+                question_es:"Tienes una CONFLUENCIA? (multiples niveles coincidiendo en este punto)",
                 note:"Zone confluence = Low Zone + 38 of another cycle, or 61.8 + liquidity level, etc.",
+                note_es:"Confluencia de zona = Zona Baja + 38 de otro ciclo, o 61.8 + nivel de liquidez, etc.",
                 yes:{
-                  id:"e8", action:"ENTER — High conviction trade ('si o si')",
-                  explanation:"Multiple zones/levels converge at this point. This is a mandatory entry signal. Enter with your business plan's lot size (adjusted for context quality). Define your stop and target BEFORE entering. First partial must protect the rest. Consider a HEDGE (T14) in the opposite direction. Never use a stop < 12 pips in Forex. If in >15% drawdown, reduce lot (T17).",
-                  quote_es:"Esta coincidencia de la zona baja con el 38 azul es ya un motivo si o si de compra."
+                  id:"e8",
+                  action:"ENTER — High conviction trade",
+                  action_es:"ENTRAR — Operacion de alta conviccion, SI O SI",
+                  explanation:"Multiple zones/levels converge. Mandatory entry. Enter with your business plan's lot size (adjusted for context quality). Never use a stop < 12 pips in Forex. Consider a HEDGE in the opposite direction.",
+                  explanation_es:"Multiples zonas/niveles convergen. Entrada obligatoria. Entra con el tamano de lote de tu plan (ajustado por calidad de contexto). Nunca uses un stop menor a 12 pips en Forex. Considera una COBERTURA en la direccion opuesta.",
+                  quote_es:"Esta coincidencia de la zona baja con el 38 azul es ya un motivo si o si de compra.",
+                  clip:"si_o_si"
                 },
                 no:{
-                  id:"e9", question:"Is there a liquidity grab aligned with your bias? (price broke lows in uptrend bias, or broke highs in downtrend bias)",
+                  id:"e9",
+                  question:"Is there a liquidity grab aligned with your bias?",
+                  question_es:"Hay una captura de liquidez alineada con tu sesgo?",
                   yes:{
-                    id:"e10", action:"ENTER on the liquidity grab",
-                    explanation:"Price swept stops and should reverse. Cycles already positioned you; the liquidity grab is the entry trigger. 'No hace falta ningun puto ciclo porque los ciclos ya te han posicionado.'",
-                    quote_es:"Sitios de liquidez que rompan puntos bajos, porque mi modelo me dice que el precio tiene que subir mas."
+                    id:"e10",
+                    action:"ENTER on the liquidity grab",
+                    action_es:"ENTRAR en la captura de liquidez",
+                    explanation:"Price swept stops and should reverse. Cycles already positioned you; the liquidity grab is the entry trigger.",
+                    explanation_es:"El precio barrio los stops y deberia revertir. Los ciclos ya te posicionaron; la captura de liquidez es el gatillo de entrada.",
+                    quote_es:"Sitios de liquidez que rompan puntos bajos, porque mi modelo me dice que el precio tiene que subir mas.",
+                    clip:"captura_de_liquidez"
                   },
                   no:{
-                    id:"e11", question:"Is price at a 61.8 level from a structure with confirmed failure of highs/lows?",
+                    id:"e11",
+                    question:"Is price at a 61.8 level from a structure with confirmed failure?",
+                    question_es:"Esta el precio en un nivel 61.8 de una estructura con fracaso confirmado?",
                     yes:{
-                      id:"e12", action:"ENTER — Any 61.8 after failure is a reason to trade",
-                      explanation:"Once there's been a failure of highs (for shorts) or lows (for longs), every 61.8 retracement becomes a valid entry point.",
-                      quote_es:"A partir de aqui ya cualquier 61.8, esto ya era motivo de venta."
+                      id:"e12",
+                      action:"ENTER — Any 61.8 after failure is a reason to trade",
+                      action_es:"ENTRAR — Cualquier 61.8 despues de un fracaso es motivo de operacion",
+                      explanation:"Once there's been a failure of highs or lows, every 61.8 retracement becomes a valid entry point.",
+                      explanation_es:"Una vez que ha habido un fracaso de maximos o minimos, cada retroceso al 61.8 se convierte en un punto de entrada valido.",
+                      quote_es:"A partir de aqui ya cualquier 61.8, esto ya era motivo de venta.",
+                      clip:"fracaso"
                     },
                     no:{
-                      id:"e13", action:"DO NOT ENTER — Wait for a better trigger",
-                      explanation:"You have the bias and the zone, but no clean entry trigger. Wait for: (1) a liquidity grab, (2) a zone confluence to form, (3) a 61.8 post-failure entry, or (4) a specific pattern entry. BEWARE of Deception Patterns (T15) — false breakouts where price lures traders in before reversing at 161.8%. If price shows weak movement, consider a Null Operation (T19) — exit at breakeven."
+                      id:"e13",
+                      action:"DO NOT ENTER — Wait for a better trigger",
+                      action_es:"NO ENTRAR — Espera un mejor gatillo",
+                      explanation:"You have the bias and zone, but no clean trigger. Wait for: confluence, liquidity grab, 61.8 post-failure, or pattern entry. BEWARE of Deception Patterns (T15).",
+                      explanation_es:"Tienes el sesgo y la zona, pero no un gatillo limpio. Espera: confluencia, captura de liquidez, 61.8 post-fracaso, o entrada por patron. CUIDADO con los Patrones de Engano (T15)."
                     }
                   }
                 }
               },
               no:{
-                id:"e14", question:"Is price in the 161.8-200 zone?",
+                id:"e14",
+                question:"Is price in the 161.8-200 zone?",
+                question_es:"Esta el precio en la zona 161.8-200?",
                 yes:{
-                  id:"e15", question:"Is this indices/commodities or currencies?",
-                  yes_label:"Indices/Commodities",
-                  no_label:"Currencies",
+                  id:"e15",
+                  question:"Is this indices/commodities or currencies?",
+                  question_es:"Es indices/materias primas o divisas?",
+                  yes_label:"Indices/Commodities", yes_label_es:"Indices/Materias Primas",
+                  no_label:"Currencies", no_label_es:"Divisas",
                   yes:{
-                    id:"e16", action:"Target 200 level — 161.8 fails often in indices. Give buffer for spike.",
-                    explanation:"In indices and commodities, the 161.8 level often doesn't hold. The 200 level works much better. Add a 'cushion' for the wick. Trade the failure-based progression between 161.8 and 200."
+                    id:"e16",
+                    action:"Target 200 level — 161.8 fails often in indices",
+                    action_es:"Objetivo nivel 200 — el 161.8 falla a menudo en indices",
+                    explanation:"In indices, the 161.8 often doesn't hold. The 200 works better. Add a 'colchoncito' for the wick.",
+                    explanation_es:"En indices, el 161.8 muchas veces no aguanta. El 200 funciona mejor. Anade un 'colchoncito' para la mecha.",
+                    clip:"colchoncito"
                   },
                   no:{
-                    id:"e17", action:"161.8 is a valid first target — 200 as secondary.",
-                    explanation:"In currencies, the 161.8 level tends to produce better reactions."
+                    id:"e17",
+                    action:"161.8 is a valid first target — 200 as secondary",
+                    action_es:"El 161.8 es un primer objetivo valido — 200 como secundario",
+                    explanation:"In currencies, the 161.8 level tends to produce better reactions.",
+                    explanation_es:"En divisas, el nivel 161.8 tiende a producir mejores reacciones."
                   }
                 },
                 no:{
-                  id:"e18", action:"DO NOT ENTER — Price is not in a tradeable zone",
-                  explanation:"Wait for price to reach a defined zone. The reading model will present the opportunity. Do not force entries. 'No puedo tener una estrategia para atacar el precio si no tengo una localizacion en el mapa.'"
+                  id:"e18",
+                  action:"DO NOT ENTER — Price is not in a tradeable zone",
+                  action_es:"NO ENTRAR — El precio no esta en zona operable",
+                  explanation:"Wait for price to reach a defined zone. Don't force entries.",
+                  explanation_es:"Espera a que el precio llegue a una zona definida. No fuerces entradas. Como dice Joaquin: no puedes tener estrategia sin localizacion en el mapa."
                 }
               }
             },
             no:{
-              id:"e19", action:"REMAP — Cycle has evolved or broken. Identify new PoCs and mark new cycle before entering.",
-              explanation:"If broken: the cycle is dead, all zones invalid. Look for new PoCs from the breakout movement. If evolved: larger fractal has formed, mark new zones from the larger impulse. 'Los fractales menores se rompen porque se estan formando fractales mayores.'"
+              id:"e19",
+              action:"REMAP — Cycle has evolved or broken",
+              action_es:"REMAPEAR — El ciclo ha evolucionado o se ha roto",
+              explanation:"If broken: cycle dead, all zones invalid. If evolved: larger fractal formed, mark new zones from the larger impulse.",
+              explanation_es:"Si se rompio: ciclo muerto, todas las zonas invalidas. Si evoluciono: se formo un fractal mayor, marca zonas nuevas desde el impulso mayor.",
+              quote_es:"Los fractales menores se rompen porque se estan formando fractales mayores.",
+              clip:"fractales"
             }
           },
           no:{
-            id:"e20", action:"CHECK CONTEXT FIRST — Never trade without reading the left side",
-            explanation:"Before entering ANY trade, check: (1) What failures are activated? (2) What liquidity has been left behind? (3) Where are historical PoCs? (4) Is the movement origin correct (reached 25%) or defective? Context can override the immediate map direction. 'Nos falta contexto. No porque este en zona de venta asumimos que es para vender.'"
+            id:"e20",
+            action:"CHECK CONTEXT FIRST — Never trade without reading the left side",
+            action_es:"REVISA EL CONTEXTO PRIMERO — Nunca operes sin leer la izquierda del grafico",
+            explanation:"Check: (1) activated failures, (2) liquidity left behind, (3) historical PoCs, (4) origin quality (25% rule).",
+            explanation_es:"Revisa: (1) fracasos activados, (2) liquidez dejada atras, (3) PoCs historicos, (4) calidad del origen (regla del 25%). Nos falta contexto. No porque este en zona de venta asumimos que es para vender."
           }
         },
         no:{
-          id:"e21", action:"WAIT — No active cycle. Cannot mark zones without 38.2% retracement.",
-          explanation:"The impulse exists but hasn't retraced to 38.2% yet. No zones can be marked. Continue monitoring. Also verify retracement is complete: price must touch 130% level to confirm retracement is finished."
+          id:"e21",
+          action:"WAIT — No active cycle",
+          action_es:"ESPERAR — No hay ciclo activo",
+          explanation:"The impulse hasn't retraced to 38.2% yet. No zones can be marked. Verify retracement completion at 130%.",
+          explanation_es:"El impulso aun no ha retrocedido al 38.2%. No se pueden marcar zonas. Verifica que el retroceso se complete al 130%."
         }
       },
       no:{
-        id:"e22", action:"IDENTIFY PoCs FIRST — Scan the chart for origins of significant movements",
-        explanation:"Use the fractal identification protocol: find peaks with 2 closed candles left and right. Validate by checking if price surpassed the fractal high by >= 1/3 of retracement height. Calculation: measure retracement in pips, divide by 3."
+        id:"e22",
+        action:"IDENTIFY PoCs FIRST",
+        action_es:"IDENTIFICA LOS PoCs PRIMERO",
+        explanation:"Find peaks with 2 closed candles left and right. Validate: price must surpass fractal high by >= 1/3 of retracement height.",
+        explanation_es:"Busca picos con 2 velas cerradas a la izquierda y derecha. Valida: el precio debe superar el maximo fractal por >= 1/3 de la altura del retroceso.",
+        clip:"punto_de_control"
       }
     },
     no:{
-      id:"e23", action:"STOP — Build a business plan before trading",
-      explanation:"Define: max loss per trade, profit target per trade, lot sizing formula, which assets to trade, what timeframes, session schedule. Without this, everything else is gambling. Restaurant analogy: charge 4x cost (1:4 R:R minimum). Maintain consistent 'menu'. Check T16."
+      id:"e23",
+      action:"STOP — Build a business plan before trading",
+      action_es:"PARA — Construye un plan de negocio antes de operar",
+      explanation:"Define: max loss, profit target, lot sizing, which assets, timeframes, schedule. 1:4 R:R minimum. Without this, everything is gambling.",
+      explanation_es:"Define: perdida maxima, objetivo de beneficio, tamano de lote, que activos, temporalidades, horario. Ratio 1:4 minimo. Sin esto, todo es apostar. Como un restaurante: cobra 4 veces el costo.",
+      clip:"plan_de_negocio"
     }
   }
 };
 
-// Additional entry checks from v3.0 data (40 videos)
-// Enrichments integrated into ENTRY_TREE node explanations:
-// - e1: Added restaurant analogy (T16), 1:4 minimum ratio
-// - e6: Added context quality check from T18 (good/regular/weak → lot size adjustment)
-// - e8: Added hedging note from T14 (enter with hedge ready if position goes against)
-// - e13: Added deception pattern awareness from T15 (watch for patron de engano)
-// - e18: Added null operation concept from T19 (exit at breakeven if weak)
-// Drawdown pre-check: if currently in > 15% drawdown, reduce lot size (T17)
-
-const NAV_GROUPS = [
-  { title:'Quick Start', items:[
-    {id:'entry', label:'Should I Enter?', ico:'?'},
-    {id:'search', label:'AI Search', ico:'S'},
-    {id:'flow', label:'Session Workflow', ico:'>'},
+const NAV_GROUPS_DATA = [
+  { title_en:'Quick Start', title_es:'Inicio Rapido', items:[
+    {id:'entry', label_en:'Should I Enter?', label_es:'Debo Entrar?', ico:'?'},
+    {id:'search', label_en:'AI Search', label_es:'Buscar', ico:'S'},
+    {id:'flow', label_en:'Session Workflow', label_es:'Flujo de Sesion', ico:'>'},
   ]},
-  { title:'Reading Model', items:[
-    {id:'T1_Cycle_Identification', label:'Cycle Identification', ico:'1'},
-    {id:'T2_Fractality_And_Evolution', label:'Fractality & Evolution', ico:'2'},
-    {id:'T3_Retracement_Completion', label:'Retracement Completion', ico:'3'},
-    {id:'T4_Context_Reading', label:'Context Reading', ico:'4'},
-    {id:'T18_Context_Assessment', label:'Context Assessment', ico:'18'},
+  { title_en:'Reading Model', title_es:'Modelo de Lectura', items:[
+    {id:'T1_Cycle_Identification', label_en:'Cycle Identification', label_es:'Identificacion de Ciclo', ico:'1'},
+    {id:'T2_Fractality_And_Evolution', label_en:'Fractality & Evolution', label_es:'Fractalidad y Evolucion', ico:'2'},
+    {id:'T3_Retracement_Completion', label_en:'Retracement Completion', label_es:'Retroceso Completo', ico:'3'},
+    {id:'T4_Context_Reading', label_en:'Context Reading', label_es:'Lectura de Contexto', ico:'4'},
+    {id:'T18_Context_Assessment', label_en:'Context Assessment', label_es:'Evaluacion de Contexto', ico:'18'},
   ]},
-  { title:'Attack Model', items:[
-    {id:'T5_Liquidity_And_Entry_Strategy', label:'Entry Strategy', ico:'5'},
-    {id:'T9_161_200_Zone_Trading', label:'161-200 Zone', ico:'9'},
-    {id:'T15_Deception_Pattern', label:'Deception Pattern', ico:'15'},
+  { title_en:'Attack Model', title_es:'Modelo de Ataque', items:[
+    {id:'T5_Liquidity_And_Entry_Strategy', label_en:'Entry Strategy', label_es:'Estrategia de Entrada', ico:'5'},
+    {id:'T9_161_200_Zone_Trading', label_en:'161-200 Zone', label_es:'Zona 161-200', ico:'9'},
+    {id:'T15_Deception_Pattern', label_en:'Deception Pattern', label_es:'Patron de Engano', ico:'15'},
   ]},
-  { title:'Management', items:[
-    {id:'T6_Trade_Classification', label:'Trade Classification', ico:'6'},
-    {id:'T7_Post_Entry_Management', label:'Post-Entry Mgmt', ico:'7'},
-    {id:'T8_Partial_Profit_Strategy', label:'Partial Strategy', ico:'8'},
-    {id:'T12_Super_Winner_Psychology', label:'Super-Winner', ico:'12'},
-    {id:'T14_Hedging_And_Coberturas', label:'Hedging & Coberturas', ico:'14'},
-    {id:'T19_Null_Operations', label:'Null Operations', ico:'19'},
+  { title_en:'Management', title_es:'Gestion', items:[
+    {id:'T6_Trade_Classification', label_en:'Trade Classification', label_es:'Clasificacion de Operacion', ico:'6'},
+    {id:'T7_Post_Entry_Management', label_en:'Post-Entry Mgmt', label_es:'Gestion Post-Entrada', ico:'7'},
+    {id:'T8_Partial_Profit_Strategy', label_en:'Partial Strategy', label_es:'Estrategia de Parciales', ico:'8'},
+    {id:'T12_Super_Winner_Psychology', label_en:'Super-Winner', label_es:'Super-Ganadora', ico:'12'},
+    {id:'T14_Hedging_And_Coberturas', label_en:'Hedging & Coberturas', label_es:'Coberturas', ico:'14'},
+    {id:'T19_Null_Operations', label_en:'Null Operations', label_es:'Operaciones Nulas', ico:'19'},
   ]},
-  { title:'Foundation', items:[
-    {id:'T10_Risk_And_Business_Plan', label:'Risk & Business Plan', ico:'10'},
-    {id:'T11_Method_Architecture', label:'Method Architecture', ico:'11'},
-    {id:'T13_Chart_Analysis_Methodology', label:'Chart Analysis', ico:'13'},
-    {id:'T16_Business_Plan_Compliance', label:'Business Plan Check', ico:'16'},
-    {id:'T17_Drawdown_Management', label:'Drawdown Mgmt', ico:'17'},
+  { title_en:'Foundation', title_es:'Fundamentos', items:[
+    {id:'T10_Risk_And_Business_Plan', label_en:'Risk & Business Plan', label_es:'Riesgo y Plan de Negocio', ico:'10'},
+    {id:'T11_Method_Architecture', label_en:'Method Architecture', label_es:'Arquitectura del Metodo', ico:'11'},
+    {id:'T13_Chart_Analysis_Methodology', label_en:'Chart Analysis', label_es:'Analisis de Grafico', ico:'13'},
+    {id:'T16_Business_Plan_Compliance', label_en:'Business Plan Check', label_es:'Verificacion Plan de Negocio', ico:'16'},
+    {id:'T17_Drawdown_Management', label_en:'Drawdown Mgmt', label_es:'Gestion del Drawdown', ico:'17'},
   ]}
 ];
 
 async function init() {
+  await loadClips();
   try { TREES = await (await fetch('trees.json')).json(); }
   catch(e) { try { TREES = await (await fetch('../decision_trees.json')).json(); } catch(e2) {
     document.getElementById('treeContainer').innerHTML='<p style="padding:40px;color:var(--red)">Error loading trees.json</p>'; return;
   }}
-  const nTrees = TREES.trees.length + 1; // +1 for entry tree
+  const nTrees = TREES.trees.length + 1;
   const nNodes = countAllNodes();
   document.getElementById('statsBar').innerHTML = `
-    <div class="stat-item"><span>${nTrees}</span> Decision Trees</div>
-    <div class="stat-item"><span>${nNodes}</span> Nodes</div>
-    <div class="stat-item"><span>${TREES.source_videos}</span> Source Videos</div>
+    <div class="stat-item"><span>${nTrees}</span> ${t('Decision Trees','Arboles de Decision')}</div>
+    <div class="stat-item"><span>${nNodes}</span> ${t('Nodes','Nodos')}</div>
+    <div class="stat-item"><span>${TREES.source_videos}</span> ${t('Source Videos','Videos Fuente')}</div>
   `;
   renderNav();
   selectTree('entry');
@@ -359,15 +512,25 @@ function countAllNodes() {
 function renderNav() {
   const nav = document.getElementById('sidebarNav');
   let html = '';
-  NAV_GROUPS.forEach(g => {
-    html += `<div class="nav-group"><div class="nav-group-title">${g.title}</div>`;
+  NAV_GROUPS_DATA.forEach(g => {
+    const title = LANG==='es' ? g.title_es : g.title_en;
+    html += `<div class="nav-group"><div class="nav-group-title">${title}</div>`;
     g.items.forEach(it => {
-      html += `<div class="nav-item" data-id="${it.id}" onclick="selectTree('${it.id}')"><span class="nav-ico">${it.ico}</span><span>${it.label}</span></div>`;
+      const label = LANG==='es' ? it.label_es : it.label_en;
+      html += `<div class="nav-item" data-id="${it.id}" onclick="selectTree('${it.id}')"><span class="nav-ico">${it.ico}</span><span>${label}</span></div>`;
     });
     html += '</div>';
   });
   nav.innerHTML = html;
 }
+
+// Get localized node text
+function nq(n) { return LANG==='es' ? (n.question_es||n.question) : n.question; }
+function na(n) { return LANG==='es' ? (n.action_es||n.action) : n.action; }
+function ne(n) { return LANG==='es' ? (n.explanation_es||n.explanation) : n.explanation; }
+function nn(n) { return LANG==='es' ? (n.note_es||n.note) : n.note; }
+function nyl(n) { return LANG==='es' ? (n.yes_label_es||n.yes_label||t('Yes','Si')) : (n.yes_label||'Yes'); }
+function nnl(n) { return LANG==='es' ? (n.no_label_es||n.no_label||'No') : (n.no_label||'No'); }
 
 function selectTree(id) {
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
@@ -377,8 +540,11 @@ function selectTree(id) {
 
   if(id==='entry') {
     currentTree = ENTRY_TREE;
-    document.getElementById('treeTitle').textContent = 'Should I Enter This Trade?';
-    document.getElementById('treeDesc').textContent = 'Walk through every condition before entering. Based on the complete Joaquin Vega methodology.';
+    document.getElementById('treeTitle').textContent = t('Should I Enter This Trade?','Debo Entrar en Esta Operacion?');
+    document.getElementById('treeDesc').textContent = t(
+      'Walk through every condition before entering. Based on the complete Joaquin Vega methodology.',
+      'Recorre cada condicion antes de entrar. Basado en la metodologia completa de Joaquin Vega.'
+    );
     if(currentMode==='step') startStepMode(ENTRY_TREE); else renderFullTree(ENTRY_TREE);
     return;
   }
@@ -400,11 +566,11 @@ function setMode(m) {
   if(currentTree) { if(m==='step') startStepMode(currentTree); else renderFullTree(currentTree); }
 }
 
-// --- Execution Flow (Interactive) ---
+// --- Execution Flow ---
 function showFlow() {
   currentTree = null;
-  document.getElementById('treeTitle').textContent = 'Trading Session Workflow';
-  document.getElementById('treeDesc').textContent = 'Click any step to jump directly into that decision tree.';
+  document.getElementById('treeTitle').textContent = t('Trading Session Workflow','Flujo de Sesion de Trading');
+  document.getElementById('treeDesc').textContent = t('Click any step to jump directly into that decision tree.','Haz clic en cualquier paso para ir directamente a ese arbol de decision.');
   const flow = TREES.execution_flow;
   const c = document.getElementById('treeContainer');
   let html = '<div class="flow-section">';
@@ -432,67 +598,57 @@ function getTreeId(ref) {
 // --- AI Search ---
 function showSearch() {
   currentTree = null;
-  document.getElementById('treeTitle').textContent = 'Find Where You Are';
-  document.getElementById('treeDesc').textContent = 'Describe your trading situation and find the relevant decision tree node.';
+  document.getElementById('treeTitle').textContent = t('Find Where You Are','Encuentra Donde Estas');
+  document.getElementById('treeDesc').textContent = t('Describe your trading situation and find the relevant decision tree node.','Describe tu situacion de trading y encuentra el nodo relevante del arbol de decision.');
   const c = document.getElementById('treeContainer');
+  const placeholder = t("Describe your situation... e.g. 'price just entered the high zone'","Describe tu situacion... ej. 'el precio acaba de entrar en zona alta'");
   c.innerHTML = `<div class="ai-panel">
     <div class="ai-input-wrap">
-      <input class="ai-input" id="aiInput" placeholder="Describe your situation... e.g. 'price just entered the high zone'" onkeydown="if(event.key==='Enter')doSearch()">
+      <input class="ai-input" id="aiInput" placeholder="${placeholder}" onkeydown="if(event.key==='Enter')doSearch()">
       <button class="ai-send" onclick="doSearch()">&#8594;</button>
     </div>
     <div class="ai-examples" id="aiExamples">
-      <div class="ai-example" onclick="searchFor('Price retraced to 38.2% from a point of control')">Price retraced to 38.2% from a point of control</div>
-      <div class="ai-example" onclick="searchFor('Price just entered the high zone of my cycle')">Price just entered the high zone of my cycle</div>
-      <div class="ai-example" onclick="searchFor('I have a winning trade, should I hold for super-winner?')">I have a winning trade, should I hold for super-winner?</div>
-      <div class="ai-example" onclick="searchFor('Price broke below my cycle break level')">Price broke below my cycle break level</div>
-      <div class="ai-example" onclick="searchFor('I see a liquidity grab below recent lows in an uptrend')">I see a liquidity grab below recent lows in an uptrend</div>
-      <div class="ai-example" onclick="searchFor('Movement didnt reach 25% - defective origin')">Movement didn't reach 25% — defective origin</div>
-      <div class="ai-example" onclick="searchFor('Price at 161.8 on gold')">Price at 161.8 on gold</div>
-      <div class="ai-example" onclick="searchFor('How many partials should I take?')">How many partials should I take?</div>
-      <div class="ai-example" onclick="searchFor('When should I hedge my position?')">When should I hedge my position?</div>
-      <div class="ai-example" onclick="searchFor('Im in 15% drawdown what should I do')">I'm in 15% drawdown, what should I do?</div>
-      <div class="ai-example" onclick="searchFor('Price looks like a false breakout deception')">Price looks like a false breakout / deception pattern</div>
-      <div class="ai-example" onclick="searchFor('Weak context should I still enter?')">Weak context — should I still enter?</div>
+      <div class="ai-example" onclick="searchFor('${t('Price retraced to 38.2% from a point of control','El precio retrocedio al 38.2% desde un punto de control')}')">${t('Price retraced to 38.2% from a point of control','El precio retrocedio al 38.2% desde un punto de control')}</div>
+      <div class="ai-example" onclick="searchFor('${t('Price just entered the high zone','El precio acaba de entrar en zona alta')}')">${t('Price just entered the high zone','El precio acaba de entrar en zona alta')}</div>
+      <div class="ai-example" onclick="searchFor('${t('Should I hold for super-winner?','Debo mantener para super-ganadora?')}')">${t('Should I hold for super-winner?','Debo mantener para super-ganadora?')}</div>
+      <div class="ai-example" onclick="searchFor('${t('Price broke below my cycle break level','El precio rompio por debajo del nivel de rotura de mi ciclo')}')">${t('Price broke below my cycle break level','El precio rompio por debajo del nivel de rotura')}</div>
+      <div class="ai-example" onclick="searchFor('${t('Liquidity grab below recent lows in uptrend','Captura de liquidez bajo minimos recientes en tendencia alcista')}')">${t('Liquidity grab below recent lows in uptrend','Captura de liquidez bajo minimos recientes en tendencia alcista')}</div>
+      <div class="ai-example" onclick="searchFor('${t('When should I hedge?','Cuando debo hacer cobertura?')}')">${t('When should I hedge?','Cuando debo hacer cobertura?')}</div>
+      <div class="ai-example" onclick="searchFor('${t('Im in 15% drawdown','Estoy en 15% de drawdown')}')">${t("I'm in 15% drawdown","Estoy en 15% de drawdown")}</div>
+      <div class="ai-example" onclick="searchFor('${t('False breakout deception pattern','Patron de engano, falsa rotura')}')">${t('False breakout / deception pattern','Patron de engano / falsa rotura')}</div>
     </div>
     <div id="aiResults"></div>
   </div>`;
   setTimeout(()=>document.getElementById('aiInput')?.focus(), 100);
 }
 
-function searchFor(q) {
-  document.getElementById('aiInput').value = q;
-  doSearch();
-}
+function searchFor(q) { document.getElementById('aiInput').value = q; doSearch(); }
 
 function doSearch() {
   const q = document.getElementById('aiInput').value.trim().toLowerCase();
   if(!q) return;
   document.getElementById('aiExamples').style.display = 'none';
-  // Search all nodes across all trees + entry tree
   const allTrees = [ENTRY_TREE, ...TREES.trees];
   const results = [];
 
   function searchNode(node, tree, path) {
     if(!node) return;
-    const texts = [node.question||'', node.action||'', node.explanation||'', node.note||'', node.quote_es||'', node.quote_en||''].join(' ').toLowerCase();
-    // Score by keyword matching
+    const texts = [node.question||'', node.question_es||'', node.action||'', node.action_es||'', node.explanation||'', node.explanation_es||'', node.note||'', node.note_es||'', node.quote_es||''].join(' ').toLowerCase();
     const words = q.split(/\s+/).filter(w=>w.length>2);
     let score = 0;
     words.forEach(w => { if(texts.includes(w)) score += 1; });
-    // Boost for exact phrase matches
     if(texts.includes(q)) score += 5;
-    // Boost partial matches
-    const keyTerms = ['38.2','61.8','130','161','200','high zone','low zone','break','evolv','partial','stop','entry','enter','liquidity','failure','fractal','cycle','point of control','retracement','25%','1/3','hedge','cobertura','drawdown','deception','engano','context','null operation','imbalance','business plan','12 pips','divided position','segment'];
+    const keyTerms = ['38.2','61.8','130','161','200','high zone','low zone','zona alta','zona baja','break','rotura','evolv','evolucion','partial','parcial','stop','entry','entrada','enter','entrar','liquidity','liquidez','failure','fracaso','fractal','cycle','ciclo','point of control','punto de control','retracement','retroceso','25%','1/3','hedge','cobertura','drawdown','deception','engano','context','contexto','null operation','operacion nula','imbalance','business plan','plan de negocio','12 pips','si o si','colchoncito'];
     keyTerms.forEach(t => { if(q.includes(t) && texts.includes(t)) score += 3; });
-
     if(score > 0) {
-      results.push({node, tree, path:[...path], score, text:node.question||node.action||''});
+      const text = LANG==='es' ? (node.question_es||node.action_es||node.question||node.action||'') : (node.question||node.action||'');
+      results.push({node, tree, path:[...path], score, text});
     }
-    if(node.yes) searchNode(node.yes, tree, [...path,'Yes']);
+    if(node.yes) searchNode(node.yes, tree, [...path,t('Yes','Si')]);
     if(node.no) searchNode(node.no, tree, [...path,'No']);
-    if(node.then) searchNode(node.then, tree, [...path,'Then']);
-    if(node.sub_decisions) searchNode(node.sub_decisions, tree, [...path,'Detail']);
-    if(node.sub_tree) { searchNode(node.sub_tree, tree, [...path,'SubTree']); if(node.sub_tree.yes) searchNode(node.sub_tree.yes, tree, [...path,'Yes']); if(node.sub_tree.no) searchNode(node.sub_tree.no, tree, [...path,'No']); }
+    if(node.then) searchNode(node.then, tree, [...path,t('Then','Luego')]);
+    if(node.sub_decisions) searchNode(node.sub_decisions, tree, [...path,t('Detail','Detalle')]);
+    if(node.sub_tree) { searchNode(node.sub_tree, tree, [...path,'SubTree']); if(node.sub_tree.yes) searchNode(node.sub_tree.yes, tree, [...path,t('Yes','Si')]); if(node.sub_tree.no) searchNode(node.sub_tree.no, tree, [...path,'No']); }
     if(node.options) Object.entries(node.options).forEach(([k,v])=>searchNode(v, tree, [...path,k]));
   }
 
@@ -502,22 +658,23 @@ function doSearch() {
 
   const rd = document.getElementById('aiResults');
   if(top.length === 0) {
-    rd.innerHTML = '<div class="ai-result"><p>No matching nodes found. Try different keywords or describe your situation differently.</p></div>';
+    rd.innerHTML = `<div class="ai-result"><p>${t('No matching nodes found. Try different keywords.','No se encontraron nodos. Intenta con otras palabras.')}</p></div>`;
     return;
   }
 
   let html = '<div class="ai-result">';
-  html += `<h3>${top.length} relevant nodes found</h3>`;
+  html += `<h3>${top.length} ${t('relevant nodes found','nodos relevantes encontrados')}</h3>`;
   top.forEach(r => {
-    const treeName = r.tree.tree_name === 'Should_I_Enter' ? 'Should I Enter?' : r.tree.tree_name.replace(/_/g,' ').replace(/^T\d+\s/,'');
+    const treeName = r.tree.tree_name === 'Should_I_Enter' ? t('Should I Enter?','Debo Entrar?') : r.tree.tree_name.replace(/_/g,' ').replace(/^T\d+\s/,'');
     const treeId = r.tree.tree_name === 'Should_I_Enter' ? 'entry' : r.tree.tree_name;
     const isAction = !!r.node.action;
-    const icon = isAction ? (r.node.action.toUpperCase().includes('WAIT')?'&#9202;':r.node.action.toUpperCase().includes('STOP')||r.node.action.toUpperCase().includes('BROKEN')?'&#9940;':'&#9989;') : '&#10067;';
+    const icon = isAction ? (na(r.node).toUpperCase().includes('WAIT')||na(r.node).toUpperCase().includes('ESPERA')?'&#9202;':na(r.node).toUpperCase().includes('STOP')||na(r.node).toUpperCase().includes('PARA')||na(r.node).toUpperCase().includes('NO ENTR')?'&#9940;':'&#9989;') : '&#10067;';
+    const expl = ne(r.node);
     html += `<div class="match-node">
       <div class="match-path">${icon} ${treeName} &rarr; ${r.path.join(' &rarr; ') || 'Root'}</div>
       <div class="match-text">${r.text}</div>
-      ${r.node.explanation ? `<p style="font-size:12px;color:var(--text-dim);margin-top:6px">${r.node.explanation.slice(0,200)}${r.node.explanation.length>200?'...':''}</p>` : ''}
-      <span class="tree-link" onclick="selectTree('${treeId}')">Open ${treeName}</span>
+      ${expl ? `<p style="font-size:12px;color:var(--text-dim);margin-top:6px">${expl.slice(0,200)}${expl.length>200?'...':''}</p>` : ''}
+      <span class="tree-link" onclick="selectTree('${treeId}')">${t('Open','Abrir')} ${treeName}</span>
     </div>`;
   });
   html += '</div>';
@@ -535,12 +692,14 @@ function renderStep() {
   const c = document.getElementById('treeContainer');
   const n = currentNode;
   const isQ = !!n.question, isA = !!n.action;
+  const qText = isQ ? nq(n) : '';
+  const aText = isA ? na(n) : '';
   let aType = 'action';
   if(isA) {
-    const a = n.action.toUpperCase();
-    if(a.includes('WAIT')||a.includes('MONITOR')) aType='wait';
-    else if(a.includes('STOP')||a.includes('BROKEN')||a.includes('DEAD')||a.includes('LOSER')||a.includes('DO NOT ENTER')||a.includes('BUILD')) aType='stop';
-    else if(a.includes('ENTER')||a.includes('HIGH CONVICTION')) aType='enter';
+    const a = aText.toUpperCase();
+    if(a.includes('WAIT')||a.includes('MONITOR')||a.includes('ESPERA')) aType='wait';
+    else if(a.includes('STOP')||a.includes('BROKEN')||a.includes('DEAD')||a.includes('DO NOT')||a.includes('NO ENTR')||a.includes('PARA ')||a.includes('BUILD')) aType='stop';
+    else if(a.includes('ENTER')||a.includes('ENTRAR')||a.includes('HIGH CONVICTION')||a.includes('SI O SI')) aType='enter';
   }
 
   let html = '<div class="step-view">';
@@ -555,16 +714,16 @@ function renderStep() {
   html += '<div class="step-card">';
 
   if(isQ) {
-    html += `<div class="step-badge question">Decision</div>`;
-    html += `<div class="step-question">${n.question}</div>`;
-    if(n.quote_es) html += `<div class="step-quote">"${n.quote_es}"</div>`;
-    if(n.note) html += `<div class="step-explanation">${n.note}</div>`;
-    // Show protocol if exists
+    html += `<div class="step-badge question">${t('Decision','Decision')}</div>`;
+    html += `<div class="step-question">${qText}</div>`;
+    if(n.quote_es) {
+      const clipHtml = n.clip ? clipButton(n.clip) : findClipForQuote(n.quote_es);
+      html += `<div class="step-quote">${clipHtml}<span class="quote-text">"${n.quote_es}"</span></div>`;
+    }
+    if(nn(n)) html += `<div class="step-explanation">${nn(n)}</div>`;
     if(n.protocol) {
       html += '<div class="step-protocol">';
-      Object.entries(n.protocol).forEach(([k,v]) => {
-        html += `<strong>${k.replace(/_/g,' ')}:</strong> ${v}<br>`;
-      });
+      Object.entries(n.protocol).forEach(([k,v]) => { html += `<strong>${k.replace(/_/g,' ')}:</strong> ${v}<br>`; });
       html += '</div>';
     }
 
@@ -575,29 +734,32 @@ function renderStep() {
       }
       html += '</div>';
     } else if(n.sub_tree) {
-      const yL=n.yes_label||'Yes', nL=n.no_label||'No';
+      const yL=nyl(n), nL=nnl(n);
       html += `<div class="step-buttons"><button class="step-btn yes" onclick="chooseSubTree('yes','${yL}')">${yL}</button><button class="step-btn no" onclick="chooseSubTree('no','${nL}')">${nL}</button></div>`;
     } else if(n.yes||n.no) {
-      const yL=n.yes_label||'Yes', nL=n.no_label||'No';
+      const yL=nyl(n), nL=nnl(n);
       html += '<div class="step-buttons">';
       if(n.yes) html += `<button class="step-btn yes" onclick="choose('yes','${yL}')">${yL}</button>`;
       if(n.no) html += `<button class="step-btn no" onclick="choose('no','${nL}')">${nL}</button>`;
       html += '</div>';
     }
   } else if(isA) {
-    const badge = aType==='enter' ? 'ENTER' : aType==='wait'?'Wait':aType==='stop'?'Stop':'Action';
+    const badge = aType==='enter' ? t('ENTER','ENTRAR') : aType==='wait'?t('Wait','Esperar'):aType==='stop'?t('Stop','Para'):t('Action','Accion');
     html += `<div class="step-badge ${aType}">${badge}</div>`;
-    html += `<div class="step-action">${n.action}</div>`;
-    if(n.explanation) html += `<div class="step-explanation">${n.explanation}</div>`;
-    if(n.quote_es) html += `<div class="step-quote">"${n.quote_es}"</div>`;
+    html += `<div class="step-action">${aText}</div>`;
+    if(ne(n)) html += `<div class="step-explanation">${ne(n)}</div>`;
+    if(n.quote_es) {
+      const clipHtml = n.clip ? clipButton(n.clip) : findClipForQuote(n.quote_es);
+      html += `<div class="step-quote">${clipHtml}<span class="quote-text">"${n.quote_es}"</span></div>`;
+    }
     if(n.protocol) {
       html += '<div class="step-protocol">';
       Object.entries(n.protocol).forEach(([k,v]) => { html += `<strong>${k.replace(/_/g,' ')}:</strong> ${v}<br>`; });
       html += '</div>';
     }
-    if(n.then) html += `<button class="step-btn continue" onclick="goThen()">Continue &rarr;</button>`;
-    if(n.sub_decisions) html += `<button class="step-btn continue" onclick="goSubDecision()">Next Decision &rarr;</button>`;
-    html += '<div style="margin-top:16px"><button class="step-btn restart" onclick="startStepMode(currentTree)">Restart</button></div>';
+    if(n.then) html += `<button class="step-btn continue" onclick="goThen()">${t('Continue','Continuar')} &rarr;</button>`;
+    if(n.sub_decisions) html += `<button class="step-btn continue" onclick="goSubDecision()">${t('Next Decision','Siguiente Decision')} &rarr;</button>`;
+    html += `<div style="margin-top:16px"><button class="step-btn restart" onclick="startStepMode(currentTree)">${t('Restart','Reiniciar')}</button></div>`;
   }
   html += '</div></div>';
   c.innerHTML = html;
@@ -607,8 +769,8 @@ function renderStep() {
 function choose(ch,l) { stepHistory.push({node:currentNode,choice:ch,choiceLabel:l}); currentNode=ch==='yes'?currentNode.yes:currentNode.no; renderStep(); }
 function chooseOption(k) { stepHistory.push({node:currentNode,choice:'yes',choiceLabel:k.replace(/_/g,' ')}); currentNode=currentNode.options[k]; renderStep(); }
 function chooseSubTree(ch,l) { stepHistory.push({node:currentNode,choice:ch,choiceLabel:l}); const st=currentNode.sub_tree; currentNode=ch==='yes'?(st.yes||st):(st.no||st); renderStep(); }
-function goThen() { stepHistory.push({node:currentNode,choice:'yes',choiceLabel:'Continue'}); currentNode=currentNode.then; renderStep(); }
-function goSubDecision() { stepHistory.push({node:currentNode,choice:'yes',choiceLabel:'Next'}); currentNode=currentNode.sub_decisions; renderStep(); }
+function goThen() { stepHistory.push({node:currentNode,choice:'yes',choiceLabel:t('Continue','Continuar')}); currentNode=currentNode.then; renderStep(); }
+function goSubDecision() { stepHistory.push({node:currentNode,choice:'yes',choiceLabel:t('Next','Siguiente')}); currentNode=currentNode.sub_decisions; renderStep(); }
 function goBack(i) { currentNode=stepHistory[i].node; stepHistory=stepHistory.slice(0,i); renderStep(); }
 
 // --- Full Tree ---
@@ -618,18 +780,19 @@ function renderFullTree(tree) {
 function renderNodeHTML(n,d) {
   if(!n) return '';
   const isQ=!!n.question, isA=!!n.action;
+  const label = isQ ? nq(n) : na(n);
   let cls='question-node';
-  if(isA){ const a=n.action.toUpperCase(); if(a.includes('WAIT')||a.includes('MONITOR'))cls='wait-node'; else if(a.includes('STOP')||a.includes('BROKEN')||a.includes('DEAD')||a.includes('LOSER')||a.includes('DO NOT'))cls='stop-node'; else cls='action-node'; }
-  const label = (isQ?n.question:n.action); const short = label.length>55?label.slice(0,52)+'...':label;
-  const title = isQ?n.question:`${n.action}\n\n${n.explanation||''}`;
+  if(isA){ const a=label.toUpperCase(); if(a.includes('WAIT')||a.includes('MONITOR')||a.includes('ESPERA'))cls='wait-node'; else if(a.includes('STOP')||a.includes('BROKEN')||a.includes('DEAD')||a.includes('DO NOT')||a.includes('NO ENTR')||a.includes('PARA '))cls='stop-node'; else cls='action-node'; }
+  const short = label.length>55?label.slice(0,52)+'...':label;
+  const title = isQ?label:`${label}\n\n${ne(n)||''}`;
   let h = `<div class="tree-node"><div class="node-box ${cls}" title="${title.replace(/"/g,'&quot;')}"><div class="node-label">${short}</div></div>`;
   if(isQ) {
-    if(n.yes||n.no) { h+='<div class="node-children">'; if(n.yes) h+=`<div class="branch"><span class="branch-label yes-label">${n.yes_label||'Yes'}</span>${renderNodeHTML(n.yes,d+1)}</div>`; if(n.no) h+=`<div class="branch"><span class="branch-label no-label">${n.no_label||'No'}</span>${renderNodeHTML(n.no,d+1)}</div>`; h+='</div>'; }
+    if(n.yes||n.no) { h+='<div class="node-children">'; if(n.yes) h+=`<div class="branch"><span class="branch-label yes-label">${nyl(n)}</span>${renderNodeHTML(n.yes,d+1)}</div>`; if(n.no) h+=`<div class="branch"><span class="branch-label no-label">${nnl(n)}</span>${renderNodeHTML(n.no,d+1)}</div>`; h+='</div>'; }
     else if(n.options) { h+='<div class="node-children">'; for(const[k,v] of Object.entries(n.options)) h+=`<div class="branch"><span class="branch-label yes-label">${k.replace(/_/g,' ')}</span>${renderNodeHTML(v,d+1)}</div>`; h+='</div>'; }
-    else if(n.sub_tree) { h+='<div class="node-children">'; if(n.sub_tree.yes) h+=`<div class="branch"><span class="branch-label yes-label">${n.yes_label||'Yes'}</span>${renderNodeHTML(n.sub_tree.yes,d+1)}</div>`; if(n.sub_tree.no) h+=`<div class="branch"><span class="branch-label no-label">${n.no_label||'No'}</span>${renderNodeHTML(n.sub_tree.no,d+1)}</div>`; h+='</div>'; }
+    else if(n.sub_tree) { h+='<div class="node-children">'; if(n.sub_tree.yes) h+=`<div class="branch"><span class="branch-label yes-label">${nyl(n)}</span>${renderNodeHTML(n.sub_tree.yes,d+1)}</div>`; if(n.sub_tree.no) h+=`<div class="branch"><span class="branch-label no-label">${nnl(n)}</span>${renderNodeHTML(n.sub_tree.no,d+1)}</div>`; h+='</div>'; }
   }
-  if(n.then) h+=`<div class="node-children"><div class="branch"><span class="branch-label yes-label">then</span>${renderNodeHTML(n.then,d+1)}</div></div>`;
-  if(n.sub_decisions) h+=`<div class="node-children"><div class="branch"><span class="branch-label yes-label">detail</span>${renderNodeHTML(n.sub_decisions,d+1)}</div></div>`;
+  if(n.then) h+=`<div class="node-children"><div class="branch"><span class="branch-label yes-label">${t('then','luego')}</span>${renderNodeHTML(n.then,d+1)}</div></div>`;
+  if(n.sub_decisions) h+=`<div class="node-children"><div class="branch"><span class="branch-label yes-label">${t('detail','detalle')}</span>${renderNodeHTML(n.sub_decisions,d+1)}</div></div>`;
   h+='</div>';
   return h;
 }
