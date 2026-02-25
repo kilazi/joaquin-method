@@ -435,14 +435,7 @@ These concepts are referenced but not fully defined in the analyzed videos:
 - Q&A sessions (clarify known gaps)
 - Guest videos with other traders
 
-### 6. Spanish-First Redesign
-**Status:** Partially done (bilingual toggle exists)
-**Description:** Since the source material is 100% Spanish, consider making Spanish the default with English as the secondary language. The current EN/ES translations could be improved by:
-- Having native Spanish speakers review Joaquin's exact phrasing
-- Adding more `quote_es` fields to non-entry trees
-- Extracting more audio clips for coverage beyond the current 16
-
-### 7. Mobile-Optimized Trading Companion
+### 6. Mobile-Optimized Trading Companion
 **Status:** Not started
 **Description:** The current webapp works on mobile but isn't optimized for in-session trading use. Design a mobile-first version:
 - Quick-access buttons for the most common entry scenarios
